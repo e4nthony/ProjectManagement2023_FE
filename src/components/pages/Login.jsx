@@ -1,38 +1,57 @@
 /* eslint-disable */
 /* the line above disables eslint check for this file (temporarily) todo:delete*/
 
-// import './LoginUi.css';
-// import profile from "./../image/a.png";
-// import email from "./../image/email.jpg";
-// import pass from "./../image/pass.png";
+import HomePage from './HomePage';
+import './pages.css';
+import { useNavigate } from "react-router-dom";
+
 
 function Login() {
+  const navigate = useNavigate();
+
+  function loginClick() {
+    // navigate("/home");
+  }
+  
+  function backClick() {
+    navigate("/home");
+  }
+
   return (
-    <div className="main">
-      <div className="sub-main">
+    <div className="main-container">
+      <div className="sub-main-container">
+
         <div>
-          <div className="imgs">
+          {/* <div className="imgs">
             <div className="container-image">
             </div>
-          </div>
+          </div> */}
           <div>
-            <h1>Login Page</h1>
-            <div>
-              <input type="text" placeholder="user name" className="name" />
+
+            <h1 className="text-tittle">Login Page</h1>
+
+            <div className="margin-around">
+              <input className="input-field-name" />
             </div>
-            <div className="second-input">
-              <input type="password" placeholder="user name" className="name" />
+
+            <div className="margin-around">
+              <input className="input-field-password" />
             </div>
-            <div className="login-button">
-              <button>Login</button>
+
+            <div className="margin-around">
+              <button className="login-button" onClick={loginClick}>Login</button>
             </div>
 
             <p className="link">
               <a href="#">Forgot password ?</a> or <a href="#">Sign Up</a>
             </p>
+
+            <div className="margin-around">
+              <button className="login-button" onClick={backClick}>Back</button>
+            </div>
+            
           </div>
         </div>
-
 
       </div>
     </div>
