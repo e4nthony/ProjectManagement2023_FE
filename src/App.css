@@ -1,3 +1,9 @@
+.devmessage {
+  text-align: left;
+  position: absolute;
+  bottom: 5px;
+}
+
 .App {
   text-align: center;
 }

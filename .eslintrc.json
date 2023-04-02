@@ -40,6 +40,18 @@
          */
         "prefer-template": ["off"],
 
+        /** warn only about the space before comment end. */
+        "spaced-comment": ["warn"],
+        
+        /** warn only about unused varsiables. */
+        "no-unused-vars": ["warn"],
+
+        /** force to put comma at end of list of objects. -disabled. */
+        "comma-dangle": ["off"],
+
+        
+        
+
 
 
 
