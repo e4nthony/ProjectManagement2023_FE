@@ -11,6 +11,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import LoginUI from './LoginUI';
+import HomePage from './HomePage';
 
 /** TAG: Backend_connect , 2 lines*/
 const paramsURL = "http://localhost:4000/getparams";
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
 const routerf = createBrowserRouter([
     {
         path: "/f",
-        element: <LoginUI/>,
+        element: /*<LoginUI/>*/ <HomePage/>,
     },
 ]);
 
