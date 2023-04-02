@@ -1,23 +1,16 @@
-/* eslint-disable */
-
-/* the line above disables eslint check for this file (temporarily) todo:delete*/
+/* eslint no-undef: "off" */
+/* reason: 'document' is undefined. */
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import LoginUI from './LoginUI';
-import HomePage from './HomePage';
-import App from './App';
+// import './index.css';    //not in use
 import reportWebVitals from './reportWebVitals';
+
+import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-root.render(
-     //<App />
-
-    <HomePage/>
-    //<LoginUI/>
-);
+root.render(<App />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
