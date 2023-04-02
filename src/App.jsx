@@ -1,16 +1,44 @@
 /* eslint-disable */
 /* the line above disables eslint check for this file (temporarily) todo:delete*/
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter } from "react-router-dom";
+import {
+    createBrowserRouter,
+    RouterProvider,
+} from "react-router-dom";
+
 
 import logo from './logo.svg';
 import './App.css';
+
+import LoginUI from './LoginUI';
 
 /** TAG: Backend_connect , 2 lines*/
 const paramsURL = "http://localhost:4000/getparams";
 // import Nav from "./Nav";
 
+
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <div>Hello world!</div>,
+    },
+]);
+
+const routerf = createBrowserRouter([
+    {
+        path: "/f",
+        element: <LoginUI/>,
+    },
+]);
+
 function App() {
+    <React.StrictMode>
+        <RouterProvider router={router} />
+        <RouterProvider router={routerf} />
+    </React.StrictMode>
+
+
+
     // useEffect(() => {
     //     fetchItems();
     // }, []);
@@ -65,9 +93,9 @@ function App() {
                     Edit 11111 text.
                 </p>
                 <div>
-                    <p>You clicked 
+                    <p>You clicked
                         {/* {count} */}
-                         times</p>
+                        times</p>
                     <button onClick={() => setCount(count + 1)}>
                         Click me
                     </button>

@@ -1,17 +1,20 @@
 /* eslint-disable */
+
 /* the line above disables eslint check for this file (temporarily) todo:delete*/
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import LoginUI from './LoginUI';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>
+    // <App />
+
+    <LoginUI/>
 );
 
 // If you want to start measuring performance in your app, pass a function
