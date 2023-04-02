@@ -8,7 +8,7 @@ import './App.css';
 
 /** TAG: Backend_connect , 2 lines*/
 const paramsURL = "http://localhost:4000/getparams";
-import Nav from "./Nav";
+// import Nav from "./Nav";
 
 function App() {
     // useEffect(() => {
