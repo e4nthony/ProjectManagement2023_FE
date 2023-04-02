@@ -38,6 +38,33 @@
          * string operators restrictions - disabled. 
          * allows to use operator '+' with strings.
          */
-        "prefer-template": ["off"]
+        "prefer-template": ["off"],
+
+
+
+
+
+
+
+        /** like that above? Nah, thanks. */
+        "no-multiple-empty-lines": ["off"],
+
+        /** No multi spaces in one row before comments - Ignore comments. Wanr about code. */
+        "no-multi-spaces": ["warn", { "ignoreEOLComments": true }],
+
+        /** Disallow trailing whitespace at the end of lines - disabled. */
+        "no-trailing-spaces": ["off"],
+        
+        /** force newline after import - disabled. */
+        "import/newline-after-import": ["off"],
+
+        /** require imports at to of file - disabled. */
+        "import/first": ["off"],
+
+        /** force CamelCase in name of files - disabled. */
+        "camelcase": ["off"],
+        
+        /** semicolons - warn about missing semicolons at the end of line; */
+        "semi": ["warn"]
     }
 }
