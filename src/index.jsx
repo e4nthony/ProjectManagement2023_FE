@@ -5,16 +5,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import LoginUI from './LoginUI';
+import {
+    createBrowserRouter,
+    RouterProvider,
+} from "react-router-dom";
+
+// import LoginUI from './LoginUI';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-root.render(
-    // <App />
 
-    <LoginUI/>
+const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <div>Hello world!</div>,
+    },
+  ]);
+
+root.render(
+    <App />
+
+    // <LoginUI/>
+    
+    // <React.StrictMode>
+    //     <RouterProvider router={router} />
+    // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
