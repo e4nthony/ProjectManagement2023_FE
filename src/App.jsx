@@ -9,7 +9,7 @@ import {
     Routes, Route
 } from "react-router-dom";
 
-import './App.css';     // style todo: upgrade
+// import './App.css';     // style todo: upgrade/delete
 
 /** Our Route Navigator */
 import RouteNavigator from "./components/RouteNavigator";
@@ -19,8 +19,10 @@ function App() {
         <div>
             <React.StrictMode>
                 <BrowserRouter>
-                    <RouteNavigator/>
-                    <div>default test message from app.jsx element (dev.info)</div>
+                    <RouteNavigator />
+                    {/* <div className='devmessage'>
+                        default test message from App.jsx element (dev.info)
+                    </div> */}
                 </BrowserRouter>
             </React.StrictMode>
         </div>

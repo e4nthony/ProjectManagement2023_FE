@@ -20,8 +20,9 @@ const RouteNavigator = () => {
     /** todo: Implement later */
     // useEffect(() => {
     // }, []);
-
+    
     return (
+        
         <div>
 
             {/* <NavBar /> */}
@@ -34,7 +35,9 @@ const RouteNavigator = () => {
                 <Route path="/login" element={<Login />} />
             </Routes>
 
-            <div>default test message from RouteNavigator.jsx element (dev.info)</div>
+            {/* <div className='devmessage'>
+                default test message from RouteNavigator.jsx element (dev.info)
+            </div> */}
 
             {/* <Footer /> */}
 
