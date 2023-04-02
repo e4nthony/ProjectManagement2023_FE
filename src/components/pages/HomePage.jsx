@@ -3,15 +3,21 @@
 
 import React from "react";
 import ReactDOM from "react-dom/client";
-import LoginUi from "./LoginUI";
+import { useNavigate } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 function HomePage() {
+  const navigate = useNavigate();
+
+  function handleClick() {
+    navigate("/login");
+  }
+
   return (
     <div>
       <h1>Home page !</h1>
-      <button onClick={() => root.render(<LoginUi />)}>Login</button>
+      <button type="button" onClick={handleClick}>Login</button>
     </div>
   );
 }
