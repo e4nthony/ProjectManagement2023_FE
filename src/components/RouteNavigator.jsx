@@ -10,7 +10,7 @@ import {
 
 /** --- Pages Imports --- */
 import Page404 from './pages/Page404';
-//home
+import Home from './pages/HomePage';
 import About from './pages/About';
 import Login from './pages/Login';
 
@@ -27,9 +27,9 @@ const RouteNavigator = () => {
             {/* <NavBar /> */}
 
             <Routes>
-                <Route path='*' element={<Page404/>} />
-                <Route path="/" element={<About />} />
-                <Route path="/home" element={<About />} />
+                <Route path='*' element={<Page404 />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/login" element={<Login />} />
             </Routes>
