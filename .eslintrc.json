@@ -40,6 +40,10 @@
          */
         "prefer-template": ["off"],
 
+        /** warn only about the space before comment end. */
+        "spaced-comment": ["warn"],
+        
+
 
 
 
