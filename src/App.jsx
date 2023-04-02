@@ -65,7 +65,9 @@ function App() {
                     Edit 11111 text.
                 </p>
                 <div>
-                    <p>You clicked {count} times</p>
+                    <p>You clicked 
+                        {/* {count} */}
+                         times</p>
                     <button onClick={() => setCount(count + 1)}>
                         Click me
                     </button>
