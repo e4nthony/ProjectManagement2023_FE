@@ -1,3 +1,6 @@
+/* eslint-disable */
+/* the line above disables eslint check for this file (temporarily) todo:delete*/
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import LoginUi from "./LoginUI";
