@@ -23,7 +23,7 @@ jobs:
           command: npm run lint
       - run: 
           name: CD - Deploy web server //same as Backend //another port
-          command: curl "https://api.render.com/deploy/srv-cgil267dvk4vd547lm70?key=zXtl5KeQBKE"
+          command: curl "https://api.render.com/deploy/srv-cgldh564dad69r7jfbbg?key=UrwcCwTg3B0"
       
 
 # Invoke jobs via workflows
