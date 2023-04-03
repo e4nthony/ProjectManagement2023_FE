@@ -1,5 +1,4 @@
-/* eslint no-undef: "off" */
-/* reason: 'document' is undefined. */
+/* eslint-env browser */
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';

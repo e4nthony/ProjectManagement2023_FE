@@ -1,6 +1,6 @@
 {
     "env": {
-        "browser": false,
+        "browser": true,
         "es2021": true
     },
     "extends": [
@@ -20,7 +20,7 @@
         /**
          * indentation : 4 spaces (tab) .
          */
-        "indent": ["error", 4],
+        "indent": ["off"],
 
         /**
          * linebreak-style check LF/CRLF - disabled.
