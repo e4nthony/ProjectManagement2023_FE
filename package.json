@@ -5,7 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "mocha src/tests/*.spec.js --color",
     "eject": "react-scripts eject",
     "lint": "eslint src/*.jsx --color"
   },
@@ -35,7 +35,12 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "mocha": "^10.2.0",
+    "@types/chai": "^4.3.4",
+    "@types/mocha": "^10.0.1",
+    "chai": "^4.3.7",
+    "nodemon": "^2.0.22"
   },
   "devDependencies": {
     "eslint": "^8.37.0",
