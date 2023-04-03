@@ -1,11 +1,10 @@
-
-
 import React, { useEffect, useState } from 'react';
 import {
     createBrowserRouter,
     RouterProvider,
     BrowserRouter,
-    Routes, Route
+    Routes,
+    Route,
 } from 'react-router-dom';
 
 // import './App.css';     // style todo: upgrade/delete

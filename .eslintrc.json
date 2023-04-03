@@ -20,8 +20,36 @@
         /**
          * indentation : 4 spaces (tab) .
          */
-        "indent": ["off"],
+        "indent": ["warn", 4],
 
+        /**
+         * indentation in react/jsx files : 4 spaces (tab) .
+         */
+        "react/jsx-indent": ["off"], 
+
+        /**
+         * force to use one function format - disabled.
+         */
+        "func-style": ["warn", "declaration"], 
+
+        /**
+         * warn about usage of non single quotes. disable error.
+         */
+        "jsx-quotes": ["warn", "prefer-single"],
+
+        /** only warn about links. */
+        "jsx-a11y/anchor-is-valid": [ "warn", {
+            "components": [ "Link" ],
+            "specialLink": [ "to" ]
+          }],
+
+
+
+        /**
+         * padded-blocks - disable.
+         */
+         "padded-blocks": ["off"],
+        
         /**
          * linebreak-style check LF/CRLF - disabled.
          * CircleCI runs on linux (LF), we work on windows (CRLF).
@@ -50,11 +78,6 @@
         "comma-dangle": ["off"],
 
         
-        
-
-
-
-
 
 
 
