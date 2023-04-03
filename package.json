@@ -5,7 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "mocha src/tests/*.spec.js --color",
+    "test": "mocha tests/*.spec.js --color",
     "eject": "react-scripts eject",
     "lint": "eslint src/*.jsx --color"
   },
