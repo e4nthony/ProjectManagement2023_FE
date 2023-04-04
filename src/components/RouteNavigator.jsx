@@ -1,38 +1,35 @@
-/* eslint-disable */
-/* the line above disables eslint check for this file (temporarily) todo:delete*/
-
 import React, { useEffect, useState } from 'react';
 import {
     // createBrowserRouter,
     // RouterProvider,
     Routes, Route
-} from "react-router-dom";
+} from 'react-router-dom';
 
 /** --- Pages Imports --- */
 import Page404 from './pages/Page404';
 import Home from './pages/HomePage';
 import About from './pages/About';
 import Login from './pages/Login';
+import NavBar from './pages/Navbar';
 
-
-const RouteNavigator = () => {
+function RouteNavigator() {
 
     /** todo: Implement later */
     // useEffect(() => {
     // }, []);
-    
+
     return (
-        
+
         <div>
 
-            {/* <NavBar /> */}
+            <NavBar />
 
             <Routes>
                 <Route path='*' element={<Page404 />} />
-                <Route path="/" element={<Home />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/login" element={<Login />} />
+                <Route path='/' element={<Home />} />
+                <Route path='/home' element={<Home />} />
+                <Route path='/about' element={<About />} />
+                <Route path='/login' element={<Login />} />
             </Routes>
 
             {/* <div className='devmessage'>
@@ -43,6 +40,6 @@ const RouteNavigator = () => {
 
         </div>
     );
-};
+}
 
 export default RouteNavigator;
