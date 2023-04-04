@@ -10,19 +10,19 @@ import Page404 from './pages/Page404';
 import Home from './pages/HomePage';
 import About from './pages/About';
 import Login from './pages/Login';
-
+import NavBar from './pages/Navbar';
 
 function RouteNavigator() {
 
     /** todo: Implement later */
     // useEffect(() => {
     // }, []);
-    
+
     return (
-        
+
         <div>
 
-            {/* <NavBar /> */}
+            <NavBar />
 
             <Routes>
                 <Route path='*' element={<Page404 />} />

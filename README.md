@@ -6,7 +6,7 @@ Project Management Course 2023 - Site - Frontend
 - Stav Sharabi
 - Anthony Epshtein
 - Adar KaTziR
-
+- Maor Hadad
 <!-- sprint1 , branch develop -->
 
 1. for Run command
