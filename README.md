@@ -7,6 +7,7 @@ Project Management Course 2023 - Site - Frontend
 - Anthony Epshtein
 - Adar KaTziR
 - Maor Hadad
+- Ido Hazan
 <!-- sprint1 , branch develop -->
 
 1. for Run command
