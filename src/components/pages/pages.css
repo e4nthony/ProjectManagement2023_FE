@@ -90,3 +90,32 @@ ul {
     margin-bottom: 25%;
     margin-top: 5%;
 }
+
+.message-text {
+    color: #ff2b2b;
+    /* font-weight: bold; */
+}
+
+
+
+
+
+
+.aliightnleft {
+    font-weight: lighter;
+    /* align-items:flex-start; */
+}
+
+.margin-around1 {
+    margin: 0.5%;
+    /* padding: 1%; */
+    /* align-items: left; */
+}
+
+.simplelabel {
+    font-weight: lighter;
+    /* text-align: right;
+    text-align: left;
+    align: */
+    /* float:left; */
+}
