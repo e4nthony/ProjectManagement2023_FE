@@ -50,10 +50,10 @@ use gitbash terminal at the same folder and run following commands:
 ## Site Preview:
 
 Home :\
-<img src="/preview/home.png" width="200">\
+<img src="/preview/home.png" width="800">\
 Login page :\
-<img src="/preview/login_page.png" width="200">\
+<img src="/preview/login_page.png" width="800">\
 About :\
-<img src="/preview/about.png" width="200">
+<img src="/preview/about.png" width="800">
 
 <!-- sprint1 -->
