@@ -13,6 +13,9 @@ CI - We used CircleCI to maintance
 continuous integration in our group, link:\
 https://app.circleci.com/pipelines/github/e4nthony/ProjectManagement2023_FE
 
+Backend GitHub - 
+https://github.com/e4nthony/ProjectManagement2023_FE
+
 ### Important Dependencies:
 
 - React - \
@@ -43,8 +46,14 @@ use gitbash terminal at the same folder and run following commands:
 - Ido Hazan
 
 
-<!-- ### Site Preview:
---- -->
 
+## Site Preview:
+
+Home :\
+<img src="/preview/home.png" width="200">\
+Login page :\
+<img src="/preview/login_page.png" width="200">\
+About :\
+<img src="/preview/about.png" width="200">
 
 <!-- sprint1 -->
