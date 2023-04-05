@@ -1,4 +1,7 @@
-import React from 'react';
+/* eslint-disable */
+/* the line above disables eslint check for this file (temporarily) todo:delete */
+
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './pages.css';
 
@@ -8,8 +11,24 @@ import HomePage from './HomePage';
 function Login() {
     const navigate = useNavigate();
 
-    function loginClick() {
-        // navigate('/home');
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [message, setMessage] = useState("");
+
+    function onLoginCallback() {
+
+        setMessage('Invalid email or password'); //dev, delete
+
+        // let email1 = email; // dev, delete
+
+
+        // const user = {
+        //     email: email,
+        //     password: password,
+        // };
+
+        // console.log('usefthfrthr'); 
+        // console.log(user.email);  // dev, delete
     }
 
     function backClick() {
@@ -30,22 +49,38 @@ function Login() {
                         <h1 className='text-tittle'>Login Page</h1>
 
                         <div className='margin-around'>
-                            <input className='input-field-name' />
+                            <text id='message' className='message-text'>
+                                {message}
+                            </text>
                         </div>
 
                         <div className='margin-around'>
-                            <input className='input-field-password' />
+                            <input id='email'
+                                className='input-field-name'
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
                         </div>
 
                         <div className='margin-around'>
-                            <button type="button" className='login-button' onClick={loginClick}>Login</button>
+                            <input id='password'
+                                className='input-field-password'
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </div>
+
+                        <div className='margin-around'>
+                            <button type="button" className='login-button' onClick={onLoginCallback}>Login</button>
                         </div>
 
                         <p className='link'>
                             <a href='#'>
                                 Forgot password ?
                             </a>
-                            or
+                            
+                            <a> or </a>
+        
                             <a href='#'>
                                 Sign Up
                             </a>
