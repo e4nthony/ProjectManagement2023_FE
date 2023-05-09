@@ -18,7 +18,7 @@ function Login() {
     const [message, setMessage] = useState("");
 
     async function onLoginCallback() {
-
+        console.log('setting the error message');
         setMessage('Invalid email or password');//dev, todo change
         
         const userData = {
@@ -27,17 +27,20 @@ function Login() {
             password: password,
         };
 
+        console.log('userData'+ userData.toString() );
         console.log('trying to reach be server');
-        console.log(user.email);  // dev, delete
+        console.log(userData.email);  // dev, delete
 
         try {
-            const res = await login_api.login(data);
+            const res = await login_api.login(userData);
             console.log('res' + res);
 
             const jsonValue = JSON.stringify(res)
+            console.log('jsonValue: ' + jsonValue);
+ 
             setMessage(res.msg); 
 
-            console.log('user logged in successfully: ' + user.email);
+            console.log('user logged in successfully: ' + userData.email);
         } catch (err) {
             console.log('user cant login: ' + err);
             return res.status(400).send({ 'error': err });
