@@ -7,7 +7,8 @@ import './pages.css';
 
 import HomePage from './HomePage';
 import login_api from '../../api/login_api';
-
+import user_api from '../../api/user_api';
+import api from '../../api/api';
 
 
 function Login() {
@@ -31,22 +32,38 @@ function Login() {
         console.log('trying to reach be server');
         console.log(userData.email);  // dev, delete
 
+        // try {
+        //     // const res = await login_api.login(userData);
+        //     const res = await login_api.login();
+        //     console.log('res' + res);
+
+        //     const jsonValue = JSON.stringify(res)
+        //     console.log('jsonValue: ' + jsonValue);
+ 
+        //     setMessage(res.msg); 
+
+        //     console.log('user logged in successfully: ' + userData.email);
+        // } catch (err) {
+        //     console.log('user cant login: ' + err);
+        //     return res.status(400).send({ 'error': err });
+        // }
+
+        // NEXT LINES DEBUG PURPOSES ONLY, TODO DELETE
+        
         try {
-            const res = await login_api.login(userData);
-            console.log('res' + res);
+            const res = await user_api.get_all_users_mails();
+            console.log('get_all_users_mails - res:' + res.toString() );
 
             const jsonValue = JSON.stringify(res)
             console.log('jsonValue: ' + jsonValue);
  
-            setMessage(res.msg); 
+            setMessage(jsonValue); 
 
             console.log('user logged in successfully: ' + userData.email);
         } catch (err) {
             console.log('user cant login: ' + err);
-            return res.status(400).send({ 'error': err });
+            // return res.status(400).send({ 'error': err });
         }
-
-
     }
 
     function backClick() {
