@@ -1,31 +1,23 @@
 /* eslint-disable */
 /* the line above disables eslint check for this file (temporarily) todo:delete */
 
+/* This is Authentication API */
 import api from './api';
 
-//  /**
-//    * pulls user data from server to display it on his page.
-//    * @param String dataJson 
-//    */
-// async function get_user_by_id(dataJson) {
-//     return api.get('/login', dataJson);
-// }
+async function register(userJson) {
+    return api.post("/auth/register", userJson);
+};
 
-//  /**
-//    * pulls all users data data from server to display it on his page.
-//    * @param String dataJson 
-//    */
-// async function get_all_users(dataJson) {
-//     return api.get('/login', dataJson);
-// }
+async function login(userJson) {
+    return api.post("/auth/login", userJson);
+};
 
- /**
-   * pulls all users mails from server to display
-   */
 async function get_all_users_mails() {
     return api.get("/get_all_users_mails");
-}
+};
 
 export default {
-    get_all_users_mails
+    register,
+    login,
+    get_all_users_mails,  // DEBUG ,TODO DELETE
 };

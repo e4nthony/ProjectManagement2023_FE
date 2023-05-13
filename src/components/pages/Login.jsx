@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import './pages.css';
 
 import HomePage from './HomePage';
-import login_api from '../../api/login_api';
 import user_api from '../../api/user_api';
 import api from '../../api/api';
 
@@ -33,8 +32,8 @@ function Login() {
         console.log(userData.email);  // dev, delete
 
         // try {
-        //     // const res = await login_api.login(userData);
-        //     const res = await login_api.login();
+        //     // const res = await user_api.login(userData);
+        //     const res = await user_api.login();
         //     console.log('res' + res);
 
         //     const jsonValue = JSON.stringify(res)
