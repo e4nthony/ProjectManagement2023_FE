@@ -9,7 +9,7 @@ import './styles/pages_styles.css';
 // import user_api from '../../api/user_api';
 // import api from '../../api/api';
 
-import user_model from '../../model/user_model.tsx';
+import user_model from '../../model/user_model.jsx';
 
 function Login() {
     const navigate = useNavigate();
