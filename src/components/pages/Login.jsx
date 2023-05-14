@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './pages.css';
+import './styles/pages_styles.css';
 
 // import HomePage from './HomePage';
 // import user_api from '../../api/user_api';
