@@ -12,7 +12,7 @@ async function login(userJson) {
     return api.post("/auth/login", userJson);
 };
 
-async function get_all_users_mails() {
+async function get_all_users_mails() { // DEBUG ,TODO DELETE
     return api.get("/get_all_users_mails");
 };
 

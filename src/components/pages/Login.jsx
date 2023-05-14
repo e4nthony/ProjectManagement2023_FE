@@ -5,10 +5,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './pages.css';
 
-import HomePage from './HomePage';
-import user_api from '../../api/user_api';
-import api from '../../api/api';
+// import HomePage from './HomePage';
+// import user_api from '../../api/user_api';
+// import api from '../../api/api';
 
+import user_model from '../../model/user_model.tsx';
 
 function Login() {
     const navigate = useNavigate();
@@ -18,51 +19,64 @@ function Login() {
     const [message, setMessage] = useState("");
 
     async function onLoginCallback() {
-        console.log('setting the error message');
-        setMessage('Invalid email or password');//dev, todo change
-        
-        const userData = {
+
+        const userAuthData = {
             /** read values from fields */
             email: email,
             password: password,
         };
 
-        console.log('userData'+ userData.toString() );
-        console.log('trying to reach be server');
-        console.log(userData.email);  // dev, delete
+        console.log('userData: ' + userAuthData.toString());
+        console.log('trying to reach back-end server...');
+        console.log(userAuthData.email);  // debug, todo delete
 
-        // try {
-        //     // const res = await user_api.login(userData);
-        //     const res = await user_api.login();
-        //     console.log('res' + res);
-
-        //     const jsonValue = JSON.stringify(res)
-        //     console.log('jsonValue: ' + jsonValue);
- 
-        //     setMessage(res.msg); 
-
-        //     console.log('user logged in successfully: ' + userData.email);
-        // } catch (err) {
-        //     console.log('user cant login: ' + err);
-        //     return res.status(400).send({ 'error': err });
-        // }
-
-        // NEXT LINES DEBUG PURPOSES ONLY, TODO DELETE
-        
-        try {
-            const res = await user_api.get_all_users_mails();
-            console.log('get_all_users_mails - res:' + res.toString() );
-
-            const jsonValue = JSON.stringify(res)
-            console.log('jsonValue: ' + jsonValue);
- 
-            setMessage(jsonValue); 
-
-            console.log('user logged in successfully: ' + userData.email);
-        } catch (err) {
-            console.log('user cant login: ' + err);
-            // return res.status(400).send({ 'error': err });
+        function showError(err_msg = 'Invalid email or password') {
+            console.log('setting the error message');
+            // setMessage(message + ', ' + err_msg);
+            setMessage(err_msg);
         }
+        showError('');
+
+        if (email == '' || password == '') {
+            showError('Please fill all fields');
+            return;
+        }
+
+        function isValidEmail(email) {
+            // const regex_exp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gi;
+            // return regex_exp.test(email);
+
+            return email.includes('@') && email.includes('.')
+        }
+        if (!isValidEmail(email)) {
+            showError('Please input a valid Email');
+            return;
+        }
+
+        if (password.length < 6) {
+            showError('Password is too short, please enter password from 6 to 18 characters');
+            return;
+        }
+        else if (password.length > 18) {
+            showError('Password is too long, please enter password from 6 to 18 characters');
+            return;
+        }
+
+        let is_success;
+        try {
+            console.log("trying log in...")
+            // let tokens = await UserModel.login(user); // todo? get tokens to stay signed in
+            is_success = await user_model.login(userAuthData)
+        } catch (err) {
+            console.log("failed to log in user: " + err);
+        }
+
+        if (!is_success) {
+            showError();
+            return;
+        }
+
+        navigate('/home');
     }
 
     function backClick() {
