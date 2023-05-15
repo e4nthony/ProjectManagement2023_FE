@@ -14,22 +14,10 @@ body{
     
 }
 form{
-<<<<<<< HEAD
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 50px;  
-=======
-    background-color: #ffff;
-    height: 450px;
-    width: 50px 40px;
-    position:fixed;
-    transform: translate(-50%,-50%);
-    top: 50%;
-    left: 50%;
-    border-radius:80px ;
-    box-shadow: 20px 20px 30px rgba(0,0,0,0.15);
->>>>>>> 8659385ebc118dccbf33ffd62fb2a342f4d5f8a9
     
 }
 label{
