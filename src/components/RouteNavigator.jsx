@@ -11,6 +11,7 @@ import Home from './pages/HomePage';
 import About from './pages/About';
 import Login from './pages/Login';
 import NavBar from './pages/Navbar';
+import Register from './pages/Register';
 
 function RouteNavigator() {
 
@@ -30,6 +31,7 @@ function RouteNavigator() {
                 <Route path='/home' element={<Home />} />
                 <Route path='/about' element={<About />} />
                 <Route path='/login' element={<Login />} />
+                <Route path='/register' element={<Register />} />
             </Routes>
 
             {/* <div className='devmessage'>
