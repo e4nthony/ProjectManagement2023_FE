@@ -12,14 +12,19 @@ function RegistrationPage() {
     const [passwordMatchError, setPasswordMatchError] = useState('');
     const [ageError, setAgeError] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    
+    const [matchMessage, setmatchMessage] = useState('');
+       
     const handleSubmit = async (e) => {
      e.preventDefault();
 
      // Check if passwords match
         if (password !== confirmPassword) {
             setPasswordMatchError('The password not match');
-        return
+            setmatchMessage('');
+    } else {
+        setmatchMessage('The password match');
+        setPasswordMatchError('');
+
     }
 
     // // Check if email is already in use
@@ -71,7 +76,7 @@ function RegistrationPage() {
       console.error('Error registering user:', error);
       setErrorMessage('An error occurred while registering. Please try again later.');
     }
-  };
+    };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -137,7 +142,9 @@ function RegistrationPage() {
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
       </label>
-      {passwordMatchError && <p>Passwords do not match.</p>}
+
+      {passwordMatchError && <p style={{ color: 'red' }}>{passwordMatchError}</p>}
+      {matchMessage && <p style={{ color: 'green' }}>{matchMessage}</p>}
       <br />
       <label htmlFor='dateOfBirth'>
         Date of Birth:
@@ -149,7 +156,7 @@ function RegistrationPage() {
         />
       </label>
       <br />
-      {passwordMatchError && <p>{passwordMatchError}</p>}
+
       {ageError  && <p>{ageError }</p>}
       {errorMessage && <p>{errorMessage }</p>}
 
