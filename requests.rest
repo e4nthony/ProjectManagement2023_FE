@@ -1,0 +1,59 @@
+###
+POST http://localhost:3080/login
+
+### requesrt to real online server
+POST https://projectmanagement2023.onrender.com/
+
+### requesrt to real online server
+POST https://projectmanagement2023.onrender.com/login
+
+### requesrt to real online server with info
+POST https://projectmanagement2023.onrender.com/login
+Authorization: jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjM5Y2JjZDQyODRiNjQwZDhmZWMyZSIsImlhdCI6MTY4MDA1NTQ5NCwiZXhwIjoxNjgwMDc3MDk0fQ.elPCCy3RKReJmUsCdzHLkMZEy2NRWTBIIXaqlAtw-Zw
+Content-Type: application/json 
+
+{
+    "message": "This is authorized user's post",
+    "sender": "000111"
+}
+
+### requesrt to 
+GET http://127.0.0.1:3080/get_all_users_mails
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###---------------------NOTES-----------------------------
+
+### post request with JSON Body (new)
+POST http://localhost:4000/post
+Authorization: jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjM5Y2JjZDQyODRiNjQwZDhmZWMyZSIsImlhdCI6MTY4MDA1NTQ5NCwiZXhwIjoxNjgwMDc3MDk0fQ.elPCCy3RKReJmUsCdzHLkMZEy2NRWTBIIXaqlAtw-Zw
+Content-Type: application/json 
+
+{
+    "message": "This is authorized user's post",
+    "sender": "000111"
+}

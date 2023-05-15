@@ -3,12 +3,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './pages.css';
+import './styles/pages_styles.css';
 
-import HomePage from './HomePage';
-import login_api from '../../api/login_api';
+// import HomePage from './HomePage';
+// import user_api from '../../api/user_api';
+// import api from '../../api/api';
 
-
+import user_model from '../../model/user_model.jsx';
 
 function Login() {
     const navigate = useNavigate();
@@ -19,31 +20,63 @@ function Login() {
 
     async function onLoginCallback() {
 
-        setMessage('Invalid email or password');//dev, todo change
-        
-        const userData = {
+        const userAuthData = {
             /** read values from fields */
             email: email,
             password: password,
         };
 
-        console.log('trying to reach be server');
-        console.log(user.email);  // dev, delete
+        console.log('userData: ' + userAuthData.toString());
+        console.log('trying to reach back-end server...');
+        console.log(userAuthData.email);  // debug, todo delete
 
-        try {
-            const res = await login_api.login(data);
-            console.log('res' + res);
+        function showError(err_msg = 'Invalid email or password') {
+            console.log('setting the error message');
+            // setMessage(message + ', ' + err_msg);
+            setMessage(err_msg);
+        }
+        showError('');
 
-            const jsonValue = JSON.stringify(res)
-            setMessage(res.msg); 
-
-            console.log('user logged in successfully: ' + user.email);
-        } catch (err) {
-            console.log('user cant login: ' + err);
-            return res.status(400).send({ 'error': err });
+        if (email == '' || password == '') {
+            showError('Please fill all fields');
+            return;
         }
 
+        function isValidEmail(email) {
+            // const regex_exp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gi;
+            // return regex_exp.test(email);
 
+            return email.includes('@') && email.includes('.')
+        }
+        if (!isValidEmail(email)) {
+            showError('Please input a valid Email');
+            return;
+        }
+
+        if (password.length < 6) {
+            showError('Password is too short, please enter password from 6 to 18 characters');
+            return;
+        }
+        else if (password.length > 18) {
+            showError('Password is too long, please enter password from 6 to 18 characters');
+            return;
+        }
+
+        let is_success;
+        try {
+            console.log("trying log in...")
+            // let tokens = await UserModel.login(user); // todo? get tokens to stay signed in
+            is_success = await user_model.login(userAuthData)
+        } catch (err) {
+            console.log("failed to log in user: " + err);
+        }
+
+        if (!is_success) {
+            showError();
+            return;
+        }
+
+        navigate('/home');
     }
 
     function backClick() {

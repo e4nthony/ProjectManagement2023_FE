@@ -1,5 +1,5 @@
 import React from 'react';
-import './NavStyles.css';
+import './styles/navbar_styles.css';
 
 export default function Navbar() {
     return (
@@ -14,7 +14,10 @@ export default function Navbar() {
                 <li>
                     <a href='/about'>About</a>
                 </li>
+                <li>
+                    <a href='/register'>Register</a>
+                </li>
             </ul>
         </nav>
-    )
+    );
 }
