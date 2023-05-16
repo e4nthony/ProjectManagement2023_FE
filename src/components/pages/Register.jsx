@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import './styles/style.css';
+import { useNavigate } from 'react-router-dom';
+
+
+import register_model from '../../model/register_model';
+
 
 function RegistrationPage() {
     const [firstName, setFirstName] = useState('');
@@ -12,7 +17,7 @@ function RegistrationPage() {
     const [passwordMatchError, setPasswordMatchError] = useState('');
     const [ageError, setAgeError] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [matchMessage, setmatchMessage] = useState('');
+    const [matchMessage, setMatchMessage] = useState('');
        
     const handleSubmit = async (e) => {
      e.preventDefault();
@@ -20,29 +25,13 @@ function RegistrationPage() {
      // Check if passwords match
         if (password !== confirmPassword) {
             setPasswordMatchError('The password not match');
-            setmatchMessage('');
+            setMatchMessage('');
     } else {
-        setmatchMessage('The password match');
+        setMatchMessage('The password match');
         setPasswordMatchError('');
 
     }
-
-    // // Check if email is already in use
-    // const emailResponse = await fetch(`/api/check-email?email=${email}`);
-    // const emailAvailable = await emailResponse.json();
-    // if (!emailAvailable) {
-    //   setErrorMessage('Email is already in use');
-    //   return;
-    // }
-
-    // // Check if username is already in use
-    // const usernameResponse = await fetch(`/api/check-username?username=${username}`);
-    // const usernameAvailable = await usernameResponse.json();
-    // if (!usernameAvailable) {
-    //   setErrorMessage('Username is already in use');
-    //   return;
-    // }
-
+  
     // Check if user is over 18 years old
     const dobDate = new Date(dateOfBirth);
     const nowDate = new Date();
@@ -62,22 +51,23 @@ function RegistrationPage() {
     formData.append('dateOfBirth', dateOfBirth);
 
     // Send form data to server
+    
+    let is_success;
     try {
-      const response = await fetch('/api/register', {
-        method: 'POST',
-        body: formData,
-      });
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      console.log('Registration successful:', data);
-    } catch (error) {
-      console.error('Error registering user:', error);
-      setErrorMessage('An error occurred while registering. Please try again later.');
+      is_success = await register_model.register(formData)
+    } catch (err) {
+      console.log('failed to log in user: ' + err);
     }
+
+    if (!is_success) {
+      errorMessage();
+      return;
+  }
+      useNavigate('/home');
+
     };
 
+    
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor='firstName'>
@@ -160,7 +150,7 @@ function RegistrationPage() {
       {ageError  && <p>{ageError }</p>}
       {errorMessage && <p>{errorMessage }</p>}
 
-      <button type='submit'>Register</button>
+      <button type='submit' onClick={handleSubmit}>Register</button>
     </form>
   );
 }
