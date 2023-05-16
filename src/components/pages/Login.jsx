@@ -76,6 +76,7 @@ function Login() {
             } else {
                 setMessage("");
                 localStorage.setItem("accessToken", res.data);
+                localStorage.setItem('loggedIn', true);
                 setAuthState(true);
                 //navigate('/home');
             }

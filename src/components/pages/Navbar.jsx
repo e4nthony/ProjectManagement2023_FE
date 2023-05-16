@@ -2,15 +2,25 @@ import {
     React, useState, useEffect, useContext
 } from 'react';
 import './styles/navbar_styles.css';
+import { useNavigate } from 'react-router-dom';
+
 import { AuthContext } from '../AuthContext';
 
 
 export default function Navbar() {
     const { setAuthState, authState } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     function logout() {
         localStorage.removeItem('accessToken');
+        localStorage.setItem('loggedIn', false);
         setAuthState(false);
+        navigate('/');
+    }
+
+    function isLogged() {
+        if (localStorage.getItem('loggedIn') === 'true') return true;
+        return false;
     }
 
     return (
@@ -19,7 +29,7 @@ export default function Navbar() {
                 SCRUM
             </a>
             <ul>
-                {!authState && (
+                {!isLogged() && (
                     <>
                         <li>
                             <a href='/login'>Login</a>
@@ -29,7 +39,7 @@ export default function Navbar() {
                         </li>
                     </>
                 )}
-                {authState && (
+                {isLogged() && (
                     <li>
                         <button type='button' className='my-button' onClick={logout}>Logout</button>
                     </li>
