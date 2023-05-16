@@ -18,6 +18,7 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
+    const [loggedIn, setLoggedIn] = useState(false);
 
     async function onLoginCallback() {
 
@@ -63,26 +64,25 @@ function Login() {
         //            return;
         //        }
         //
-        let is_success;
         try {
+
             console.log("trying log in...")
             // let tokens = await UserModel.login(user); // todo? get tokens to stay signed in
-            is_success = await user_model.login(userAuthData);
-            if (is_success.status === 200) {
-                setMessage("Logged in");
+            const res = await user_model.login(userAuthData);
+            if (res.data.error) {
+                setLoggedIn(false);
+                setMessage(res.data.error);
             } else {
-                setMessage("Invalid email or password");
+                setMessage("");
+                sessionStorage.setItem("accessToken", res.data);
+                setLoggedIn(true);
+
+                //navigate('/home');
             }
+
         } catch (err) {
             console.log("failed to log in user: " + err);
         }
-
-        if (!is_success) {
-            showError();
-            return;
-        }
-
-        //navigate('/home');
     }
 
     function backClick() {
@@ -154,6 +154,9 @@ function Login() {
                             <button type="button" className='login-button' onClick={backClick}>Back</button>
                         </div>
 
+                        <div className='margin-around'>
+                            {loggedIn && <h1 className='text-tittle'>{email} has been logged in</h1>}
+                        </div>
                     </div>
                 </div>
 
