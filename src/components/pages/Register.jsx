@@ -18,12 +18,11 @@ function RegistrationPage() {
     const [ageError, setAgeError] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [matchMessage, setMatchMessage] = useState('');
-       
-    const handleSubmit = async (e) => {
-      e.preventDefault();
 
-      // Check if passwords match
-      if (password !== confirmPassword) {
+    //event.target.value
+    const handleConfirmPasswordChange = (event) => {
+      setConfirmPassword(event.target.value);
+      if (password !== event.target.value) {
         setPasswordMatchError('The password not match');
         setMatchMessage('');
       } else {
@@ -34,31 +33,57 @@ function RegistrationPage() {
           setErrorMessage('Password is too short, please enter password from 6 to 18 characters');
         } else if (password.length > 18) {
         setErrorMessage('Password is too long, please enter password from 6 to 18 characters');
+        } else {
+          setErrorMessage('')
+        }
+    };
+    const handelEmail = (event) => {
+   
+      setEmail(event.target.value);
+       if (event.target.value.includes('@') && event.target.value.includes('.')) {
+      setErrorMessage('');
+        } else {
+      setErrorMessage('Please input a valid Email');
+    }
+
+    };
+    const handelDateOfBirth = (event) => {
+      setDateOfBirth(event.target.value) 
+      // Check if user is over 18 years old
+       const dobDate = new Date(event.target.value);
+       const nowDate = new Date();
+       const diffInYears = (nowDate - dobDate) / (1000 * 60 * 60 * 24 * 365);
+       if (diffInYears < 18) {
+         setAgeError('You must be at least 18 years old to register');
+       } else {
+        setAgeError('');
+      }
+
+    };
+
+    const handelPassowrd = (event) => {
+      setPassword(event.target.value);
+      if (event.target.value !== confirmPassword) {
+        setPasswordMatchError('The password not match');
+        setMatchMessage('');
+      } else {
+        setMatchMessage('The password match');
+        setPasswordMatchError('');
         }
 
-        if (email === '' || password === '' || username === '') {
+    };
+    
+
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+
+        if (email === '' || password === '' || username === '' || firstName === '' || lastName === '' || dateOfBirth === '') {
           setErrorMessage('Please fill all fields');
-          return;
+        } else {
+          setErrorMessage('');
         }
 
-        function isValidEmail(Pemail) { //Pemail = paramer email
-            // return regex_exp.test(email);
-
-          return Pemail.includes('@') && Pemail.includes('.');
-        }
-        if (!isValidEmail(email)) {
-          setErrorMessage('Please input a valid Email');
-          return;
-        }
-  
-        // Check if user is over 18 years old
-        const dobDate = new Date(dateOfBirth);
-        const nowDate = new Date();
-        const diffInYears = (nowDate - dobDate) / (1000 * 60 * 60 * 24 * 365);
-        if (diffInYears < 18) {
-          setAgeError('You must be at least 18 years old to register');
-          return;
-        }
 
         // Create form data object
         const formData = new FormData();
@@ -117,7 +142,7 @@ function RegistrationPage() {
                   id='email'
                   className='input'
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={handelEmail}
                   required
                 />
             </label>
@@ -138,7 +163,7 @@ function RegistrationPage() {
                   type='password'
                   id='password'
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={handelPassowrd}
                 />
             </label>
             <br />
@@ -148,10 +173,9 @@ function RegistrationPage() {
                   type='password'
                   id='confirmPassword'
                   value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  onChange={handleConfirmPasswordChange}
                 />
             </label>
-
             {passwordMatchError && <p style={{ color: 'red' }}>{passwordMatchError}</p>}
             {matchMessage && <p style={{ color: 'green' }}>{matchMessage}</p>}
             <br />
@@ -161,12 +185,12 @@ function RegistrationPage() {
                   type='date'
                   id='dateOfBirth'
                   value={dateOfBirth}
-                  onChange={(e) => setDateOfBirth(e.target.value)}
+                  onChange={handelDateOfBirth}
                 />
             </label>
             <br />
 
-            {ageError && <p color=''>{ageError }</p>}
+            {ageError && <p style={{ color: 'black' }}>{ageError }</p>}
             {errorMessage && <p style={{ color: 'black' }}>{errorMessage }</p>}
 
             <button type='submit' onClick={handleSubmit}>Register</button>
