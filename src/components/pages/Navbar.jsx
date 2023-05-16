@@ -1,9 +1,12 @@
-import { React, useState, useEffect } from 'react';
+import {
+    React, useState, useEffect, useContext
+} from 'react';
 import './styles/navbar_styles.css';
 import { AuthContext } from '../AuthContext';
 
+
 export default function Navbar() {
-    const [authState, setAuthState] = useState(false);
+    const { setAuthState, authState } = useContext(AuthContext);
 
     function logout() {
         localStorage.removeItem('accessToken');
@@ -12,32 +15,30 @@ export default function Navbar() {
 
     return (
         <nav className='nav'>
-            <AuthContext.Provider value={{ authState, setAuthState }}>
-                <a href='/' className='site-title'>
-                    SCRUM
-                </a>
-                <ul>
-                    {!authState && (
-                        <>
-                            <li>
-                                <a href='/login'>Login</a>
-                            </li>
-                            <li>
-                                <a href='/register'>Register</a>
-                            </li>
-                        </>
-                    )}
-
-                    {authState && (
+            <a href='/' className='site-title'>
+                SCRUM
+            </a>
+            <ul>
+                {!authState && (
+                    <>
                         <li>
-                            <button type='button' className='my-button' onClick={logout}>Logout</button>
+                            <a href='/login'>Login</a>
                         </li>
-                    )}
+                        <li>
+                            <a href='/register'>Register</a>
+                        </li>
+                    </>
+                )}
+                {authState && (
                     <li>
-                        <a href='/about'>About</a>
+                        <button type='button' className='my-button' onClick={logout}>Logout</button>
                     </li>
-                </ul>
-            </AuthContext.Provider>
+                )}
+                <li>
+                    <a href='/about'>About</a>
+                </li>
+            </ul>
+
         </nav>
     );
 }

@@ -16,8 +16,13 @@ async function get_all_users_mails() { // DEBUG ,TODO DELETE
     return api.get("/get_all_users_mails");
 };
 
+async function authToken() {
+    return api.get("/authToken");
+};
+
 export default {
     register,
     login,
-    get_all_users_mails,  // DEBUG ,TODO DELETE
+    get_all_users_mails,
+    authToken // DEBUG ,TODO DELETE
 };

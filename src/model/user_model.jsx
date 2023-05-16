@@ -25,9 +25,20 @@ async function login(userAuthData) {
     return res;
 }
 
+async function authToken() {
+    let res;
+    try {
+        res = await user_api.authToken();
+    } catch (err) {
+        console.log('user log in failed: ' + err);
+    }
+    return res;
+}
+
 export default {
     // register,
     login,
+    authToken,
     // getAllUsers,
 };
 
