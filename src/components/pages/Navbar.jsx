@@ -1,6 +1,10 @@
 import React from 'react';
 import './styles/navbar_styles.css';
 
+function logout() {
+    localStorage.removeItem('accessToken');
+}
+
 export default function Navbar() {
     return (
         <nav className='nav'>
@@ -8,9 +12,22 @@ export default function Navbar() {
                 SCRUM
             </a>
             <ul>
-                <li className='active'>
-                    <a href='/login'>Login</a>
-                </li>
+                {!localStorage.getItem('accessToken') && (
+                    <>
+                        <li>
+                            <a href='/login'>Login</a>
+                        </li>
+                        <li>
+                            <a href='/register'>Register</a>
+                        </li>
+                    </>
+                )}
+
+                {localStorage.getItem('accessToken') && (
+                    <li>
+                        <button type="button" className='my-button' onClick={logout}>Logout</button>
+                    </li>
+                )}
                 <li>
                     <a href='/about'>About</a>
                 </li>

@@ -74,7 +74,7 @@ function Login() {
                 setMessage(res.data.error);
             } else {
                 setMessage("");
-                sessionStorage.setItem("accessToken", res.data);
+                localStorage.setItem("accessToken", res.data);
                 setLoggedIn(true);
 
                 //navigate('/home');
