@@ -20,139 +20,158 @@ function RegistrationPage() {
     const [matchMessage, setMatchMessage] = useState('');
        
     const handleSubmit = async (e) => {
-     e.preventDefault();
+      e.preventDefault();
 
-     // Check if passwords match
-        if (password !== confirmPassword) {
-            setPasswordMatchError('The password not match');
-            setMatchMessage('');
-    } else {
+      // Check if passwords match
+      if (password !== confirmPassword) {
+        setPasswordMatchError('The password not match');
+        setMatchMessage('');
+      } else {
         setMatchMessage('The password match');
         setPasswordMatchError('');
+        }
+        if (password.length < 6) {
+          setErrorMessage('Password is too short, please enter password from 6 to 18 characters');
+        } else if (password.length > 18) {
+        setErrorMessage('Password is too long, please enter password from 6 to 18 characters');
+        }
 
-    }
+        if (email === '' || password === '' || username === '') {
+          setErrorMessage('Please fill all fields');
+          return;
+        }
+
+        function isValidEmail(Pemail) { //Pemail = paramer email
+            // return regex_exp.test(email);
+
+          return Pemail.includes('@') && Pemail.includes('.');
+        }
+        if (!isValidEmail(email)) {
+          setErrorMessage('Please input a valid Email');
+          return;
+        }
   
-    // Check if user is over 18 years old
-    const dobDate = new Date(dateOfBirth);
-    const nowDate = new Date();
-    const diffInYears = (nowDate - dobDate) / (1000 * 60 * 60 * 24 * 365);
-    if (diffInYears < 18) {
-      setAgeError('You must be at least 18 years old to register');
-      return
-    }
+        // Check if user is over 18 years old
+        const dobDate = new Date(dateOfBirth);
+        const nowDate = new Date();
+        const diffInYears = (nowDate - dobDate) / (1000 * 60 * 60 * 24 * 365);
+        if (diffInYears < 18) {
+          setAgeError('You must be at least 18 years old to register');
+          return;
+        }
 
-    // Create form data object
-    const formData = new FormData();
-    formData.append('firstName', firstName);
-    formData.append('lastName', lastName);
-    formData.append('username', username);
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('dateOfBirth', dateOfBirth);
+        // Create form data object
+        const formData = new FormData();
+        formData.append('firstName', firstName);
+        formData.append('lastName', lastName);
+        formData.append('username', username);
+        formData.append('email', email);
+        formData.append('password', password);
+        formData.append('dateOfBirth', dateOfBirth);
 
-    // Send form data to server
+        // Send form data to server
     
-    let is_success;
-    try {
-      is_success = await register_model.register(formData)
-    } catch (err) {
-      console.log('failed to log in user: ' + err);
-    }
+        let is_success;
+        try {
+            is_success = await register_model.register(formData);
+        } catch (err) {
+            console.log('failed to log in user: ' + err);
+        }
 
-    if (!is_success) {
-      errorMessage();
-      return;
-  }
-      useNavigate('/home');
+        if (!is_success) {
+            errorMessage();
+            return;
+        }
+        useNavigate('/home');
 
     };
 
     
-  return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor='firstName'>
+    return (
+        <form onSubmit={handleSubmit}>
+            <label htmlFor='firstName'>
         First Name:
-        <input
-          type='text'
-          id='firstName'
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-      </label>
-      <br />
-      <label htmlFor='lastName'>
+                <input
+                  type='text'
+                  id='firstName'
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+            </label>
+            <br />
+            <label htmlFor='lastName'>
         Last Name:
-        <input
-          type='text'
-          id='lastName'
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-        />
-      </label>
-      <br />
+                <input
+                  type='text'
+                  id='lastName'
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+            </label>
+            <br />
 
-      <label htmlFor='email' className='label'>
+            <label htmlFor='email' className='label'>
         Email
-        <input
-          type='email'
-          id='email'
-          className='input'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </label>
+                <input
+                  type='email'
+                  id='email'
+                  className='input'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+            </label>
 
-      <label htmlFor='username'>
+            <label htmlFor='username'>
         Username:
-        <input
-          type='text'
-          id='username'
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </label>
-      <br />
-      <label htmlFor='password'>
+                <input
+                  type='text'
+                  id='username'
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+            </label>
+            <br />
+            <label htmlFor='password'>
         Password:
-        <input
-          type='password'
-          id='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </label>
-      <br />
-      <label htmlFor='confirmPassword'>
+                <input
+                  type='password'
+                  id='password'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+            </label>
+            <br />
+            <label htmlFor='confirmPassword'>
         Confirm Password:
-        <input
-          type='password'
-          id='confirmPassword'
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-      </label>
+                <input
+                  type='password'
+                  id='confirmPassword'
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+            </label>
 
-      {passwordMatchError && <p style={{ color: 'red' }}>{passwordMatchError}</p>}
-      {matchMessage && <p style={{ color: 'green' }}>{matchMessage}</p>}
-      <br />
-      <label htmlFor='dateOfBirth'>
+            {passwordMatchError && <p style={{ color: 'red' }}>{passwordMatchError}</p>}
+            {matchMessage && <p style={{ color: 'green' }}>{matchMessage}</p>}
+            <br />
+            <label htmlFor='dateOfBirth'>
         Date of Birth:
-        <input
-          type='date'
-          id='dateOfBirth'
-          value={dateOfBirth}
-          onChange={(e) => setDateOfBirth(e.target.value)}
-        />
-      </label>
-      <br />
+                <input
+                  type='date'
+                  id='dateOfBirth'
+                  value={dateOfBirth}
+                  onChange={(e) => setDateOfBirth(e.target.value)}
+                />
+            </label>
+            <br />
 
-      {ageError  && <p>{ageError }</p>}
-      {errorMessage && <p>{errorMessage }</p>}
+            {ageError && <p color=''>{ageError }</p>}
+            {errorMessage && <p style={{ color: 'black' }}>{errorMessage }</p>}
 
-      <button type='submit' onClick={handleSubmit}>Register</button>
-    </form>
-  );
+            <button type='submit' onClick={handleSubmit}>Register</button>
+        </form>
+    );
 }
 
 export default RegistrationPage;

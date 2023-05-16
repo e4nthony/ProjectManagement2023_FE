@@ -13,6 +13,7 @@ import Login from './pages/Login';
 import NavBar from './pages/Navbar';
 import Register from './pages/Register';
 import PersonalArea from './pages/PersonalArea';
+import EditInfo from './pages/EditInfo';
 
 function RouteNavigator() {
 
@@ -34,6 +35,7 @@ function RouteNavigator() {
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
                 <Route path='/personalarea' element={<PersonalArea />} />
+                <Route path='/personalarea/editInfo' element={<EditInfo />} />
             </Routes>
 
             {/* <div className='devmessage'>
