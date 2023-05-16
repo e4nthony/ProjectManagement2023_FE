@@ -6,10 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import './styles/pages_styles.css';
 
 // import HomePage from './HomePage';
-// import user_api from '../../api/user_api';
+// import user_api from '../../api_api';
 // import api from '../../api/api';
 
 import user_model from '../../model/user_model.jsx';
+import { is } from '@babel/types';
 
 function Login() {
     const navigate = useNavigate();
@@ -42,31 +43,36 @@ function Login() {
             return;
         }
 
-        function isValidEmail(email) {
-            // const regex_exp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gi;
-            // return regex_exp.test(email);
-
-            return email.includes('@') && email.includes('.')
-        }
-        if (!isValidEmail(email)) {
-            showError('Please input a valid Email');
-            return;
-        }
-
-        if (password.length < 6) {
-            showError('Password is too short, please enter password from 6 to 18 characters');
-            return;
-        }
-        else if (password.length > 18) {
-            showError('Password is too long, please enter password from 6 to 18 characters');
-            return;
-        }
-
+        //        function isValidEmail(email) {
+        //            // const regex_exp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gi;
+        //            // return regex_exp.test(email);
+        //
+        //            return email.includes('@') && email.includes('.')
+        //        }
+        //        if (!isValidEmail(email)) {
+        //            showError('Please input a valid Email');
+        //            return;
+        //        }
+        //
+        //        if (password.length < 6) {
+        //            showError('Password is too short, please enter password from 6 to 18 characters');
+        //            return;
+        //        }
+        //        else if (password.length > 18) {
+        //            showError('Password is too long, please enter password from 6 to 18 characters');
+        //            return;
+        //        }
+        //
         let is_success;
         try {
             console.log("trying log in...")
             // let tokens = await UserModel.login(user); // todo? get tokens to stay signed in
-            is_success = await user_model.login(userAuthData)
+            is_success = await user_model.login(userAuthData);
+            if (is_success.status === 200) {
+                setMessage("Logged in");
+            } else {
+                setMessage("Invalid email or password");
+            }
         } catch (err) {
             console.log("failed to log in user: " + err);
         }
@@ -76,7 +82,7 @@ function Login() {
             return;
         }
 
-        navigate('/home');
+        //navigate('/home');
     }
 
     function backClick() {

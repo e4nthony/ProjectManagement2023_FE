@@ -8,22 +8,26 @@ async function login(userAuthData) {
     const data = {
         email: userAuthData.email,
         password: userAuthData.password // unencrypted/raw password
-    }
+    };
 
-    
+    let res;
     try {
-        const res = user_api.login(data);
-
-        console.log('user log in successfully: ' + userAuthData.email);
+        res = await user_api.login(data);
+        console.log('res(user_model): ' + res.status);
+        if (res.status === 200) {
+            console.log('user log in successfully: ' + userAuthData.email);
+        } else if (res.status === 400) {
+            console.log('user log in failed: ' + userAuthData.email);
+        }
     } catch (err) {
         console.log('user log in failed: ' + err);
     }
-
+    return res;
 }
 
 export default {
-     // register,
-     login,
+    // register,
+    login,
     // getAllUsers,
-}
+};
 
