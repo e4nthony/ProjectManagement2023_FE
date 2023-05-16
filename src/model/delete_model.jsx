@@ -1,11 +1,8 @@
-
-/* eslint-disable */
-/* the line above disables eslint check for this file (temporarily) todo:delete */
 import user_api from '../api/user_api'
 
 /** This model need to call api functions (to write less logic at pages) */
 
-async function register(userAuthData) {
+async function deletemyaccount(userAuthData) {
 
     // /** Pack data to 'JSON' format to send via web*/
     // const data = {
@@ -15,7 +12,7 @@ async function register(userAuthData) {
 
     
     try {
-        const res = user_api.register(userAuthData);
+        const res = user_api.deletemyaccount(userAuthData);
 
         console.log('user register successfully: ' + userAuthData.email);
     } catch (err) {
@@ -25,7 +22,7 @@ async function register(userAuthData) {
 }
 
 export default {
-    register,
+    deletemyaccount,
     // getAllUsers,
 }
 

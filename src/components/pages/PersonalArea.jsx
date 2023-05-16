@@ -1,10 +1,13 @@
+
+/* eslint-disable */
+/* the line above disables eslint check for this file (temporarily) todo:delete */
+
 import React, { useState } from 'react';
 import {
     Link, Route, Routes, useNavigate   
 } from 'react-router-dom';
 import './styles/personalArea.css';
 import Login from './Login';
-
 function PersonalArea() {
     const [isLoggedIn, setIsLoggedIn] = useState(true); // change to false when log in
     const [user, setUser] = useState({
@@ -14,9 +17,8 @@ function PersonalArea() {
         email: '',
         password: '',
     });
-  
-  
-
+    
+    
     return (
         <div>
             <h1>Personal Area</h1>
@@ -57,6 +59,12 @@ function PersonalArea() {
                     <Link to='/personalarea/editinfo'>
                         <button type='button'>Edit Info</button>
                     </Link>
+
+                    <Link to='/personalarea/confirmanddelet'>
+                    <button type='button' >delete my account</button>
+                    </Link>
+
+
                 </div>
             ) : (
                 <div>
