@@ -23,7 +23,6 @@ function RouteNavigator() {
         <div>
 
             <NavBar />
-
             <Routes>
                 <Route path='*' element={<Page404 />} />
                 <Route path='/' element={<Home />} />

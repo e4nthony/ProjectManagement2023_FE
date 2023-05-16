@@ -1,9 +1,10 @@
 /* eslint-disable */
 /* the line above disables eslint check for this file (temporarily) todo:delete */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './styles/pages_styles.css';
+import { AuthContext } from '../AuthContext'
 
 // import HomePage from './HomePage';
 // import user_api from '../../api_api';
@@ -18,7 +19,7 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
-    const [loggedIn, setLoggedIn] = useState(false);
+    const { setAuthState } = useContext(AuthContext);
 
     async function onLoginCallback() {
 
@@ -70,13 +71,12 @@ function Login() {
             // let tokens = await UserModel.login(user); // todo? get tokens to stay signed in
             const res = await user_model.login(userAuthData);
             if (res.data.error) {
-                setLoggedIn(false);
+                setAuthState(false);
                 setMessage(res.data.error);
             } else {
                 setMessage("");
                 localStorage.setItem("accessToken", res.data);
-                setLoggedIn(true);
-
+                setAuthState(true);
                 //navigate('/home');
             }
 
@@ -155,7 +155,7 @@ function Login() {
                         </div>
 
                         <div className='margin-around'>
-                            {loggedIn && <h1 className='text-tittle'>{email} has been logged in</h1>}
+                            {AuthContext && <h1 className='text-tittle'>{email} has been logged in</h1>}
                         </div>
                     </div>
                 </div>
