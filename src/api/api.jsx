@@ -5,8 +5,9 @@ const backend_url = 'http://127.0.0.1:3080';
 
 const apiClient = create({
     baseURL: backend_url,
-    headers: { Accept: 'application/vnd.github.v3+json', accessToken: localStorage.getItem('accessToken') },
-    // headers: { Accept: 'application/json' },
+    headers: {
+        Accept: 'application/vnd.github.v3+json',
+    },
 })
 
 export default apiClient

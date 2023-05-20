@@ -1,14 +1,44 @@
+/* eslint-disable */
+/* the line above disables eslint check for this file (temporarily) todo:delete */
+
 import user_api from '../api/user_api'
 
-/** This model need to call api functions (to write less logic at pages) */
+/* This model need to call api functions (to write less logic at pages) */
 
 async function login(userAuthData) {
+    console.log("trying log in...")
 
-    /** Pack data to 'JSON' format to send via web*/
+    /* Pack data to 'JSON' format to send via web*/
     const data = {
         email: userAuthData.email,
         password: userAuthData.password // unencrypted/raw password
     };
+
+    try {
+        // let tokens = await UserModel.login(user); // todo? get tokens to stay signed in
+        const token = await user_api.login(userAuthData);
+        
+        const authHeader = req.header('authorization');
+    
+        token = authHeader.split(' ')[1];   // example: 'jwt 46745187' , a 46745187 is a token.
+    
+
+        if (res.data.error || authHeader == null) {
+            setAuthState(false);
+            setMessage(res.data.error); // debug
+        } else {
+            setAuthState(true);
+            setMessage("");
+            localStorage.setItem('accessToken', token);
+            //navigate('/home');
+        }
+
+    } catch (err) {
+        console.log("failed to log in user: " + err);
+    }
+
+
+
 
     let res;
     try {
@@ -25,10 +55,10 @@ async function login(userAuthData) {
     return res;
 }
 
-async function authToken() {
+async function get_access_token() {
     let res;
     try {
-        res = await user_api.authToken();
+        res = await user_api.get_access_token();
     } catch (err) {
         console.log('user log in failed: ' + err);
     }
@@ -38,7 +68,7 @@ async function authToken() {
 export default {
     // register,
     login,
-    authToken,
+    get_access_token,
     // getAllUsers,
 };
 

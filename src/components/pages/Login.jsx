@@ -19,6 +19,8 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
+
+
     const { setAuthState } = useContext(AuthContext);
 
     async function onLoginCallback() {
@@ -34,55 +36,38 @@ function Login() {
         console.log(userAuthData.email);  // debug, todo delete
 
         function showError(err_msg = 'Invalid email or password') {
-            console.log('setting the error message');
+            console.log('setting the error message: ' + err_msg);
             // setMessage(message + ', ' + err_msg);
             setMessage(err_msg);
         }
+
         showError('');
+
+        /* --------- Checks input on client's device before sending to server ----------- */
 
         if (email == '' || password == '') {
             showError('Please fill all fields');
             return;
         }
 
-        //        function isValidEmail(email) {
-        //            // const regex_exp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gi;
-        //            // return regex_exp.test(email);
-        //
-        //            return email.includes('@') && email.includes('.')
-        //        }
-        //        if (!isValidEmail(email)) {
-        //            showError('Please input a valid Email');
-        //            return;
-        //        }
-        //
-        //        if (password.length < 6) {
-        //            showError('Password is too short, please enter password from 6 to 18 characters');
-        //            return;
-        //        }
-        //        else if (password.length > 18) {
-        //            showError('Password is too long, please enter password from 6 to 18 characters');
-        //            return;
-        //        }
-        //
-        try {
-
-            console.log("trying log in...")
-            // let tokens = await UserModel.login(user); // todo? get tokens to stay signed in
-            const res = await user_model.login(userAuthData);
-            if (res.data.error) {
-                setAuthState(false);
-                setMessage(res.data.error);
-            } else {
-                setMessage("");
-                localStorage.setItem("accessToken", res.data);
-                setAuthState(true);
-                //navigate('/home');
-            }
-
-        } catch (err) {
-            console.log("failed to log in user: " + err);
+        function isValidEmail(email) {
+            return email.includes('@') && email.includes('.')
         }
+
+        if (!isValidEmail(email)) {
+            showError('Please input a valid Email');
+            return;
+        }
+
+        if (password.length < 6) {
+            /* this password cannot be valid */
+            showError();
+            return;
+        }
+
+        user_model.login(userAuthData);
+
+       
     }
 
     function backClick() {
