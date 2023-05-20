@@ -40,3 +40,17 @@ body {
 .nav li.hover {
     background-color: aqua;
 }
+
+.my-button {
+    all: unset;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    padding: .25rem;
+}
+
+.my-button:hover {
+    cursor: pointer;
+}

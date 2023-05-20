@@ -1,15 +1,17 @@
 /* eslint-disable */
 /* the line above disables eslint check for this file (temporarily) todo:delete */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './styles/pages_styles.css';
+import { AuthContext } from '../AuthContext'
 
 // import HomePage from './HomePage';
-// import user_api from '../../api/user_api';
+// import user_api from '../../api_api';
 // import api from '../../api/api';
 
 import user_model from '../../model/user_model.jsx';
+import { is } from '@babel/types';
 
 function Login() {
     const navigate = useNavigate();
@@ -17,8 +19,9 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
-    const [islogin,setIsLoggedIn] = useState(false);
-    const [id,setid] = useState("");
+    const { setAuthState } = useContext(AuthContext);
+    const [islogin, setIsLoggedIn] = useState(false);
+    const [id, setid] = useState("");
     async function onLoginCallback() {
 
         const userAuthData = {
@@ -43,41 +46,44 @@ function Login() {
             return;
         }
 
-        function isValidEmail(email) {
-            // const regex_exp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gi;
-            // return regex_exp.test(email);
-
-            return email.includes('@') && email.includes('.')
-        }
-        if (!isValidEmail(email)) {
-            showError('Please input a valid Email');
-            return;
-        }
-
-        if (password.length < 6) {
-            showError('Password is too short, please enter password from 6 to 18 characters');
-            return;
-        }
-        else if (password.length > 18) {
-            showError('Password is too long, please enter password from 6 to 18 characters');
-            return;
-        }
-
-        let is_success;
+        //        function isValidEmail(email) {
+        //            // const regex_exp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gi;
+        //            // return regex_exp.test(email);
+        //
+        //            return email.includes('@') && email.includes('.')
+        //        }
+        //        if (!isValidEmail(email)) {
+        //            showError('Please input a valid Email');
+        //            return;
+        //        }
+        //
+        //        if (password.length < 6) {
+        //            showError('Password is too short, please enter password from 6 to 18 characters');
+        //            return;
+        //        }
+        //        else if (password.length > 18) {
+        //            showError('Password is too long, please enter password from 6 to 18 characters');
+        //            return;
+        //        }
+        //
         try {
+
             console.log("trying log in...")
             // let tokens = await UserModel.login(user); // todo? get tokens to stay signed in
-            is_success = await user_model.login(userAuthData)
+            const res = await user_model.login(userAuthData);
+            if (res.data.error) {
+                setAuthState(false);
+                setMessage(res.data.error);
+            } else {
+                setMessage("");
+                localStorage.setItem("accessToken", res.data);
+                setAuthState(true);
+                navigate('/');
+            }
+
         } catch (err) {
             console.log("failed to log in user: " + err);
         }
-
-        if (!is_success) {
-            showError();
-            return;
-        }
-
-        navigate('/home');
     }
 
     function backClick() {
@@ -121,6 +127,7 @@ function Login() {
                                     <label for='password' className='simplelabel'><b>Password: </b></label>
                                 </div>
                                 <input id='password'
+                                    type='password'
                                     className='input-field-password'
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
@@ -148,7 +155,6 @@ function Login() {
                         <div className='margin-around'>
                             <button type="button" className='login-button' onClick={backClick}>Back</button>
                         </div>
-
                     </div>
                 </div>
 
