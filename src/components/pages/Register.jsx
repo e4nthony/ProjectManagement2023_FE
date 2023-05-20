@@ -102,7 +102,7 @@ function RegistrationPage() {
       userName: username,
       email: email,
       enc_password: password,
-      date: dateOfBirth
+      birth_date: dateOfBirth
     }
 
 
