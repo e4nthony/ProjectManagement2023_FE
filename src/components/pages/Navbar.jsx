@@ -5,9 +5,11 @@ import './styles/navbar_styles.css';
 import { useNavigate } from 'react-router-dom';
 
 import { AuthContext } from '../AuthContext';
+import DropDownProfile from './DropDownProfile';
 
 
 export default function Navbar() {
+    const [selectedOption, setSelectedOption] = useState('');
     const { setAuthState, authState } = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -33,16 +35,13 @@ export default function Navbar() {
                         </li>
                     </>
                 )}
-                {authState && (
-                    <li>
-                        <button type='button' className='my-button' onClick={logout}>Logout</button>
-                    </li>
-                )}
                 <li>
                     <a href='/about'>About</a>
                 </li>
+                <li>
+                    <DropDownProfile />
+                </li>
             </ul>
-
         </nav>
     );
 }

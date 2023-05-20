@@ -77,7 +77,7 @@ function Login() {
                 setMessage("");
                 localStorage.setItem("accessToken", res.data);
                 setAuthState(true);
-                //navigate('/home');
+                navigate('/');
             }
 
         } catch (err) {
@@ -126,6 +126,7 @@ function Login() {
                                     <label for='password' className='simplelabel'><b>Password: </b></label>
                                 </div>
                                 <input id='password'
+                                    type='password'
                                     className='input-field-password'
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
@@ -152,10 +153,6 @@ function Login() {
 
                         <div className='margin-around'>
                             <button type="button" className='login-button' onClick={backClick}>Back</button>
-                        </div>
-
-                        <div className='margin-around'>
-                            {AuthContext && <h1 className='text-tittle'>{email} has been logged in</h1>}
                         </div>
                     </div>
                 </div>
