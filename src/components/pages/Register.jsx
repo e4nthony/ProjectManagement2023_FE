@@ -88,19 +88,20 @@ function RegistrationPage() {
     }
 
     // Create form data object
-    const formData = new FormData();
-    formData.append('firstName', firstName);
-    formData.append('lastName', lastName);
-    formData.append('userName', username);
-    formData.append('email', email);
-    //formData.append('password', password);
-    formData.append('date', dateOfBirth);
+    // const formData = new FormData();
+    // formData.append('firstName', firstName);
+    // formData.append('lastName', lastName);
+    // formData.append('userName', username);
+    // formData.append('email', email);
+    // formData.append('password', password);
+    // formData.append('date', dateOfBirth);
 
     const data = {
       firstName: firstName,
       lastName: lastName,
       userName: username,
       email: email,
+      enc_password:password,
       date: dateOfBirth
     }
 
