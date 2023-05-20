@@ -2,7 +2,7 @@
 /* the line above disables eslint check for this file (temporarily) todo:delete */
 
 import React, { useState } from 'react';
-import './styles/style.css';
+import './styles/registerStyle.css';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -101,11 +101,11 @@ function RegistrationPage() {
       lastName: lastName,
       userName: username,
       email: email,
-      enc_password:password,
+      enc_password: password,
       date: dateOfBirth
     }
 
-   
+
 
     // Send form data to server
 
