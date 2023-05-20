@@ -14,7 +14,7 @@ import user_model from './model/user_model';
 import RouteNavigator from './components/RouteNavigator';
 
 function App() {
-    const [authState, setAuthState] = useState(false);
+    const [authState, setAuthState] = useState(true);
 
     useEffect(() => {
         (async () => {
@@ -36,16 +36,17 @@ function App() {
 
     return (
         <div>
-            <AuthContext.Provider value={{ authState, setAuthState }}>
-                <React.StrictMode>
+
+            <React.StrictMode>
+                <AuthContext.Provider value={{ authState, setAuthState }}>
                     <BrowserRouter>
                         <RouteNavigator />
                         {/* <div className='devmessage'>
                         default test message from App.jsx element (dev.info)
                     </div> */}
                     </BrowserRouter>
-                </React.StrictMode>
-            </AuthContext.Provider>
+                </AuthContext.Provider>
+            </React.StrictMode>
         </div>
     );
 }

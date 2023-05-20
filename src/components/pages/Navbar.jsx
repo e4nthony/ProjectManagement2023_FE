@@ -13,14 +13,8 @@ export default function Navbar() {
 
     function logout() {
         localStorage.removeItem('accessToken');
-        localStorage.setItem('loggedIn', false);
         setAuthState(false);
         navigate('/');
-    }
-
-    function isLogged() {
-        if (localStorage.getItem('loggedIn') === 'true') return true;
-        return false;
     }
 
     return (
@@ -29,7 +23,7 @@ export default function Navbar() {
                 SCRUM
             </a>
             <ul>
-                {!isLogged() && (
+                {!authState && (
                     <>
                         <li>
                             <a href='/login'>Login</a>
@@ -39,7 +33,7 @@ export default function Navbar() {
                         </li>
                     </>
                 )}
-                {isLogged() && (
+                {authState && (
                     <li>
                         <button type='button' className='my-button' onClick={logout}>Logout</button>
                     </li>
