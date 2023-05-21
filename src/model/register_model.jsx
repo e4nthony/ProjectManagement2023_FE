@@ -18,10 +18,11 @@ async function register(userAuthData) {
         const res = user_api.register(userAuthData);
 
         console.log('user register successfully: ' + userAuthData.email);
+        return true
     } catch (err) {
         console.log('user log in failed: ' + err);
     }
-
+    return false
 }
 
 export default {

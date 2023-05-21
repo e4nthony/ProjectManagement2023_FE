@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import './styles/registerStyle.css';
 import { useNavigate } from 'react-router-dom';
-
+import bcrypt from 'bcrypt'
 
 import register_model from '../../model/register_model';
 
@@ -96,12 +96,19 @@ function RegistrationPage() {
     // formData.append('password', password);
     // formData.append('date', dateOfBirth);
 
+
+
+    
+    /* encrypt password (generate hash of password): */
+    const salt = await bcrypt.genSalt(10);
+    const encryptedPassword = await bcrypt.hash(password, salt);
+
     const data = {
       firstName: firstName,
       lastName: lastName,
       userName: username,
       email: email,
-      enc_password: password,
+      enc_password: encryptedPassword,
       birth_date: dateOfBirth
     }
 

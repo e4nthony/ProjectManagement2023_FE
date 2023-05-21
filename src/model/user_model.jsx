@@ -1,13 +1,20 @@
-import user_api from '../api/user_api'
+import bcrypt from 'bcrypt'
+
+import user_api from '../api/user_api';
 
 /** This model need to call api functions (to write less logic at pages) */
 
 async function login(userAuthData) {
+    const raw_password = userAuthData.password; // unencrypted password
 
-    /** Pack data to 'JSON' format to send via web*/
+    /* encrypt password (generate hash of password): */
+    const salt = await bcrypt.genSalt(10);
+    const encryptedPassword = await bcrypt.hash(raw_password, salt);
+
+    /* Pack data to 'JSON' format to send via web */
     const data = {
         email: userAuthData.email,
-        password: userAuthData.password // unencrypted/raw password
+        enc_password: encryptedPassword
     };
 
     let res;
