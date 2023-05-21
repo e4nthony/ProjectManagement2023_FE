@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import './styles/registerStyle.css';
 import { useNavigate } from 'react-router-dom';
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 
 import register_model from '../../model/register_model';
 

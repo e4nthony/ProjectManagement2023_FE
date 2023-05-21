@@ -34,7 +34,7 @@
     "@types/chai": "^4.3.4",
     "@types/mocha": "^10.0.1",
     "apisauce": "^3.0.0",
-    "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
     "chai": "^4.3.7",
     "mocha": "^10.2.0",
     "nodemon": "^2.0.22",
