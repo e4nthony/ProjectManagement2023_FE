@@ -20,10 +20,9 @@ export default function Navbar() {
 
     return (
         <nav className='nav'>
-            <a href='/' className='site-title'>
-                BidZone
-            </a>
+            <a href='/' className='site-title'>BidZone</a>
             <ul>
+                {authState && (<a href='/CreatePost'>Create Post</a>)}
                 {!authState && (
                     <>
                         <li>
@@ -37,9 +36,7 @@ export default function Navbar() {
                 <li>
                     <a href='/about'>About</a>
                 </li>
-                <li>
-                    <DropDownProfile />
-                </li>
+                {authState && (<DropDownProfile />)}
             </ul>
         </nav>
     );
