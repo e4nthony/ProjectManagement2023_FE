@@ -13,12 +13,17 @@ async function register(userAuthData) {
     //     password: userAuthData.password // unencrypted/raw password
     // }
 
-    
+
     try {
         const res = user_api.register(userAuthData);
 
-        console.log('user register successfully: ' + userAuthData.email);
-        return true
+        const statusCode = (await res).status;
+        console.log('got response from server, status code: ' + statusCode);
+        console.log('response: ' + JSON.stringify(res));
+        if (statusCode == 200) {
+            console.log('user register successfully: ' + JSON.stringify(userAuthData.email));
+            return true
+        }
     } catch (err) {
         console.log('user log in failed: ' + err);
     }

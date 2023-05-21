@@ -7,14 +7,15 @@ import user_api from '../api/user_api';
 async function login(userAuthData) {
     const raw_password = userAuthData.password; // unencrypted password
 
-    /* encrypt password (generate hash of password): */
-    const salt = await bcrypt.genSalt(10);
-    const encryptedPassword = await bcrypt.hash(raw_password, salt);
+    // /* encrypt password (generate hash of password): */
+    // const salt = await bcrypt.genSalt(10);
+    // const encryptedPassword = await bcrypt.hash(raw_password, salt);
 
     /* Pack data to 'JSON' format to send via web */
     const data = {
         email: userAuthData.email,
-        enc_password: encryptedPassword
+        raw_password: userAuthData.password
+        // enc_password: encryptedPassword
     };
 
     let res;
