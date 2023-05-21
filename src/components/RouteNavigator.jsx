@@ -17,12 +17,14 @@ import Register from './pages/Register';
 import PersonalArea from './pages/PersonalArea';
 import EditInfo from './pages/EditInfo';
 import Confirmanddel from './pages/confirmanddelet';
+import CreatePost from './pages/CreatePost';
+
 function RouteNavigator() {
 
     /** todo: Implement later */
     // useEffect(() => {
     // }, []);
-//bool-login
+    //bool-login
     return (
 
         <div>
@@ -37,7 +39,8 @@ function RouteNavigator() {
                 <Route path='/register' element={<Register />} />
                 <Route path='/personalarea' element={<PersonalArea />} />
                 <Route path='/personalarea/editInfo' element={<EditInfo />} />
-                <Route path='/personalarea/confirmanddelet' element={<Confirmanddel/>} />
+                <Route path='/personalarea/confirmanddelet' element={<Confirmanddel />} />
+                <Route path='/CreatePost' element={<CreatePost />} />
             </Routes>
 
             {/* <div className='devmessage'>
