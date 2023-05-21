@@ -6,8 +6,8 @@
   }
 
 .post {
-    width: 400px;
-    height: 300px;
+    width: 500px;
+    height: 400px;
     border-radius: 10px;
     position: relative;
     display: flex;
@@ -24,20 +24,30 @@
   }
   .post .title {
     flex: 20%;
-    border-bottom: 1px solid lightgray;
+    font-size: 25px;
     background-color: dodgerblue;
     display: grid;
     place-content: center;
     color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
   }
   
   .post .body {
-    flex: 60%;
+    flex: 30%;
     display: grid;
     place-content: center;
   }
-  
-  .post .footer {
+
+  .post .pic{
+    flex: 140%;
+    display: grid;
+    border-top: 1px solid black;
+    place-content: center;
+  }
+
+
+  .post .maxBid{
     flex: 20%;
     border-top: 1px solid lightgray;
     display: flex;
@@ -46,6 +56,35 @@
     background-color: dodgerblue;
     color: white;
     border-bottom-left-radius: 10px;
+  }
+
+
+  .post .timer{
+    flex: 20%;
+    border-top: 1px solid lightgray;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    background-color: dodgerblue;
+    color: white;
     border-bottom-right-radius: 10px;
+  }
+
+
+  .post .seller{
+    flex: 10%;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    background-color: dodgerblue;
+    color: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  .post .priceANDtimer{
+    display: flex;
+    flex: 30%;
+    flex-direction:row;
   }
   

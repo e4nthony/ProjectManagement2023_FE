@@ -50,11 +50,10 @@ function HomePage() {
                                     console.log(post.title + ' has been clicked')
                                 }} >
                                 <div className="title"> {post.title} </div>
+                                <div className="seller">{post.username}</div>
                                 <div className="body">{post.postText}</div>
-                                <div className="body">{post.postImage}</div>
-                                <div className="footer">{post.postMinPrice}</div>
-                                <div className="footer">{post.postMaxTime}</div>
-                                <div className="footer">{post.username}</div>
+                                <div className="pic">{post.postImage}</div>
+                                <div className="priceANDtimer"><div className="maxBid">{post.postMinPrice}</div><div className="timer">{post.postMaxTime}</div></div>
                             </div>
                         );
                     })}
