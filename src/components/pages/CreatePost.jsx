@@ -33,7 +33,7 @@ function CreatePost() {
 
     return (
         <div className="createPostPage">
-            <h1>Home page !</h1>
+            <h1>Create Post !</h1>
             <Formik
                 initialValues={initialValues}
                 onSubmit={onSubmit}
