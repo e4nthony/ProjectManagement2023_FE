@@ -1,21 +1,14 @@
-import bcrypt from 'bcryptjs'
-
 import user_api from '../api/user_api';
 
-/** This model need to call api functions (to write less logic at pages) */
+/* This model need to call api functions (to write less logic at pages) */
 
 async function login(userAuthData) {
-    const raw_password = userAuthData.password; // unencrypted password
-
-    // /* encrypt password (generate hash of password): */
-    // const salt = await bcrypt.genSalt(10);
-    // const encryptedPassword = await bcrypt.hash(raw_password, salt);
-
+    console.log('trying log in...');
+    
     /* Pack data to 'JSON' format to send via web */
     const data = {
         email: userAuthData.email,
         raw_password: userAuthData.password
-        // enc_password: encryptedPassword
     };
 
     let res;

@@ -2,7 +2,7 @@
 /* the line above disables eslint check for this file (temporarily) todo:delete */
 
 import React, { useState } from 'react';
-import './styles/registerStyle.css';
+import './styles/register_styles.css';
 import { useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs'
 
@@ -40,6 +40,7 @@ function RegistrationPage() {
       setErrorMessage('')
     }
   };
+
   const handelEmail = (event) => {
 
     setEmail(event.target.value);
@@ -50,6 +51,7 @@ function RegistrationPage() {
     }
 
   };
+
   const handelDateOfBirth = (event) => {
     setDateOfBirth(event.target.value)
     // Check if user is over 18 years old
@@ -76,8 +78,6 @@ function RegistrationPage() {
 
   };
 
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -95,27 +95,21 @@ function RegistrationPage() {
     // formData.append('email', email);
     // formData.append('password', password);
     // formData.append('date', dateOfBirth);
-
-
-
     
     /* encrypt password (generate hash of password): */
     const salt = await bcrypt.genSalt(10);
     const encryptedPassword = await bcrypt.hash(password, salt);
 
     const data = {
+      email: email,
+      enc_password: encryptedPassword,
       firstName: firstName,
       lastName: lastName,
       userName: username,
-      email: email,
-      enc_password: encryptedPassword,
       birth_date: dateOfBirth
     }
 
-
-
-    // Send form data to server
-
+    /* Send data to server */
     let is_success;
     try {
       is_success = await register_model.register(data);
@@ -127,10 +121,9 @@ function RegistrationPage() {
       errorMessage();
       return;
     }
+
     useNavigate('/home');
-
   };
-
 
   return (
     <form onSubmit={handleSubmit}>

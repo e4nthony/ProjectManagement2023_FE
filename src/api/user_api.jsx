@@ -12,8 +12,8 @@ async function login(userJson) {
     return api.post("/auth/login", userJson);
 };
 
-async function deletemyaccount(userJson) {
-    return api.post("/auth/deletemyaccount", userJson);
+async function deleteaccount(userJson) {
+    return api.post("/auth/deleteaccount", userJson);
 };
 
 async function get_all_users_mails() { // DEBUG ,TODO DELETE
@@ -27,7 +27,7 @@ async function authToken() {
 export default {
     register,
     login,
-    deletemyaccount,
-    get_all_users_mails,
-    authToken // DEBUG ,TODO DELETE
+    deleteaccount,
+    get_all_users_mails,  // DEBUG ,TODO DELETE
+    authToken
 };
