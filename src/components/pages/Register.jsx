@@ -206,7 +206,7 @@ function RegistrationPage() {
       {ageError && <p style={{ color: 'black' }}>{ageError}</p>}
       {errorMessage && <p style={{ color: 'black' }}>{errorMessage}</p>}
 
-      <button type='submit' onClick={handleSubmit}>Register</button>
+      <button className='register-button' type='submit' onClick={handleSubmit}>Register</button>
     </form>
   );
 }
