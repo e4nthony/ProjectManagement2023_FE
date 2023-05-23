@@ -19,9 +19,9 @@ async function register(userAuthData) {
 
         const statusCode = (await res).status;
         console.log('got response from server, status code: ' + statusCode);
-        console.log('response: ' + JSON.stringify(res));
+        console.log('response: ' + JSON.stringify(res, null, 2));
         if (statusCode == 200) {
-            console.log('user register successfully: ' + JSON.stringify(userAuthData.email));
+            console.log('user registered successfully: ' + JSON.stringify(userAuthData.email));
             return true
         }
     } catch (err) {

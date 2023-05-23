@@ -62,16 +62,16 @@ function Login() {
         }
 
         try {
-
-            console.log("trying log in...")
             // let tokens = await UserModel.login(user); // todo? get tokens to stay signed in
             const res = await user_model.login(userAuthData);
-            if (res.data.error || !res.body.accessToken) {
+            if (res.data.error || !res.data.accessToken) {
+                console.log("no data," + JSON.stringify(res, null, 2))
                 setAuthState(false);
                 setMessage(res.data.error);
             } else {
+                console.log("got token: " + JSON.stringify(res.data.accessToken, null, 2))
                 setMessage("");
-                localStorage.setItem("accessToken", res.body.accessToken);
+                localStorage.setItem("accessToken", res.data.accessToken);
                 setAuthState(true);
                 navigate('/');
             }

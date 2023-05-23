@@ -10,6 +10,8 @@ import register_model from '../../model/register_model';
 
 
 function RegistrationPage() {
+  const navigate = useNavigate();
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -115,14 +117,16 @@ function RegistrationPage() {
       is_success = await register_model.register(data);
     } catch (err) {
       console.log('failed to register user: ' + err);
-    }
-
-    if (!is_success) {
-      errorMessage();
+      setErrorMessage('Registration failed, please try again later');
       return;
     }
 
-    useNavigate('/home');
+    if (!is_success) {
+      setErrorMessage('Registration failed, please try again later');
+      return;
+    }
+
+    return navigate('/login');
   };
 
   return (
