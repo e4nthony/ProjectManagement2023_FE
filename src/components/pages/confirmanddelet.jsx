@@ -1,6 +1,6 @@
 /* eslint-disable */
 /* the line above disables eslint check for this file (temporarily) todo:delete */
-import './styles/style.css';
+// import './styles/style.css';
 import React, { useState } from 'react';
 import {
  Link, Route, Routes, useNavigate   
