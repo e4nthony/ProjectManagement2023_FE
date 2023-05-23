@@ -3,7 +3,7 @@
 /** --- Login Page Styles --- */
 .main-container {
     text-align: center;
-    background-image: radial-gradient(100% 100% at 0 100%, #63ddff 0, #ffffff 100%);
+    /* background-image: radial-gradient(100% 100% at 0 100%, #63ddff 0, #ffffff 100%); */
     /* background-color: rgb(158, 255, 229); */
     height: 100vh;
     /* makes fullscreen */

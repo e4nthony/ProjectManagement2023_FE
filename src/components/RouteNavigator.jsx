@@ -1,3 +1,5 @@
+/* eslint-disable */
+/* the line above disables eslint check for this file (temporarily) todo:delete */
 import React, { useEffect, useState } from 'react';
 import {
     // createBrowserRouter,
@@ -11,25 +13,34 @@ import Home from './pages/HomePage';
 import About from './pages/About';
 import Login from './pages/Login';
 import NavBar from './pages/Navbar';
+import Register from './pages/Register';
+import PersonalArea from './pages/PersonalArea';
+import EditInfo from './pages/EditInfo';
+import Confirmanddel from './pages/confirmanddelet';
+import CreatePost from './pages/CreatePost';
 
 function RouteNavigator() {
 
     /** todo: Implement later */
     // useEffect(() => {
     // }, []);
-
+    //bool-login
     return (
 
         <div>
 
             <NavBar />
-
             <Routes>
                 <Route path='*' element={<Page404 />} />
                 <Route path='/' element={<Home />} />
                 <Route path='/home' element={<Home />} />
                 <Route path='/about' element={<About />} />
                 <Route path='/login' element={<Login />} />
+                <Route path='/register' element={<Register />} />
+                <Route path='/personalarea' element={<PersonalArea />} />
+                <Route path='/personalarea/editInfo' element={<EditInfo />} />
+                <Route path='/personalarea/confirmanddelet' element={<Confirmanddel />} />
+                <Route path='/CreatePost' element={<CreatePost />} />
             </Routes>
 
             {/* <div className='devmessage'>
