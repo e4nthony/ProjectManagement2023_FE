@@ -88,3 +88,52 @@
     flex-direction:row;
   }
   
+  .posts .posts-type {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex: 30%;
+  }
+
+  .posts .posts-type .explore{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 40px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    margin-right: 300px;
+    background-color: rgb(114, 180, 246);
+    color: white;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  .posts .posts-type .explore:hover{
+    cursor: pointer;
+    background-color: dodgerblue;
+  }
+
+  .posts .posts-type .following{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 40px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    background-color: rgb(114, 180, 246);
+    color: white;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  
+  .posts .posts-type .following:hover{
+    cursor: pointer;
+    background-color: dodgerblue;
+  }

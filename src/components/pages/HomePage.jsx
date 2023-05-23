@@ -38,10 +38,17 @@ function HomePage() {
             <div>
                 <h1>Home page !</h1>
                 <div><img src={logo} alt='' /></div>
-                <p className='about-par' style={{ color: 'black' }}>
-                    Welcome to our project in Project Managment course 2023
-                </p >
+
                 <div className='posts'>
+                    <div className='posts-type'>
+                        <div className='explore' onClick={() => {
+                            console.log('explore')
+                        }}>Explore</div>
+
+                        <div className='following' onClick={() => {
+                            console.log('following')
+                        }}>Following</div>
+                    </div>
                     {posts.map((post) => {
                         return (
                             <div
