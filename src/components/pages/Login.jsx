@@ -66,12 +66,12 @@ function Login() {
             console.log("trying log in...")
             // let tokens = await UserModel.login(user); // todo? get tokens to stay signed in
             const res = await user_model.login(userAuthData);
-            if (res.data.error || !accessToken) {
+            if (res.data.error || !res.body.accessToken) {
                 setAuthState(false);
                 setMessage(res.data.error);
             } else {
                 setMessage("");
-                localStorage.setItem("accessToken", res.data.accessToken);
+                localStorage.setItem("accessToken", res.body.accessToken);
                 setAuthState(true);
                 navigate('/');
             }
