@@ -95,7 +95,7 @@ function RegistrationPage() {
     // formData.append('email', email);
     // formData.append('password', password);
     // formData.append('date', dateOfBirth);
-    
+
     /* encrypt password (generate hash of password): */
     const salt = await bcrypt.genSalt(10);
     const encryptedPassword = await bcrypt.hash(password, salt);
@@ -114,7 +114,7 @@ function RegistrationPage() {
     try {
       is_success = await register_model.register(data);
     } catch (err) {
-      console.log('failed to log in user: ' + err);
+      console.log('failed to register user: ' + err);
     }
 
     if (!is_success) {
