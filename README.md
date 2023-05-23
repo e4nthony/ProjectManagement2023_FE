@@ -66,6 +66,6 @@ Create Post Page :\
 Delete My Account Page :\
 <img src="/preview/Delete Account Page.png" width="800">\
 About :\
-<img src="/preview/About.png" width="800">
+<img src="/preview/About Page.png" width="800">
 
 <!-- sprint3 -->
