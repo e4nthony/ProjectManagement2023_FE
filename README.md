@@ -49,11 +49,23 @@ use gitbash terminal at the same folder and run following commands:
 
 ## Site Preview:
 
-Home :\
-<img src="/preview/home.png" width="800">\
+Home - Unauthorized Client:\
+<img src="/preview/Home (Unauthorized).png" width="800">\
+Home - Authorized Client:\
+<img src="/preview/Home (Authorized).png" width="800">\
+Home - Authorized Client - Navigation Bar (and user's menu):\
+<img src="/preview/Home with NavigationBar's DropDownMenu (Authorized).png" width="800">\
+Register page :\
+<img src="/preview/Register.png" width="800">\
 Login page :\
-<img src="/preview/login_page.png" width="800">\
+<img src="/preview/Login.png" width="800">\
+Personal Area :\
+<img src="/preview/Personal Area.png" width="800">\
+Create Post Page :\
+<img src="/preview/Create Post Page.png" width="800">\
+Delete My Account Page :\
+<img src="/preview/Delete Account Page.png" width="800">\
 About :\
-<img src="/preview/about.png" width="800">
+<img src="/preview/About Page.png" width="800">
 
-<!-- sprint1 -->
+<!-- sprint3 -->
