@@ -4,7 +4,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import login_styles from './styles/LoginStyles.module.css';
-import global_styles from '../styles/GlobalStyles.module.css';
+// import global_styles from '../styles/GlobalStyles.module.css';
 import { AuthContext } from '../AuthContext'
 
 // import HomePage from './HomePage';
@@ -59,7 +59,7 @@ function Login() {
         if (password.length < 6) {
             /* this password cannot be valid */
             // showError('Password is too short, please enter password from 6 to 18 characters');
-            showError();
+            showError();  // default error
             return;
         }
 

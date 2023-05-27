@@ -9,7 +9,7 @@ import {
 import { AuthContext } from './components/AuthContext';
 import user_model from './model/user_model';
 // import './App.css';     // style todo: upgrade/delete
-import styles from './components/pages/styles/global_styles.module.css';
+import styles from './components/styles/GlobalStyles.module.css';
 
 /** Our Route Navigator */
 import RouteNavigator from './components/RouteNavigator';

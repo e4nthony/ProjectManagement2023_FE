@@ -7,13 +7,14 @@ import {
     Routes, Route
 } from 'react-router-dom';
 
+
+import NavBar from './Navbar';
 /** --- Pages Imports --- */
 import Page404 from './pages/Page404';
 import Home from './pages/HomePage';
-import About from './pages/About';
-import Login from './pages/Login';
-import NavBar from './pages/Navbar';
 import Register from './pages/Register';
+import Login from './pages/Login';
+import About from './pages/About';
 import PersonalArea from './pages/PersonalArea';
 import EditInfo from './pages/EditInfo';
 import Confirmanddel from './pages/confirmanddelet';
