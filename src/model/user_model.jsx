@@ -2,9 +2,9 @@ import user_api from '../api/user_api';
 
 /* This model need to call api functions (to write less logic at pages) */
 
-async function login(userAuthData) {
+async function login (userAuthData) {
     console.log('trying log in...');
-    
+
     /* Pack data to 'JSON' format to send via web */
     const data = {
         email: userAuthData.email,
@@ -26,7 +26,7 @@ async function login(userAuthData) {
     return res;
 }
 
-async function authToken() {
+async function authToken () {
     let res;
     try {
         res = await user_api.authToken();
@@ -39,7 +39,7 @@ async function authToken() {
 export default {
     // register,
     login,
-    authToken,
+    authToken
     // getAllUsers,
 };
 

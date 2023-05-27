@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Page404() {
+function Page404 () {
     return (
-        <div> 404 - Not found</div>
+      <div> 404 - Not found</div>
         //  todo: make a button to home here
     );
 }
