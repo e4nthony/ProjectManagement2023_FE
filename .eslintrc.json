@@ -5,107 +5,35 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "airbnb"
+        "standard"
     ],
     "overrides": [
     ],
     "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
+        "ecmaVersion": 12
     },
     "plugins": [
         "react"
     ],
     "rules": {
-        /**
-         * indentation : 4 spaces (tab) .
-         */
-        "indent": ["warn", 4],
+        /* indentation : 4 spaces. */
+        "indent": ["error", 4],
 
-        /**
-         * indentation in react/jsx files : 4 spaces (tab) .
-         */
-        "react/jsx-indent": ["off"], 
+        /* disable check of semicolons at the end of line; 
+           standardx wont work with value 1 or 2,
+           and wont add ';' automatically when "semi" value is 0. */
+        "semi": 0,
 
-        /**
-         * force to use one function format - disabled.
-         */
-        "func-style": ["warn", "declaration"], 
+        /* allow multiple empty lines */
+        "no-multiple-empty-lines": 0,
 
-        /**
-         * warn about usage of non single quotes. disable error.
-         */
-        "jsx-quotes": ["warn", "prefer-single"],
-
-        /** only warn about links. */
-        "jsx-a11y/anchor-is-valid": [ "warn", {
-            "components": [ "Link" ],
-            "specialLink": [ "to" ]
-          }],
-
-
-
-        /**
-         * padded-blocks - disable.
-         */
-         "padded-blocks": ["off"],
-        
-        /**
-         * linebreak-style check LF/CRLF - disabled.
-         * CircleCI runs on linux (LF), we work on windows (CRLF).
-         * Caused errors when runs ‘lint’ script on linux server(CircleCI).
-         */
-        "linebreak-style": 0 , 
-
-        /**
-         * remove warnings at console when runs ‘lint’ script.
-         */
-        "no-console": ["off"],
-
-        /**
-         * string operators restrictions - disabled. 
-         * allows to use operator '+' with strings.
-         */
-        "prefer-template": ["off"],
-
-        /** warn only about the space before comment end. */
-        "spaced-comment": ["warn"],
-        
-        /** warn only about unused varsiables. */
-        "no-unused-vars": ["warn"],
-
-        /** force to put comma at end of list of objects. -disabled. */
-        "comma-dangle": ["off"],
-
-        
-
-
-
-        /** like that above? Nah, thanks. */
-        "no-multiple-empty-lines": ["off"],
-
-        /** No multi spaces in one row before comments - Ignore comments. Wanr about code. */
+        /* No multi spaces in one row before comments - Ignore comments. Wanr about code. */
         "no-multi-spaces": ["warn", { "ignoreEOLComments": true }],
 
-        /** Disallow trailing whitespace at the end of lines - disabled. */
-        "no-trailing-spaces": ["off"],
+        /* Ingore 'Require the use of === and !==' */
+        "eqeqeq": 0,
         
-        /** force newline after import - disabled. */
-        "import/newline-after-import": ["off"],
-
-        /** require imports at to of file - disabled. */
-        "import/first": ["off"],
-
-        /** force CamelCase in name of files - disabled. */
-        "camelcase": ["off"],
-        
-        /** semicolons - warn about missing semicolons at the end of line; */
-        "semi": ["warn"],
-
-        "import/prefer-default-export": [
-            "warn",
-            { "target": "single"} // default is "single"
-        ],
-        "react/jsx-no-constructed-context-values": "off"
+        /* force CamelCase in names - disabled. (wont work properly) */
+        "camelcase": ["off"]
     }
 }
