@@ -8,24 +8,6 @@ import styles from './styles/HomeStyles.module.css';
 import logo from '../../pictures/BidZone-logo.png';
 
 function HomePage() {
-    // const navigate = useNavigate();
-    // function handleClick() {
-    //     navigate('/login');
-    // }
-
-    function handleExploreClick() {
-        console.log('\'Explore\' feed selected')
-    }
-
-    function handleFollowingClick() {
-        console.log('\'Following\' feed selected')
-    }
-
-
-
-
-
-    // dev todo delete
     const post1 = {
         title: 'post1Title',
         postText: 'post1Text',
@@ -46,57 +28,43 @@ function HomePage() {
     };
     const posts = [post1, post2];
 
-
-
-
-
-
-
-
-
-    function GenerateSinglePost(post) {
-        return (
-            <div id='aPost'
-                className={styles.post}
-                onClick={() => {
-                    console.log(post.title + ' has been clicked')
-                }} >
-
-                <div id='title'> {post.title} </div>
-                <div id='seller'>{post.username}</div>
-                <div id='body'>{post.postText}</div>
-                <div id='pic'>{post.postImage}</div>
-                <div id='priceANDtimer'>
-                    <div id='maxBid'>{post.postMinPrice}</div>
-                    <div id='timer'>{post.postMaxTime}</div>
-                </div>
-                <div id='index'></div>
+    const navigate = useNavigate();
 
             </div>
         );
     }
 
     return (
-        <div>
+        <div className='main-container'>
+            <div>
+                <h1>Home page !</h1>
+                <div><img src={logo} alt='' /></div>
 
-            {/* --- Logo --- */}
-            <div id='siteLogo'>
-                <img src={logo} alt='site_logo' />
-            </div>
+                <div className='posts'>
+                    <div className='posts-type'>
+                        <div className='explore' onClick={() => {
+                            console.log('explore')
+                        }}>Explore</div>
 
-            {/* --- Feed --- */}
-            <div className={styles.postsList}>
-
-                {/* --- Buttons --- */}
-                <div id='feedMode'>
-                    <div id='explore' onClick={handleExploreClick}>Explore</div>
-
-                    <div id='following' onClick={handleFollowingClick}>Following</div>
-                </div>
-
-                {/* --- Posts List --- */}
-                <div>
-                    {posts.map(GenerateSinglePost)}
+                        <div className='following' onClick={() => {
+                            console.log('following')
+                        }}>Following</div>
+                    </div>
+                    {posts.map((post) => {
+                        return (
+                            <div
+                                className="post"
+                                onClick={() => {
+                                    console.log(post.title + ' has been clicked')
+                                }} >
+                                <div className="title"> {post.title} </div>
+                                <div className="seller">{post.username}</div>
+                                <div className="body">{post.postText}</div>
+                                <div className="pic">{post.postImage}</div>
+                                <div className="priceANDtimer"><div className="maxBid">{post.postMinPrice}</div><div className="timer">{post.postMaxTime}</div></div>
+                            </div>
+                        );
+                    })}
                 </div>
 
             </div>
