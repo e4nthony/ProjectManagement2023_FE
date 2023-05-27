@@ -1,5 +1,5 @@
 // function checkPassword(){
-    
+
 //         let password =document.getElementById("password").value;
 //         let cnfrmPassword=document.getElementById("cnfrm-password").value;
 //         console.log(password,cnfrmPassword);
@@ -22,6 +22,6 @@
 
 //         }
 
-        
+
 // }
 // export default checkPassword;
