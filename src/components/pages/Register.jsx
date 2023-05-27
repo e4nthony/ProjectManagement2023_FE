@@ -2,7 +2,8 @@
 /* the line above disables eslint check for this file (temporarily) todo:delete */
 
 import React, { useState } from 'react';
-import './styles/register_styles.css';
+// import global_styles from './styles/global_styles.module.css';
+// import register_styles from './styles/register_styles.module.css';
 import { useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs'
 
@@ -16,7 +17,7 @@ function RegistrationPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('2000-01-01');
   const [passwordMatchError, setPasswordMatchError] = useState('');
   const [ageError, setAgeError] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -95,7 +96,7 @@ function RegistrationPage() {
     // formData.append('email', email);
     // formData.append('password', password);
     // formData.append('date', dateOfBirth);
-    
+
     /* encrypt password (generate hash of password): */
     const salt = await bcrypt.genSalt(10);
     const encryptedPassword = await bcrypt.hash(password, salt);
@@ -130,6 +131,7 @@ function RegistrationPage() {
       <label htmlFor='firstName'>
         First Name:
         <input
+          className={global_styles.input}
           type='text'
           id='firstName'
           value={firstName}
@@ -140,6 +142,7 @@ function RegistrationPage() {
       <label htmlFor='lastName'>
         Last Name:
         <input
+          className={global_styles.input}
           type='text'
           id='lastName'
           value={lastName}
@@ -151,9 +154,9 @@ function RegistrationPage() {
       <label htmlFor='email' className='label'>
         Email
         <input
+          className={global_styles.input}
           type='email'
           id='email'
-          className='input'
           value={email}
           onChange={handelEmail}
           required
@@ -163,6 +166,7 @@ function RegistrationPage() {
       <label htmlFor='username'>
         Username:
         <input
+          className={global_styles.input}
           type='text'
           id='username'
           value={username}
@@ -173,6 +177,7 @@ function RegistrationPage() {
       <label htmlFor='password'>
         Password:
         <input
+          className={global_styles.input}
           type='password'
           id='password'
           value={password}
@@ -183,6 +188,7 @@ function RegistrationPage() {
       <label htmlFor='confirmPassword'>
         Confirm Password:
         <input
+          className={global_styles.input}
           type='password'
           id='confirmPassword'
           value={confirmPassword}
@@ -195,6 +201,7 @@ function RegistrationPage() {
       <label htmlFor='dateOfBirth'>
         Date of Birth:
         <input
+          className={global_styles.input}
           type='date'
           id='dateOfBirth'
           value={dateOfBirth}
@@ -206,7 +213,7 @@ function RegistrationPage() {
       {ageError && <p style={{ color: 'black' }}>{ageError}</p>}
       {errorMessage && <p style={{ color: 'black' }}>{errorMessage}</p>}
 
-      <button type='submit' onClick={handleSubmit}>Register</button>
+      <button className={register_styles.register-button} type='button' onClick={handleSubmit}>Register</button>
     </form>
   );
 }

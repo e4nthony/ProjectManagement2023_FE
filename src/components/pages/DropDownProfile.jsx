@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useState, useContext } from 'react';
-import './styles/DropDownProfile.css';
+// import './styles/DropDownProfile.module.css';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
 import profilePic from '../../../src/pictures/profilePic.png';

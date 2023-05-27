@@ -5,7 +5,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { useNavigate } from 'react-router-dom';
-import './styles/pages_styles.css';
+// import './styles/home_styles.module.css';
 import logo from '../../pictures/BidZone-logo.png';
 
 function HomePage() {

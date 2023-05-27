@@ -1,7 +1,7 @@
 import {
     React, useState, useEffect, useContext
 } from 'react';
-import './styles/navbar_styles.css';
+// import './styles/navbar_styles.module.css';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
 import DropDownProfile from './DropDownProfile';

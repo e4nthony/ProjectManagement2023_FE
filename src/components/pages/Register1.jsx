@@ -1,7 +1,7 @@
 /* eslint-disable */
 /* the line above disables eslint check for this file (temporarily) todo:delete */
 import React from 'react';
-import './styles/style.css';
+// import './styles/style.css';
 
 
 
