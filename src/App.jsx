@@ -35,7 +35,7 @@ function App () {
     }, []);
 
     return (
-        <div className={styles.background}>
+      <div className={styles.background}>
 
         <React.StrictMode>
           <AuthContext.Provider value={{ authState, setAuthState }}>

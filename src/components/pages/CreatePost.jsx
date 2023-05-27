@@ -1,16 +1,16 @@
 /* eslint-disable */
-import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import './styles/CreatePost.css';
+import React from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import styles from './styles/CreatePost.module.css';
 
 function CreatePost() {
     const initialValues = {
-        title: "",
-        postText: "",
-        postMinPrice: "",
-        postMaxTime: "",
-        postImage: "",
+        title: '',
+        postText: '',
+        postMinPrice: '',
+        postMaxTime: '',
+        postImage: '',
     };
 
     const validationSchema = Yup.object().shape({
@@ -18,12 +18,12 @@ function CreatePost() {
         postText: Yup.string().required("This field can't be empty !"),
         postMinPrice: Yup.string().required("This field can't be empty !"),
         postMaxTime: Yup.string().required("This field can't be empty !"),
-        postImage: Yup.string().required("This field can't be empty !"),
+        postImage: Yup.string().required("his field can't be empty !"),
     });
 
     const onSubmit = (data) => {
         //here you can see how the data orgenized after a post has been created
-        // we need to send "data" var to the server and save the post in our database
+        // we need to send 'data' var to the server and save the post in our database
         console.log('title: ' + data.title);
         console.log('postText: ' + data.postText);
         console.log('postMinPrice: ' + data.postMinPrice);
@@ -32,57 +32,57 @@ function CreatePost() {
     };
 
     return (
-        <div className="createPostPage">
+        <div className={styles.createPostPage}>
             <h1>Create Post !</h1>
             <Formik
                 initialValues={initialValues}
                 onSubmit={onSubmit}
                 validationSchema={validationSchema}
             >
-                <Form className="formContainer">
+                <Form className={styles.formContainer}>
                     <label>Post title: </label>
-                    <ErrorMessage name="title" component="span" />
+                    <ErrorMessage name='title' component='span' />
                     <Field
-                        autocomplete="off"
-                        id="createPostFields"
-                        name="title"
-                        placeholder="Write here the title of your post.."
+                        autocomplete='off'
+                        id='createPostFields'
+                        name='title'
+                        placeholder='Write here the title of your post..'
                     />
                     <label>Post text: </label>
-                    <ErrorMessage name="postText" component="span" />
+                    <ErrorMessage name='postText' component='span' />
                     <Field
-                        autocomplete="off"
-                        id="createPostFields"
-                        name="postText"
-                        placeholder="Write here your description.."
+                        autocomplete='off'
+                        id='createPostFields'
+                        name='postText'
+                        placeholder='Write here your description..'
                     />
 
                     <label>Minimum price: </label>
-                    <ErrorMessage name="postMinPrice" component="span" />
+                    <ErrorMessage name='postMinPrice' component='span' />
                     <Field
-                        autocomplete="off"
-                        id="createPostFields"
-                        name="postMinPrice"
-                        placeholder="Enter your price in USD.."
+                        autocomplete='off'
+                        id='createPostFields'
+                        name='postMinPrice'
+                        placeholder='Enter your price in USD..'
                     />
                     <label>Maximum time: </label>
-                    <ErrorMessage name="postMaxTime" component="span" />
+                    <ErrorMessage name='postMaxTime' component='span' />
                     <Field
-                        autocomplete="off"
-                        id="createPostFields"
-                        name="postMaxTime"
-                        placeholder="Set your timer in minutes.."
+                        autocomplete='off'
+                        id='createPostFields'
+                        name='postMaxTime'
+                        placeholder='Set your timer in minutes..'
                     />
                     <label>Image: </label>
-                    <ErrorMessage name="postImage" component="span" />
+                    <ErrorMessage name='postImage' component='span' />
                     <Field
-                        autocomplete="off"
-                        id="createPostFields"
-                        type="file"
-                        name="postImage"
+                        autocomplete='off'
+                        id='createPostFields'
+                        type='file'
+                        name='postImage'
 
                     />
-                    <button type="submit">Create Post</button>
+                    <button id='submit' type='submit'>Create Post</button>
                 </Form>
             </Formik>
         </div>
