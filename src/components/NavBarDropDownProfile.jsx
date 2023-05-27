@@ -1,9 +1,9 @@
 /* eslint-disable */
 import React, { useState, useContext } from 'react';
-// import './styles/DropDownProfile.module.css';
+import styles from './styles/NavBarDropDownProfile.module.css';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../AuthContext';
-import profilePic from '../../../src/pictures/profilePic.png';
+import { AuthContext } from './AuthContext';
+import profilePic from '../../src/pictures/profilePic.png';
 
 function DropdownMenu() {
     const [isOpen, setIsOpen] = useState(false);
@@ -32,11 +32,18 @@ function DropdownMenu() {
     }
 
     return (
-        <div className="dropdown-menu">
+        <div className={styles.dropdownMenu}>
 
-            {authState && (<button type='button' className="dropdown-toggle" onClick={toggleMenu}><img style={{ width: '25px', height: '25px' }} src={profilePic} alt="" /></button>)}
+            {authState && (
+
+                <button type='button' className={styles.dropdownToggle} onClick={toggleMenu}>
+                    <img style={{ width: '25px', height: '25px' }} src={profilePic} alt="" />
+                </button>
+
+            )}
+
             {isOpen && (
-                <ul className="dropdown-options">
+                <ul className={styles.dropdownOptions}>
                     <li onClick={() => PersonalArea()}>Personal area</li>
                     <li onClick={() => MyChats()}>My chats</li>
                     <li onClick={() => logout()}>Logout</li>

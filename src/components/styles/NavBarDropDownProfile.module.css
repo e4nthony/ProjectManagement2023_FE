@@ -1,9 +1,12 @@
-.dropdown-menu {
+/* --- --- --- Nav Bar DropDown Profile Menu CSS Stylesheet --- --- --- */
+
+
+.dropdownMenu {
   position: relative;
   display: inline-block;
 }
 
-.dropdown-toggle {
+.dropdownToggle {
   all: unset;
   padding: 0;
   margin: 0;
@@ -14,7 +17,8 @@
   cursor: pointer;
 }
 
-.dropdown-options {
+/* <ul> - a parent */
+.dropdownOptions {
   position: absolute;
   top: 100%;
   right: 0;
@@ -28,13 +32,13 @@
   flex-direction: column;
 }
 
-.dropdown-options li {
+.dropdownOptions li {
   padding: 10px;
   cursor: pointer;
   border-bottom: 1px solid #333;
 }
 
-.dropdown-options li:last-child {
+.dropdownOptions li:last-child {
   border-bottom: none;
   background-color: #333;
 }

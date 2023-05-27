@@ -4,10 +4,12 @@
 import {
     React, useState, useEffect, useContext
 } from 'react';
+
 import styles from './styles/NavbarStyles.module.css';
+
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
-import DropDownProfile from './pages/DropDownProfile';
+import DropDownProfile from './NavBarDropDownProfile';
 
 
 export default function Navbar () {
