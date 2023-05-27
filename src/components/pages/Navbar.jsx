@@ -1,3 +1,6 @@
+/* eslint-disable */
+/* the line above disables eslint check for this file (temporarily) todo:delete */
+
 import {
     React, useState, useEffect, useContext
 } from 'react';
@@ -7,40 +10,37 @@ import { AuthContext } from '../AuthContext';
 import DropDownProfile from './DropDownProfile';
 
 
-export default function Navbar() {
+export default function Navbar () {
     const [selectedOption, setSelectedOption] = useState('');
     const { setAuthState, authState } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    function logout() {
+    function logout () {
         localStorage.removeItem('accessToken');
         setAuthState(false);
         navigate('/');
     }
 
     return (
-        <nav className='nav'>
-            <a href='/' className='site-title'>
-                BidZone
-            </a>
-            <ul>
-                {!authState && (
-                    <>
-                        <li>
-                            <a href='/login'>Login</a>
-                        </li>
-                        <li>
-                            <a href='/register'>Register</a>
-                        </li>
-                    </>
+      <nav className='nav'>
+        <a href='/' className='site-title'>BidZone</a>
+        <ul>
+          {authState && (<a href='/CreatePost'>Create Post</a>)}
+          {!authState && (
+            <>
+              <li>
+                <a href='/login'>Login</a>
+              </li>
+              <li>
+                <a href='/register'>Register</a>
+              </li>
+            </>
                 )}
-                <li>
-                    <a href='/about'>About</a>
-                </li>
-                <li>
-                    <DropDownProfile />
-                </li>
-            </ul>
-        </nav>
+          <li>
+            <a href='/about'>About</a>
+          </li>
+          {authState && (<DropDownProfile />)}
+        </ul>
+      </nav>
     );
 }

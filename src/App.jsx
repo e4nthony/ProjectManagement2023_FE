@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {
-    createBrowserRouter,
-    RouterProvider,
-    BrowserRouter,
-    Routes,
-    Route,
+    // createBrowserRouter,
+    // RouterProvider,
+    BrowserRouter
+    // Routes,
+    // Route
 } from 'react-router-dom';
 import { AuthContext } from './components/AuthContext';
 import user_model from './model/user_model';
@@ -14,7 +14,7 @@ import styles from './components/pages/styles/global_styles.module.css';
 /** Our Route Navigator */
 import RouteNavigator from './components/RouteNavigator';
 
-function App() {
+function App () {
     const [authState, setAuthState] = useState(true);
 
     useEffect(() => {
@@ -28,7 +28,6 @@ function App() {
                 } else {
                     setAuthState(true);
                 }
-
             } catch (err) {
                 console.log('failed to log in user: ' + err);
             }
@@ -38,17 +37,17 @@ function App() {
     return (
         <div className={styles.background}>
 
-            <React.StrictMode>
-                <AuthContext.Provider value={{ authState, setAuthState }}>
-                    <BrowserRouter>
-                        <RouteNavigator />
-                        {/* <div className='devmessage'>
+        <React.StrictMode>
+          <AuthContext.Provider value={{ authState, setAuthState }}>
+            <BrowserRouter>
+              <RouteNavigator />
+              {/* <div className='devmessage'>
                         default test message from App.jsx element (dev.info)
                     </div> */}
-                    </BrowserRouter>
-                </AuthContext.Provider>
-            </React.StrictMode>
-        </div>
+            </BrowserRouter>
+          </AuthContext.Provider>
+        </React.StrictMode>
+      </div>
     );
 }
 

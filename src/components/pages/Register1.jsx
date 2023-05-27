@@ -49,7 +49,7 @@ function register() {
 
             <div>
                     <title>Registration Form</title>
-                    <link rel="stylesheet" href="./pages/styles/style.css"></link>
+                    {/* <link rel="stylesheet" href="./pages/styles/style.css"></link> */}
                     <link  href="https://font.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet"></link>
                     <label for="firstname">Firstname Form</label>
                 <form>

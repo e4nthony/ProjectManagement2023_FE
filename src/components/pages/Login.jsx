@@ -62,16 +62,16 @@ function Login() {
         }
 
         try {
-
-            console.log("trying log in...")
             // let tokens = await UserModel.login(user); // todo? get tokens to stay signed in
             const res = await user_model.login(userAuthData);
-            if (res.data.error) {
+            if (res.data.error || !res.data.accessToken) {
+                console.log("no data," + JSON.stringify(res, null, 2))
                 setAuthState(false);
                 setMessage(res.data.error);
             } else {
+                console.log("got token: " + JSON.stringify(res.data.accessToken, null, 2))
                 setMessage("");
-                localStorage.setItem("accessToken", res.data);
+                localStorage.setItem("accessToken", res.data.accessToken);
                 setAuthState(true);
                 navigate('/');
             }
@@ -86,75 +86,77 @@ function Login() {
     }
 
     return (
-        <div className='main-container'>
-            <div className='sub-main-container'>
+        <form>
+            <div className='main-container'>
+                <div className='sub-main-container'>
 
-                <div>
-                    {/* <div className='imgs'>
+                    <div>
+                        {/* <div className='imgs'>
             <div className='container-image'>
             </div>
           </div> */}
-                    <div>
+                        <div>
 
-                        <h1 className='text-tittle'>Login Page</h1>
+                            <h1 className='text-tittle'>Login Page</h1>
 
-                        <div className='margin-around'>
-                            <text id='message' className='message-text'>
-                                {message}
-                            </text>
-                        </div>
-
-
-                        <div className='aliightnleft'>
-                            <div className='margin-around1'>
-                                <div>
-                                    <label for='email' className='simplelabel'><b>Email: </b></label>
-                                </div>
-                                <input id='email'
-                                    className='input-field-name'
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
+                            <div className='margin-around'>
+                                <text id='message' className='message-text'>
+                                    {message}
+                                </text>
                             </div>
 
-                            <div className='margin-around1'>
-                                <div>
-                                    <label for='password' className='simplelabel'><b>Password: </b></label>
+
+                            <div className='aliightnleft'>
+                                <div className='margin-around1'>
+                                    <div>
+                                        <label for='email' className='simplelabel'><b>Email: </b></label>
+                                    </div>
+                                    <input id='email'
+                                        className='input-field-name'
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                    />
                                 </div>
-                                <input id='password'
-                                    type='password'
-                                    className='input-field-password'
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
+
+                                <div className='margin-around1'>
+                                    <div>
+                                        <label for='password' className='simplelabel'><b>Password: </b></label>
+                                    </div>
+                                    <input id='password'
+                                        type='password'
+                                        className='input-field-password'
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                </div>
                             </div>
-                        </div>
 
 
-                        <div className='margin-around'>
-                            <button type="button" className='login-button' onClick={onLoginCallback}>Login</button>
-                        </div>
+                            <div className='margin-around'>
+                                <button type="button" className='login-button' onClick={onLoginCallback}>Login</button>
+                            </div>
 
-                        <p className='link'>
-                            <a href='#'>
-                                Forgot password ?
-                            </a>
+                            <p className='link'>
+                                <a href='#'>
+                                    Forgot password ?
+                                </a>
 
-                            <a> or </a>
+                                <a> or </a>
 
-                            <a href='#'>
-                                Sign Up
-                            </a>
-                        </p>
+                                <a href='#'>
+                                    Sign Up
+                                </a>
+                            </p>
 
-                        <div className='margin-around'>
-                            <button type="button" className='login-button' onClick={backClick}>Back</button>
+                            <div className='margin-around'>
+                                <button type="button" className='login-button' onClick={backClick}>Back</button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
-        </div>
+        </form>
     );
 }
 
