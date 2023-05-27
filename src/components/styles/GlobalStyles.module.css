@@ -1,0 +1,4 @@
+.background {
+    height: 100vh;
+    background: radial-gradient(100% 100% at 0 100%, #63ddff 0, #ffffff 100%);
+}

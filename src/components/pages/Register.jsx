@@ -2,8 +2,8 @@
 /* the line above disables eslint check for this file (temporarily) todo:delete */
 
 import React, { useState } from 'react';
-// import global_styles from './styles/global_styles.module.css';
-// import register_styles from './styles/register_styles.module.css';
+import global_styles from '../styles/GlobalStyles.module.css';
+import register_styles from './styles/RegisterStyles.module.css';
 import { useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs'
 
@@ -131,7 +131,7 @@ function RegistrationPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={register_styles.reg}>
       <label htmlFor='firstName'>
         First Name:
         <input
@@ -217,7 +217,7 @@ function RegistrationPage() {
       {ageError && <p style={{ color: 'black' }}>{ageError}</p>}
       {errorMessage && <p style={{ color: 'black' }}>{errorMessage}</p>}
 
-      <button className={register_styles.register-button} type='button' onClick={handleSubmit}>Register</button>
+      <button className={register_styles.registerButton} id='submitRegister' type='button' onClick={handleSubmit}>Register</button>
     </form>
   );
 }

@@ -1,17 +1,4 @@
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 50px;
-  }
-  
-  label {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-    font-size: 18px;
-    font-weight: bold;
-  }
+
   
   input[type='text'],
   input[type='password'],
@@ -24,20 +11,5 @@ form {
     border-radius: 5px;
   }
   
-  input[type='submit'] {
-    width: 100px;
-    height: 40px;
-    margin-top: 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #0077cc;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
   
-  input[type='submit']:hover {
-    background-image: radial-gradient(100% 100% at 0 100%, #63ddff 0, #ffffff 100%);
-  }
   
