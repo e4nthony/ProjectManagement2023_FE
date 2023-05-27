@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import './oldstyles/login_styles.module.css';
+import styles from './styles/login_styles.module.css';
 import { AuthContext } from '../AuthContext'
 
 // import HomePage from './HomePage';
@@ -87,8 +87,8 @@ function Login() {
 
     return (
         <form>
-            <div className='main-container'>
-                <div className='sub-main-container'>
+            <div className={styles.mainContainer}>
+                <div className={styles.subMainContainer}>
 
                     <div>
                         {/* <div className='imgs'>
@@ -97,34 +97,34 @@ function Login() {
           </div> */}
                         <div>
 
-                            <h1 className='text-tittle'>Login Page</h1>
+                            <h1 className={styles.textTittle}>Login Page</h1>
 
-                            <div className='margin-around'>
+                            <div className={styles.marginAround}>
                                 <text id='message' className='message-text'>
                                     {message}
                                 </text>
                             </div>
 
 
-                            <div className='aliightnleft'>
-                                <div className='margin-around1'>
+                            <div className={styles.alignLeft}>
+                                <div className={styles.marginAround1}>
                                     <div>
-                                        <label for='email' className='simplelabel'><b>Email: </b></label>
+                                        <label for='email' className={styles.simpleLabel}><b>Email: </b></label>
                                     </div>
                                     <input id='email'
-                                        className='input-field-name'
+                                        className={styles.inputFieldName}
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                     />
                                 </div>
 
-                                <div className='margin-around1'>
+                                <div className={styles.marginAround1}>
                                     <div>
-                                        <label for='password' className='simplelabel'><b>Password: </b></label>
+                                        <label for='password' className={styles.simpleLabel}><b>Password: </b></label>
                                     </div>
                                     <input id='password'
                                         type='password'
-                                        className='input-field-password'
+                                        className={styles.inputFieldPassword}
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
@@ -132,8 +132,8 @@ function Login() {
                             </div>
 
 
-                            <div className='margin-around'>
-                                <button type="button" className='login-button' onClick={onLoginCallback}>Login</button>
+                            <div className={styles.marginAround}>
+                                <button type="button" className={styles.loginButton} onClick={onLoginCallback}>Login</button>
                             </div>
 
                             <p className='link'>
@@ -148,8 +148,8 @@ function Login() {
                                 </a>
                             </p>
 
-                            <div className='margin-around'>
-                                <button type="button" className='login-button' onClick={backClick}>Back</button>
+                            <div className={styles.marginAround}>
+                                <button type="button" className={styles.loginButton} onClick={backClick}>Back</button>
                             </div>
                         </div>
                     </div>
