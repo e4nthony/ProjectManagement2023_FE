@@ -37,12 +37,12 @@ body {
     padding: .25rem;
 }
 
-.nav li.active {
-    background-color: #555;
+.nav li:active {
+    background-color: #999999;
 }
 
-.nav li.hover {
-    background-color: aqua;
+.nav li:hover {
+    background-color: #555;
 }
 
 /** --- Profile Icon --- */

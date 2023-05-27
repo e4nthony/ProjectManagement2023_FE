@@ -23,7 +23,7 @@ export default function Navbar () {
 
     return (
       <nav className={styles.nav}>
-        <a href='/' className={styles.siteTitle}>BidZone</a>
+        <a href='/'>BidZone</a>
         <ul>
           {authState && (<a href='/CreatePost'>Create Post</a>)}
           {!authState && (
