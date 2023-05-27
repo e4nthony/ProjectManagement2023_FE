@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import {
  Link, Route, Routes, useNavigate   
 } from 'react-router-dom';
-import './styles/personalArea.css';
+// import './styles/personalArea.css';
 import delete_model from '../../model/delete_model.jsx';
 function Confirm() {
 

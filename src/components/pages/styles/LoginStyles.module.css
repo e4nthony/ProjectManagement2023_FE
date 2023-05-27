@@ -1,35 +1,44 @@
-/** CSS stylesheet for pages. */
+/* --- --- --- Login Page CSS Stylesheet --- --- --- */
 
-/** --- Login Page Styles --- */
-.main-container {
+
+/* --- --- Whole Page Styles ( by type of field, declaring name of style in className={} ONCE IN PARENT object. ) --- --- */
+
+/* <form> - a parent */
+.log {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    /* background-image: radial-gradient(100% 100% at 0 100%, #63ddff 0, #ffffff 100%); */
-    /* background-color: rgb(158, 255, 229); */
     height: 100vh;
-    /* makes fullscreen */
+    margin-top: 50px;
 }
 
-.sub-main-container {
-    height: 40vmin;
-    /* pointer-events: none; */
+.log label {
+    display: flex;
+    flex-direction: column;
+    margin-top: 6px;
+    margin-bottom: 3px;
+    font-size: 18px;
+    font-weight: 600;
 }
 
-.text-tittle {
-
-    height: 40vmin;
-    pointer-events: none;
-}
-
-.input-field-name {
+.log input[id='email'],
+.log input[id='password'] {
+    width: 300px;
+    height: 30px;
+    padding: 5px;
+    font-size: 16px;
+    border: 2px solid #a6d6e7;
+    border-radius: 5px;
     text-align: left;
 }
 
-.input-field-password {
-    text-align: left;
-}
+
+/* --- --- Specific Styles - ( by declaring name of style in className={} in every object. ) --- --- */
 
 /* --- Login Button --- */
-.login-button {
+.loginButton {
+    margin: 6px;
     align-items: center;
     appearance: none;
     background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
@@ -59,22 +68,33 @@
     will-change: box-shadow, transform;
     font-size: 18px;
 }
-
-.login-button:focus {
+.loginButton:focus {
     box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
 }
-
-.login-button:hover {
+.loginButton:hover {
     box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
     transform: translateY(-2px);
 }
-
-.login-button:active {
+.loginButton:active {
     box-shadow: #3c4fe0 0 3px 7px inset;
     transform: translateY(2px);
 }
 
-.margin-around {
+
+
+
+
+.textTittle {
+
+    height: 25vmin;
+    pointer-events: none;
+}
+
+/* .inputFieldPassword {
+    text-align: left;
+}  */
+
+.marginAround {
     margin: 0.5%;
     /* padding: 1%; */
 }
@@ -85,37 +105,20 @@ ul {
     text-align: left;
 }
 
-.about-par {
+/* .aboutPar {
     font-size: 150%;
-    margin-bottom: 25%;
-    margin-top: 5%;
-}
+} */
 
-.message-text {
+.messageText {
     color: #ff2b2b;
     /* font-weight: bold; */
 }
 
 
 
-
-
-
-.aliightnleft {
-    font-weight: lighter;
-    /* align-items:flex-start; */
-}
-
-.margin-around1 {
+.marginAround1 {
     margin: 0.5%;
     /* padding: 1%; */
     /* align-items: left; */
 }
 
-.simplelabel {
-    font-weight: lighter;
-    /* text-align: right;
-    text-align: left;
-    align: */
-    /* float:left; */
-}

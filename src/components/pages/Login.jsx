@@ -3,7 +3,8 @@
 
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './styles/login_styles.css';
+import login_styles from './styles/LoginStyles.module.css';
+// import global_styles from '../styles/GlobalStyles.module.css';
 import { AuthContext } from '../AuthContext'
 
 // import HomePage from './HomePage';
@@ -57,7 +58,8 @@ function Login() {
 
         if (password.length < 6) {
             /* this password cannot be valid */
-            showError('Password is too short, please enter password from 6 to 18 characters');
+            // showError('Password is too short, please enter password from 6 to 18 characters');
+            showError();  // default error
             return;
         }
 
@@ -86,75 +88,64 @@ function Login() {
     }
 
     return (
-        <form>
-            <div className='main-container'>
-                <div className='sub-main-container'>
+        <form className={login_styles.log}>
+            <div>
 
-                    <div>
-                        {/* <div className='imgs'>
-            <div className='container-image'>
-            </div>
-          </div> */}
+                <h1 className={login_styles.textTittle}>Login Page</h1>
+
+                <div className={login_styles.marginAround}>
+                    <text id='message' className='message-text'>
+                        {message}
+                    </text>
+                </div>
+
+
+                <div className={login_styles.alignLeft}>
+                    <div className={login_styles.marginAround1}>
                         <div>
-
-                            <h1 className='text-tittle'>Login Page</h1>
-
-                            <div className='margin-around'>
-                                <text id='message' className='message-text'>
-                                    {message}
-                                </text>
-                            </div>
-
-
-                            <div className='aliightnleft'>
-                                <div className='margin-around1'>
-                                    <div>
-                                        <label for='email' className='simplelabel'><b>Email: </b></label>
-                                    </div>
-                                    <input id='email'
-                                        className='input-field-name'
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                    />
-                                </div>
-
-                                <div className='margin-around1'>
-                                    <div>
-                                        <label for='password' className='simplelabel'><b>Password: </b></label>
-                                    </div>
-                                    <input id='password'
-                                        type='password'
-                                        className='input-field-password'
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                    />
-                                </div>
-                            </div>
-
-
-                            <div className='margin-around'>
-                                <button type="button" className='login-button' onClick={onLoginCallback}>Login</button>
-                            </div>
-
-                            <p className='link'>
-                                <a href='#'>
-                                    Forgot password ?
-                                </a>
-
-                                <a> or </a>
-
-                                <a href='#'>
-                                    Sign Up
-                                </a>
-                            </p>
-
-                            <div className='margin-around'>
-                                <button type="button" className='login-button' onClick={backClick}>Back</button>
-                            </div>
+                            <label for='email'>Email:</label>
                         </div>
+                        <input id='email'
+                            className={login_styles.inputFieldName}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
                     </div>
 
+                    <div className={login_styles.marginAround1}>
+                        <div>
+                            <label for='password'>Password:</label>
+                        </div>
+                        <input id='password'
+                            type='password'
+                            className={login_styles.inputFieldPassword}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
                 </div>
+
+
+                <div className={login_styles.marginAround}>
+                    <button type="button" className={login_styles.loginButton} onClick={onLoginCallback}>Login</button>
+                </div>
+
+                <p className='link'>
+                    <a href='#'>
+                        Forgot password ?
+                    </a>
+
+                    <a> or </a>
+
+                    <a href='#'>
+                        Sign Up
+                    </a>
+                </p>
+
+                <div className={login_styles.marginAround}>
+                    <button type="button" className={login_styles.loginButton} onClick={backClick}>Back</button>
+                </div>
+
             </div>
         </form>
     );

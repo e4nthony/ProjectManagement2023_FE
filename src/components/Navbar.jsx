@@ -4,10 +4,12 @@
 import {
     React, useState, useEffect, useContext
 } from 'react';
-import './styles/navbar_styles.css';
+
+import styles from './styles/NavbarStyles.module.css';
+
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../AuthContext';
-import DropDownProfile from './DropDownProfile';
+import { AuthContext } from './AuthContext';
+import DropDownProfile from './NavBarDropDownProfile';
 
 
 export default function Navbar () {
@@ -22,8 +24,8 @@ export default function Navbar () {
     }
 
     return (
-      <nav className='nav'>
-        <a href='/' className='site-title'>BidZone</a>
+      <nav className={styles.nav}>
+        <a href='/'>BidZone</a>
         <ul>
           {authState && (<a href='/CreatePost'>Create Post</a>)}
           {!authState && (

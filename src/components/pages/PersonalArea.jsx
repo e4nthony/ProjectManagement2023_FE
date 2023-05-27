@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import {
     Link, Route, Routes, useNavigate   
 } from 'react-router-dom';
-import './styles/personalArea.css';
+// import './styles/personalArea.css';
 import Login from './Login';
 function PersonalArea() {
     const [isLoggedIn, setIsLoggedIn] = useState(true); // change to false when log in
