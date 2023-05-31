@@ -1,7 +1,8 @@
 /* --- --- --- Home Page CSS Stylesheet --- --- --- */
 
 .siteLogo {
-    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -31,7 +32,7 @@
     padding-bottom: 5px;
     font-size: 20px;
     margin-right: 300px;
-    background-color: rgb(114, 180, 246);
+    background-color: rgb(144, 172, 197);
     color: white;
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
@@ -52,7 +53,7 @@
     height: 40px;
     padding-bottom: 5px;
     font-size: 20px;
-    background-color: rgb(114, 180, 246);
+    background-color: rgb(144, 172, 197);
     color: white;
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
@@ -70,7 +71,7 @@
 
 /* <div> a parent */
 .post {
-    width: 500px;
+    width: 650px;
     height: 400px;
     border-radius: 10px;
     position: relative;
