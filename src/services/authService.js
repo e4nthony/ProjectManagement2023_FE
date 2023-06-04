@@ -6,8 +6,13 @@ import user_api from '../api/user_api'
 
 /* This service calls api functions (to write less logic at pages) */
 
-
+/**
+ * 
+ * @param {*} userAuthData 
+ * @returns res from server
+ */
 async function register(userAuthData) {
+    console.log('authService: trying register...');
 
     // /** Pack data to 'JSON' format to send via web*/
     // const data = {
@@ -32,9 +37,14 @@ async function register(userAuthData) {
     return false
 }
 
-
-async function login (userAuthData) {
-    console.log('trying log in...');
+/**
+ * Packs data from cliend and sends login request
+ * 
+ * @param {*} userAuthData  // {email, raw_password}
+ * @returns res from server
+ */
+async function login(userAuthData) {
+    console.log('authService: trying to log in...');
 
     /* Pack data to 'JSON' format to send via web */
     const data = {
@@ -57,8 +67,44 @@ async function login (userAuthData) {
     return res;
 }
 
+/**
+ * logout user and
+ * sending request to server to delete existing token for this device
+ * 
+ * @param {*} userAuthData  // {email}
+ * @returns res from server
+ */
+async function logout(userAuthData) {
+    console.log('authService: trying log out...');
 
-async function authToken () {
+    /* Pack data to 'JSON' format to send via web */
+    const data = {
+        email: userAuthData.email
+    };
+
+    let res;
+    try {
+        res = await user_api.logout(data);
+
+        //TODO
+
+        // console.log(' res: ' + res.status);
+        // if (res.status === 200) {
+        //     console.log('user log in successfully: ' + userAuthData.email);
+        // } else if (res.status === 400) {
+        //     console.log('user log in failed: ' + userAuthData.email);
+        // }
+    } catch (err) {
+        console.log('user log in failed: ' + err);
+    }
+    return res;
+}
+
+/**
+ * // todo: consider if need
+ * @returns 
+ */
+async function authToken() {
     let res;
     try {
         res = await user_api.authToken();
@@ -68,28 +114,33 @@ async function authToken () {
     return res;
 }
 
+/**
+ * 
+ * @param {*} userAuthData 
+ * @returns null
+ */
+async function deletemyaccount(userAuthData) {
+    console.log('authService: trying to delete account...');
 
-async function deletemyaccount (userAuthData) {
-    // /** Pack data to 'JSON' format to send via web*/
-    // const data = {
-    //     email: userAuthData.email,
-    //     password: userAuthData.password // unencrypted/raw password
-    // }
-
+    //TODO
 
     try {
-        const res = user_api.deletemyaccount(userAuthData);
+        const res = await user_api.deletemyaccount(userAuthData);
+
+        //TODO
 
         console.log('user register successfully: ' + userAuthData.email);
     } catch (err) {
         console.log('user log in failed: ' + err);
     }
+    return;
 }
 
 
 export default {
     register,
     login,
+    logout,
     authToken,
     deletemyaccount,
     // getAllUsers,
