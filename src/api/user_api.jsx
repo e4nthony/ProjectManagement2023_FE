@@ -4,6 +4,9 @@
 import api from './api';
 
 
+/* --- --- This File Contains API That User Allowed To Interact With --- --- */
+
+
 /* --- This is Authentication API --- */
 
 async function register(userJson) {
@@ -43,9 +46,11 @@ async function get_all_posts_by_author(userJson) {
 
 
 /* --- DEBUG API --- */
+
 async function get_all_users_mails() { // DEBUG ,TODO DELETE
     return api.get("/get_all_users_mails");
 };
+
 
 export default {
     register,

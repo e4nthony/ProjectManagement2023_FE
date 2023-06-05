@@ -7,6 +7,7 @@ import user_api from '../api/user_api'
 /* This service calls api functions (to write less logic at pages) */
 
 /**
+ * Packs data from cliend and sends register request
  * 
  * @param {*} userAuthData 
  * @returns res from server
@@ -14,27 +15,23 @@ import user_api from '../api/user_api'
 async function register(userAuthData) {
     console.log('authService: trying register...');
 
-    // /** Pack data to 'JSON' format to send via web*/
-    // const data = {
-    //     email: userAuthData.email,
-    //     password: userAuthData.password // unencrypted/raw password
-    // }
-
+    /* userAuthData already packed in right format */
 
     try {
         const res = user_api.register(userAuthData);
 
         const statusCode = (await res).status;
-        console.log('got response from server, status code: ' + statusCode);
-        console.log('response: ' + JSON.stringify(res, null, 2));
-        if (statusCode == 200) {
-            console.log('user registered successfully: ' + JSON.stringify(userAuthData.email));
-            return true
+        console.log('authService: got response from server, status code: ' + statusCode);
+        console.log('authService: response: ' + JSON.stringify(res, null, 2));
+        if (res.status === 200) {
+            console.log('authService: user registered successfully: ' + JSON.stringify(userAuthData.email));
+        } else if (res.status === 400) {
+            console.log('authService: user registration failed: ' + JSON.stringify(userAuthData.email));
         }
     } catch (err) {
-        console.log('user log in failed: ' + err);
+        console.log('authService: user registration failed: ' + err);
     }
-    return false
+    return res;
 }
 
 /**
@@ -55,14 +52,14 @@ async function login(userAuthData) {
     let res;
     try {
         res = await user_api.login(data);
-        console.log('res(authService): ' + res.status);
+        console.log('authService: res: ' + res.status);
         if (res.status === 200) {
-            console.log('user log in successfully: ' + userAuthData.email);
+            console.log('authService: user log in successfully: ' + userAuthData.email);
         } else if (res.status === 400) {
-            console.log('user log in failed: ' + userAuthData.email);
+            console.log('authService: user log in failed: ' + userAuthData.email);
         }
     } catch (err) {
-        console.log('user log in failed: ' + err);
+        console.log('authService: user log in failed: ' + err);
     }
     return res;
 }
@@ -95,7 +92,7 @@ async function logout(userAuthData) {
         //     console.log('user log in failed: ' + userAuthData.email);
         // }
     } catch (err) {
-        console.log('user log in failed: ' + err);
+        console.log('authService: user log in failed: ' + err);
     }
     return res;
 }
@@ -109,7 +106,7 @@ async function authToken() {
     try {
         res = await user_api.authToken();
     } catch (err) {
-        console.log('user log in failed: ' + err);
+        console.log('authService: user log in failed: ' + err);
     }
     return res;
 }
@@ -129,9 +126,9 @@ async function deletemyaccount(userAuthData) {
 
         //TODO
 
-        console.log('user register successfully: ' + userAuthData.email);
+        console.log('authService: user register successfully: ' + userAuthData.email);
     } catch (err) {
-        console.log('user log in failed: ' + err);
+        console.log('authService: user log in failed: ' + err);
     }
     return;
 }

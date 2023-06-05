@@ -103,6 +103,7 @@ function RegistrationPage() {
     const salt = await bcrypt.genSalt(10);
     const encryptedPassword = await bcrypt.hash(password, salt);
 
+    /* Packs data to 'JSON' format to send via web */
     const data = {
       email: email,
       enc_password: encryptedPassword,
