@@ -7,7 +7,7 @@ import register_styles from './styles/RegisterStyles.module.css';
 import { useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs'
 
-import register_model from '../../model/register_model';
+import authService from '../../services/authService';
 
 
 function RegistrationPage() {
@@ -115,7 +115,7 @@ function RegistrationPage() {
     /* Send data to server */
     let is_success;
     try {
-      is_success = await register_model.register(data);
+      is_success = await authService.register(data);
     } catch (err) {
       console.log('failed to register user: ' + err);
       setErrorMessage('Registration failed, please try again later');

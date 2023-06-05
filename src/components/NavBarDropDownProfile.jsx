@@ -5,10 +5,17 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
 import profilePic from '../../src/pictures/profilePic.png';
 
+/* helps to print circular objects as string */
+import { inspect } from 'util'; //DEBUG
+
 function DropdownMenu() {
-    const [isOpen, setIsOpen] = useState(false);
-    const { setAuthState, authState } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const { authState, setAuthState } = useContext(AuthContext);
+
+    console.log('NavBarDDP: AuthContext: ' + inspect(authState)); //DEBUG
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -25,7 +32,9 @@ function DropdownMenu() {
     }
 
     function logout() {
-        localStorage.removeItem('accessToken');
+        //TODO?: move logic to services
+        localStorage.clear();
+        // localStorage.removeItem('accessToken');
         setAuthState(false);
         setIsOpen(false);
         navigate('/login');

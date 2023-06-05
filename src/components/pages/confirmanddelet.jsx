@@ -6,7 +6,8 @@ import {
  Link, Route, Routes, useNavigate   
 } from 'react-router-dom';
 // import './styles/personalArea.css';
-import delete_model from '../../model/delete_model.jsx';
+import authService from '../../services/authService';
+
 function Confirm() {
 
     const [email, setEmail] = useState('');
@@ -20,7 +21,7 @@ function Confirm() {
     };
     async function ondeleteCallback() {
         console.log('dsfsfsd')
-        delete_model.deletemyaccount(userAuthData)
+        authService.deletemyaccount(userAuthData)
     }   
 
     return (<div>

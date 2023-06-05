@@ -14,6 +14,10 @@ async function login(userJson) {
     return api.post("/auth/login", userJson);
 };
 
+async function logout(userJson) {
+    return api.post("/auth/logout", userJson);
+};
+
 async function deleteaccount(userJson) {
     return api.post("/auth/deleteaccount", userJson);
 };
