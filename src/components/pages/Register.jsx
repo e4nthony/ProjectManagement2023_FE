@@ -32,9 +32,9 @@ function RegistrationPage() {
 
   useEffect(() => {
     /* protects register page from authorized/active user. */
-    if (authState){
-        navigate('/home')
-    }
+    // if (authState){
+    //     navigate('/home')
+    // }
 }, []);
 
 

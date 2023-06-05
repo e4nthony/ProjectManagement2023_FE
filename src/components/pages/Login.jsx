@@ -29,9 +29,9 @@ function Login() {
 
     useEffect(() => {
         /* protects login page from authorized/active user. */
-        if (authState){
-            navigate('/home')
-        }
+        // if (authState){
+        //     navigate('/home')
+        // }
     }, []);
 
     async function onLoginCallback() {
