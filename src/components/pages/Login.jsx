@@ -16,8 +16,9 @@ import { is } from '@babel/types';
 function Login() {
     const navigate = useNavigate();
 
+    
     /* import here setAuthState function */
-    const { setAuthState } = useContext(AuthContext);
+    const { authState, setAuthState } = useContext(AuthContext);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -26,6 +27,12 @@ function Login() {
     // const [islogin, setIsLoggedIn] = useState(false);
     // const [id, setid] = useState('');
 
+    useEffect(() => {
+        /* protects login page from authorized/active user. */
+        if (authState){
+            navigate('/home')
+        }
+    }, []);
 
     async function onLoginCallback() {
 

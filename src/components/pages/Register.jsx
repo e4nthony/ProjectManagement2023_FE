@@ -9,6 +9,8 @@ import bcrypt from 'bcryptjs'
 
 import authService from '../../services/authService';
 
+import { AuthContext } from '../AuthContext'
+
 
 function RegistrationPage() {
   const navigate = useNavigate();
@@ -24,6 +26,17 @@ function RegistrationPage() {
   const [ageError, setAgeError] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [matchMessage, setMatchMessage] = useState('');
+
+  /* import here setAuthState function */
+  const { authState, setAuthState } = useContext(AuthContext);
+
+  useEffect(() => {
+    /* protects register page from authorized/active user. */
+    if (authState){
+        navigate('/home')
+    }
+}, []);
+
 
   //event.target.value
   const handleConfirmPasswordChange = (event) => {
