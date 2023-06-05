@@ -119,7 +119,7 @@ function HomePage() {
         <div>
 
             {/* --- Logo --- */}
-            <div id='siteLogo'>
+            <div id='siteLogo' className={styles.siteLogo} >
                 <img src={logo} alt='site_logo' />
             </div>
 

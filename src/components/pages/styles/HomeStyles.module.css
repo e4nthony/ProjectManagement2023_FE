@@ -5,6 +5,9 @@
     justify-content: center;
 }
 
+.siteLogo img {
+    width: 400px;
+}
 
 
 /* --- Posts List (feed) --- */
