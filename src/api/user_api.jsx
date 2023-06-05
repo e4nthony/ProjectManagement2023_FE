@@ -1,6 +1,7 @@
 /* eslint-disable */
 /* the line above disables eslint check for this file (temporarily) todo:delete */
 
+import { async } from 'q';
 import api from './api';
 
 
@@ -41,6 +42,11 @@ async function get_all_posts_by_author(userJson) {
     return api.post("post/get_all_posts_by_author", userJson);
 };
 
+/* --- This is User API --- */
+async function get_user_info_by_email(userAuthData) {
+    return api.post("user/get_user_info_by_email", userAuthData);
+}
+
 
 /* --- DEBUG API --- */
 async function get_all_users_mails() { // DEBUG ,TODO DELETE
@@ -55,5 +61,6 @@ export default {
     authToken,
     create_post,
     get_all_posts,
-    get_all_posts_by_author
+    get_all_posts_by_author,
+    get_user_info_by_email
 };

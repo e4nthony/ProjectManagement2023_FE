@@ -1,6 +1,7 @@
 /* eslint-disable */
 /* the line above disables eslint check for this file (temporarily) todo:delete */
 
+import { async } from 'q';
 import user_api from '../api/user_api'
 
 
@@ -119,7 +120,7 @@ async function authToken() {
  * @param {*} userAuthData 
  * @returns null
  */
-async function deletemyaccount(userAuthData) {
+async function deletemyaccount(email) {
     console.log('authService: trying to delete account...');
 
     //TODO
@@ -136,6 +137,31 @@ async function deletemyaccount(userAuthData) {
     return;
 }
 
+async function get_user_info_by_email(userAuthData)
+{
+    console.log('authService: trying to get info...');
+
+    /* Pack data to 'JSON' format to send via web */
+    const data = {
+        email: userAuthData
+    };
+
+    let res;
+    try {
+        res = await user_api.get_user_info_by_email(data);
+        console.log('res(authService): ' + res.status);
+        if (res.status === 200) {
+            console.log('user info in successfully: ' + email);
+            console.log('res is \n' + res);
+        } else if (res.status === 400) {
+            console.log('user info  failed: ' + email);
+        }
+    } catch (err) {
+        console.log('user info failed: ' + err);
+    }
+    return res; 
+}
+
 
 export default {
     register,
@@ -143,5 +169,6 @@ export default {
     logout,
     authToken,
     deletemyaccount,
+    get_user_info_by_email,
     // getAllUsers,
 };
