@@ -12,6 +12,7 @@ import { AuthContext } from '../AuthContext'
 
 import user_model from '../../model/user_model.jsx';
 import { is } from '@babel/types';
+import { UserContext } from '../UserContext';
 
 function Login() {
     const navigate = useNavigate();
@@ -19,7 +20,7 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
-
+    const {user ,setUser} = useContext(UserContext);
     const { setAuthState } = useContext(AuthContext);
     const [islogin, setIsLoggedIn] = useState(false);
     const [id, setid] = useState("");
@@ -73,6 +74,7 @@ function Login() {
                 setMessage("");
                 localStorage.setItem("accessToken", res.data.accessToken);
                 setAuthState(true);
+                setUser(AuthContext.email);
                 navigate('/');
             }
 

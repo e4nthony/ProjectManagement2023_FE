@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
     createBrowserRouter,
     RouterProvider,
@@ -8,12 +8,15 @@ import {
 } from 'react-router-dom';
 import { AuthContext } from './components/AuthContext';
 import user_model from './model/user_model';
+import { UserContext } from './components/UserContext';
+
 // import './App.css';     // style todo: upgrade/delete
 
 /** Our Route Navigator */
 import RouteNavigator from './components/RouteNavigator';
 
 function App() {
+    const [user, setUser] = useState('');
     const [authState, setAuthState] = useState(true);
 
     useEffect(() => {
@@ -39,12 +42,14 @@ function App() {
 
             <React.StrictMode>
                 <AuthContext.Provider value={{ authState, setAuthState }}>
+                    <UserContext.Provider value={{ user, setUser }}>
                     <BrowserRouter>
                         <RouteNavigator />
                         {/* <div className='devmessage'>
                         default test message from App.jsx element (dev.info)
                     </div> */}
                     </BrowserRouter>
+                    </UserContext.Provider>
                 </AuthContext.Provider>
             </React.StrictMode>
         </div>

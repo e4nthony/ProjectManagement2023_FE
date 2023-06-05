@@ -2,24 +2,21 @@
 /* eslint-disable */
 /* the line above disables eslint check for this file (temporarily) todo:delete */
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
     Link, Route, Routes, useNavigate   
 } from 'react-router-dom';
 import './styles/personalArea.css';
-import Login from './Login';
+import { UserContext } from '../UserContext';
 function PersonalArea() {
     const [isLoggedIn, setIsLoggedIn] = useState(true); // change to false when log in
-    const [user, setUser] = useState({
-        firstName: '',
-        lastName: '',
-        username: '',
-        email: '',
-        password: '',
-    });
+    const {user,setUser} = useContext(UserContext)
+    
     
     
     return (
+
+
         <div>
             <h1>Personal Area</h1>
             {isLoggedIn ? (
@@ -39,7 +36,7 @@ function PersonalArea() {
                     </div>
                     <div>
                         <strong>Email: </strong>
-                        {user.email}
+                        {user}
                     </div>
                     <div>
                         <strong>Password: </strong>
@@ -49,11 +46,11 @@ function PersonalArea() {
                     <div className='following-followers'>
                         <div className='following-followers-item'>
                             <h3>Following</h3>
-                            <span>{user.followers}</span>
+                            <span>{user}</span>
                         </div>
                         <div className='following-followers-item'>
                             <h3>Followers</h3>
-                            <span>{user.followers}</span>
+                            <span>{user}</span>
                         </div>
                     </div>
                     <Link to='/personalarea/editinfo'>
