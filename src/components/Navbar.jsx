@@ -11,38 +11,41 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
 import DropDownProfile from './NavBarDropDownProfile';
 
+/* helps to print circular objects as string */
+import { inspect } from 'util'; //DEBUG
 
-export default function Navbar () {
+export default function Navbar() {
     const [selectedOption, setSelectedOption] = useState('');
-    const { setAuthState, authState } = useContext(AuthContext);
+
+    const { authState, setAuthState } = useContext(AuthContext);
+
+    console.log('NavBar: AuthContext\'s authState: ' + inspect(authState)); //DEBUG
+
     const navigate = useNavigate();
 
-    function logout () {
-        localStorage.removeItem('accessToken');
-        setAuthState(false);
-        navigate('/');
-    }
-
     return (
-      <nav className={styles.nav}>
-        <a href='/'>BidZone</a>
-        <ul>
-          {authState && (<a href='/CreatePost'>Create Post</a>)}
-          {!authState && (
-            <>
-              <li>
-                <a href='/login'>Login</a>
-              </li>
-              <li>
-                <a href='/register'>Register</a>
-              </li>
-            </>
+        <nav className={styles.nav}>
+            <a href='/'>BidZone</a>
+            <ul>
+                {!authState && (
+                    <>
+                        <li>
+                            <a href='/login'>Login</a>
+                        </li>
+                        <li>
+                            <a href='/register'>Register</a>
+                        </li>
+                    </>
                 )}
-          <li>
-            <a href='/about'>About</a>
-          </li>
-          {authState && (<DropDownProfile />)}
-        </ul>
-      </nav>
+
+                {authState && (<a href='/CreatePost'>Create Post</a>)}
+
+                <li>
+                    <a href='/about'>About</a>
+                </li>
+
+                {authState && (<DropDownProfile />)}
+            </ul>
+        </nav>
     );
 }

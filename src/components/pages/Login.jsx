@@ -11,76 +11,91 @@ import { AuthContext } from '../AuthContext'
 // import user_api from '../../api_api';
 // import api from '../../api/api';
 
-import user_model from '../../model/user_model.jsx';
+import authService from '../../services/authService';
 import { is } from '@babel/types';
 
 function Login() {
     const navigate = useNavigate();
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [message, setMessage] = useState("");
-
+    /* import here setAuthState function */
     const { setAuthState } = useContext(AuthContext);
-    const [islogin, setIsLoggedIn] = useState(false);
-    const [id, setid] = useState("");
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
+
+    // const [islogin, setIsLoggedIn] = useState(false);
+    // const [id, setid] = useState('');
+
+
     async function onLoginCallback() {
 
         const userAuthData = {
-            /** read values from fields */
+            /* reads values from fields */
             email: email,
             password: password,
         };
 
-        console.log('userData: ' + userAuthData.toString());
-        console.log('trying to reach back-end server...');
-        console.log(userAuthData.email);  // debug, todo delete
+        console.log('LoginPage: userData: ' + userAuthData.toString());
+        console.log('LoginPage: userAuthData.email:' + userAuthData.email);  // debug, todo delete
 
         function showError(err_msg = 'Invalid email or password') {
-            console.log('setting the error message: ' + err_msg);
+            console.log('LoginPage: Setting the error message: ' + err_msg);
             setMessage(err_msg);
         }
         showError('');
 
         if (email == '' || password == '') {
+            /* one or both fields are epmty. */
             showError('Please fill all fields');
             return;
         }
 
         function isValidEmail(email) {
+            //TODO ?improove email check?
             return email.includes('@') && email.includes('.')
         }
-
         if (!isValidEmail(email)) {
             showError('Please input a valid Email');
             return;
         }
 
         if (password.length < 6) {
-            /* this password cannot be valid */
-            // showError('Password is too short, please enter password from 6 to 18 characters');
+            /* this password cannot be valid, don't send it to server */
             showError();  // default error
             return;
         }
 
+        /* try to login */
         try {
             // let tokens = await UserModel.login(user); // todo? get tokens to stay signed in
-            const res = await user_model.login(userAuthData);
-            if (res.data.error || !res.data.accessToken) {
-                console.log("no data," + JSON.stringify(res, null, 2))
-                setAuthState(false);
+            console.log('LoginPage: trying to reach back-end server...');
+            const res = await authService.login(userAuthData);
+
+            if (!res.data || res.data.error || !res.data.accessToken) {
+                /* if there is error or corrupted request */
+                console.log('LoginPage: no data,' + JSON.stringify(res, null, 2));
                 setMessage(res.data.error);
-            } else {
-                console.log("got token: " + JSON.stringify(res.data.accessToken, null, 2))
-                setMessage("");
-                localStorage.setItem("accessToken", res.data.accessToken);
-                setAuthState(true);
-                navigate('/');
+                setAuthState(false);
+                return;
             }
 
+            console.log('LoginPage: got token: ' + JSON.stringify(res.data.accessToken, null, 2));
+            setMessage('');  /* no error to show to user */
+            localStorage.clear();  /* clears local storage from previous user */
+            localStorage.setItem('activeUserEmail', email);
+            localStorage.setItem('accessToken', res.data.accessToken);
+
+            /* force update of the AuthContext's default value. */
+            setAuthState(true);
+
+            navigate('/');
+
         } catch (err) {
-            console.log("failed to log in user: " + err);
+            console.log('failed to log in user: ' + err);
         }
+
+        return true;
     }
 
     function backClick() {
@@ -127,7 +142,7 @@ function Login() {
 
 
                 <div className={login_styles.marginAround}>
-                    <button type="button" className={login_styles.loginButton} onClick={onLoginCallback}>Login</button>
+                    <button type='button' className={login_styles.loginButton} onClick={onLoginCallback}>Login</button>
                 </div>
 
                 <p className='link'>
@@ -143,7 +158,7 @@ function Login() {
                 </p>
 
                 <div className={login_styles.marginAround}>
-                    <button type="button" className={login_styles.loginButton} onClick={backClick}>Back</button>
+                    <button type='button' className={login_styles.loginButton} onClick={backClick}>Back</button>
                 </div>
 
             </div>
