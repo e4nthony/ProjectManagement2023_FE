@@ -37,7 +37,7 @@ async function create_post(userJson) {
 };
 
 async function get_all_posts() {
-    return api.post("post/get_all_posts");
+    return api.get("post/get_all_posts");
 };
 
 async function get_all_posts_by_author(userJson) {
