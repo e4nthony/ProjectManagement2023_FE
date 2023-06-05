@@ -1,9 +1,8 @@
 import { createContext } from 'react';
 
-// const user_obj = {user: {email: '', token: ''}};
-// const user_obj = {active_user: {}};
+let status = true;
+if (!localStorage.getItem('activeUserEmail') || !localStorage.getItem('accessToken') ) {
+    status = false
+}
 
-
-export const AuthContext = createContext(() => {
-    return localStorage.getItem('authState')
-});
+export const AuthContext = createContext(status);
