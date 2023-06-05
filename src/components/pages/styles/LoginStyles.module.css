@@ -83,12 +83,24 @@
 
 
 
-
+/* --- textTittle parent --- */
 .textTittle {
-
-    height: 25vmin;
     pointer-events: none;
 }
+
+.textTittle h1 {
+    height: 25vmin;
+}
+
+.textTittle h3 {
+    height: 3vmin;
+}
+
+
+
+
+
+
 
 /* .inputFieldPassword {
     text-align: left;

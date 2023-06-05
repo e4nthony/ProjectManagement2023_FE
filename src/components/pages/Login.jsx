@@ -4,7 +4,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import login_styles from './styles/LoginStyles.module.css';
-// import global_styles from '../styles/GlobalStyles.module.css';
 import { AuthContext } from '../AuthContext'
 
 // import HomePage from './HomePage';
@@ -105,8 +104,10 @@ function Login() {
     return (
         <form className={login_styles.log}>
             <div>
-
-                <h1 className={login_styles.textTittle}>Login Page</h1>
+                <div className={login_styles.textTittle}>
+                    <h3>Welcome to BidZone!</h3>
+                    <h1>Login</h1>
+                </div>
 
                 <div className={login_styles.marginAround}>
                     <text id='message' className='message-text'>
