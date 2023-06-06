@@ -16,11 +16,12 @@ import { AuthContext } from '../AuthContext';
 /* helps to print circular objects as string */
 import { inspect } from 'util'; //DEBUG
 
+import GenerateSinglePost from '../SinglePost';
+
 
 function HomePage() {
     // const [feedMode, setFeedMode] = useState('explore');
     const [feedData, setFeedData] = useState([]);
-
     const { authState, setAuthState } = useContext(AuthContext);
 
 
@@ -80,40 +81,9 @@ function HomePage() {
         reloadFeed('following');
     }
 
-
     useEffect(() => {
         reloadFeed();
     }, []);
-
-
-
-
-    function GenerateSinglePost(post) {
-        return (
-            <div id='aPost'
-                className={styles.post}
-                onClick={() => {
-                    console.log(post.title + ' has been clicked')
-                }} >
-
-                <div id='title'> {post.post_tittle} </div>
-                <div id='seller'>{'author: ' + post.author_email}</div>
-                <div id='body'>{post.post_text}</div>
-                <div id='pic'>{post.postImage}</div>
-                <div id='priceANDtimer'>
-                    <div id='maxBid'>{post.current_price}</div>
-                    {/* what about timer ??? */}
-                    <div id='timer'>{ }</div>
-                </div>
-
-
-                {/* DEBUG dev _id */}
-                <div id='index'>{'post_id: ' + post._id}</div>
-
-
-            </div>
-        );
-    }
 
     return (
         <div>
@@ -128,9 +98,9 @@ function HomePage() {
 
                 {/* --- Buttons --- */}
                 {authState && <div id='feedMode'>
-                    <div id='explore' onClick={handleExploreClick}>Explore</div>
+                    <div id='exploreButton' onClick={handleExploreClick}>Explore</div>
 
-                    <div id='following' onClick={handleFollowingClick}>Following</div>
+                    <div id='followingButton' onClick={handleFollowingClick}>Following</div>
                 </div>}
 
                 {/* --- Posts List --- */}

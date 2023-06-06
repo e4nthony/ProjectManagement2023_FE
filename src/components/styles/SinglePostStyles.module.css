@@ -1,0 +1,404 @@
+/* --- Single Post Styles ( by id of field, declaring name of style in className={} ONCE IN PARENT object. ) --- --- */
+
+/* <div> a parent */
+.post {
+    width: 650px;
+    height: auto;
+
+    border-radius: 6px;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 50px;
+    /* border: 1px solid lightgray; */
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
+
+    /* background-color: rgba(255, 255, 255, 0); */
+    backdrop-filter: blur(1.3px);
+
+    /* color: black; */
+
+    transition: box-shadow .15s, transform .15s;
+    will-change: box-shadow, transform;
+}
+
+/* .post:hover {
+    backdrop-filter: blur(2.7px);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    cursor: pointer;
+    transform: translateY(-1px);
+} */
+
+/* .post:active {
+    backdrop-filter: blur(1.3px);
+    box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
+    transform: translateY(2px);
+
+    box-shadow: #000000 0 3px 7px inset;
+    transform: translateY(2px);
+} */
+
+/* --- --- Post Header --- --- */
+.post div[id='header'] {
+    height: 45px;
+
+    padding-left: 20px;
+    padding-right: 20px;
+
+    align-items: center;
+
+    font-size: 22px;
+
+    background-color: #004e89;
+    color: white;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* flex-wrap: wrap; */
+
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+
+    /* - forces text to single line - */
+    white-space: nowrap;
+
+
+    /* display: grid; */
+    /* place-content: left; */
+    /* padding: 5; */
+    /* flex: 20%; */
+    /* flex-direction: row; */
+}
+
+.post div[id='maxBidAndTittle'] {
+    display: flex;
+    flex-direction: row;
+}
+
+.post div[id='maxBid'] {
+    border: 1px solid lightgray;
+    max-width: 100px;
+}
+
+.post div[id='tittle'] {
+    margin-left: 20px;
+    width: 370px;
+
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    /* max-width: 9vw; */
+    /* flex-direction: row;  */
+    /* overflow:hidden; */
+
+    border: 1px solid lightgray;
+}
+
+
+/* Place Bid Button */
+.post button[id='placeBidButton'] {
+    position: relative;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.712);
+    /* box-shadow: */
+    box-shadow: rgba(0, 0, 0, 0.712) 0px 2px 2px 0px;
+
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    background: transparent;
+    color: #fff;
+    overflow: hidden;
+    /* box-shadow: 0 0 0 0 transparent; */
+    -webkit-transition: all 0.2s ease-in;
+    -moz-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+}
+
+.post button[id='placeBidButton']:hover {
+    border: 1px solid black;
+    color: black;
+    background: gold;
+    box-shadow: 0 0 30px 5px rgba(255, 215, 0, 0.815);
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+}
+
+.post button[id='placeBidButton']:hover::before {
+    -webkit-animation: sh02 0.5s 0s linear;
+    -moz-animation: sh02 0.5s 0s linear;
+    animation: sh02 0.5s 0s linear;
+}
+
+.post button[id='placeBidButton']::before {
+    content: '';
+    display: block;
+    width: 0px;
+    height: 86%;
+    position: absolute;
+    top: 7%;
+    left: 0%;
+    opacity: 0;
+    background: #fff;
+    box-shadow: 0 0 50px 30px #fff;
+    -webkit-transform: skewX(-20deg);
+    -moz-transform: skewX(-20deg);
+    -ms-transform: skewX(-20deg);
+    -o-transform: skewX(-20deg);
+    transform: skewX(-20deg);
+}
+
+.post button[id='placeBidButton']:active {
+    transform: translateY(2px);
+}
+
+@keyframes sh02 {
+    from {
+        opacity: 0;
+        left: 0%;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        left: 100%;
+    }
+}
+
+button:active {
+    box-shadow: 0 0 0 0 transparent;
+    -webkit-transition: box-shadow 0.2s ease-in;
+    -moz-transition: box-shadow 0.2s ease-in;
+    transition: box-shadow 0.2s ease-in;
+}
+
+/* .post div[id='placeBidButton'] {
+    border: 1px solid lightgray;
+    width: 100px;
+} */
+
+/* .post div[id='status'] {
+    margin-left: 20px;
+} */
+
+
+
+
+
+/* --- --- Post Body --- --- */
+.post div[id='body'] {
+    border: 1px solid rgb(231, 1, 1);
+    flex: 30%;
+    display: grid;
+    place-content: left;
+}
+
+.post div[id='desctiption'] {
+    border: 1px solid rgb(89, 91, 233);
+}
+
+.post img[id='picContainer'] {
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+}
+
+.post img[id='pic'] {
+    place-content: center;
+    border: 1px solid rgb(4, 250, 229);
+    max-width: 500px;
+    max-height: 300px;
+}
+
+/* .post img[id='default_pic'] {
+    border: 1px solid rgb(231, 1, 1);
+} */
+
+
+/* --- --- Post Footer --- --- */
+.post div[id='footer'] {
+    height: 5vh;
+
+    font-size: 18px;
+
+    padding-left: 20px;
+    padding-right: 20px;
+
+    color: black;
+    /* color: white; */
+
+    /* border: 1px solid lightgray; */
+
+
+    align-items: center;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    /* text-shadow: 1px 2px 0 #000; */
+
+    /* flex: 30%; */
+    /* flex-direction: row; */
+    /* background-color: dodgerblue; */
+    /* background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #024e89 95%); */
+
+
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ff7f01 100%);
+
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+
+
+    /* - forces text to single line - */
+    white-space: nowrap;
+}
+
+/* --- Author Buttons --- */
+.post div[type='authorButtons'] {
+    height: 25px;
+
+    /* margin: 6px; */
+    align-items: center;
+    appearance: none;
+    background-image: radial-gradient(100% 100% at 100% 0, #0091ff 0, #004e89 100%);
+    border: 0;
+    border-radius: 6px;
+    box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #003964 0 -3px 0 inset;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: "JetBrains Mono", monospace;
+
+
+
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    position: relative;
+
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow .15s, transform .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow, transform;
+    font-size: 18px;
+}
+
+.post div[type='authorButtons']:focus {
+    box-shadow: #003964 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+}
+
+.post div[type='authorButtons']:hover {
+    box-shadow: #003964a4 0 4px 8px, #003964a4 0 7px 13px -3px, #003964 0 -3px 0 inset;
+    transform: translateY(-2px);
+}
+
+.post div[type='authorButtons']:active {
+    box-shadow: #003964 0 3px 7px inset;
+    transform: translateY(2px);
+}
+
+
+.post div[id='authorContainer'] {
+    border: 1px solid rgb(0, 241, 101);
+    display: flex;
+    max-width: 570px;
+}
+
+.post div[id='author'] {
+    margin-left: 0.5rem;
+    display: flex;
+    place-content: center;
+    text-shadow: rgba(175, 18, 18, 0.3) 0px 2px 8px 0px;
+}
+
+.post div[id='authorButtons'] {
+    display: flex;
+    place-content: center;
+}
+
+.post div[id='followButton'] {
+    margin-left: 15px;
+    /* border: 1px solid lightgray; */
+}
+
+.post div[id='messageButton'] {
+    margin-left: 15px;
+
+    /* border: 1px solid lightgray; */
+}
+
+/* .post div[id='likeButton'] {
+    margin-left: 15px;
+    width: 40px;
+    border: 1px solid lightgray;
+} */
+
+
+
+.post button[id='likeButton'] {
+    border: 1px solid rgb(0, 241, 101);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: none;
+    background-color: transparent;
+    position: relative;
+}
+
+.post button[id='likeButton']:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+    transition: .2s;
+}
+
+.post button[id='likeButton']:focus {
+    fill: #fd1853;
+    /* animation: grosseur .2s ; linear */
+}
+
+/* .post button[id='likeButton']:target {
+    color: #fd1853;
+} */
+/* @keyframes grosseur {
+    0% {
+        width: 50px;
+        height: 50px;
+        fill: #fd1853;
+    }
+
+    100% {
+        width: 30px;
+        height: 30px;
+        fill: #fd1853;
+    }
+} */
+
+/* --- --------------------------------- --- */
+
+
+.post div[id='index'] {
+    display: flex;
+    place-content: center;
+}

@@ -1,7 +1,7 @@
 /* eslint-disable */
 /* the line above disables eslint check for this file (temporarily) todo:delete */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import global_styles from '../styles/GlobalStyles.module.css';
 import register_styles from './styles/RegisterStyles.module.css';
 import { useNavigate } from 'react-router-dom';
@@ -35,7 +35,7 @@ function RegistrationPage() {
     // if (authState){
     //     navigate('/home')
     // }
-}, []);
+  }, []);
 
 
   //event.target.value
