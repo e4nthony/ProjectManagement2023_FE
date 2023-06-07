@@ -3,7 +3,9 @@
 /* <div> a parent */
 .post {
     width: 650px;
+    
     height: auto;
+    min-height: 200px; 
 
     border-radius: 6px;
     position: relative;
@@ -68,7 +70,9 @@
     font-size: 22px;
 
     /* background-color: #004e89; */
-    background-color: #585858;
+    background-color: #0064b1;
+
+    /* background-color: #478550; */
 
     color: white;
 
