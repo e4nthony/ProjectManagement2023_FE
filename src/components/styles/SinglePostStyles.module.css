@@ -97,7 +97,7 @@
 }
 
 .post div[id='maxBid'] {
-    border: 1px solid lightgray;
+    /* border: 1px solid lightgray; */
     max-width: 100px;
 }
 
@@ -113,7 +113,7 @@
     /* flex-direction: row;  */
     /* overflow:hidden; */
 
-    border: 1px solid lightgray;
+    /* border: 1px solid lightgray; */
 }
 
 
@@ -215,15 +215,19 @@ button:active {
 
 /* --- --- Post Body --- --- */
 .post div[id='body'] {
-    border: 1px solid rgb(231, 1, 1);
+    /* border: 1px solid rgb(231, 1, 1); */
     flex: 30%;
     display: grid;
     place-content: left;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-right: 20px;
 }
 
-.post div[id='desctiption'] {
+/* .post div[id='desctiption'] {
     border: 1px solid rgb(89, 91, 233);
-}
+} */
 
 .post img[id='picContainer'] {
     display: flex;
@@ -233,7 +237,7 @@ button:active {
 
 .post img[id='pic'] {
     place-content: center;
-    border: 1px solid rgb(4, 250, 229);
+    /* border: 1px solid rgb(4, 250, 229); */
     max-width: 500px;
     max-height: 300px;
 }
@@ -337,7 +341,7 @@ button:active {
 
 
 .post div[id='authorContainer'] {
-    border: 1px solid rgb(0, 241, 101);
+    /* border: 1px solid rgb(0, 241, 101); */
     display: flex;
     max-width: 570px;
 }
