@@ -162,13 +162,40 @@ async function get_user_info_by_email(userAuthData)
     return res; 
 }
 
+async function edit_info(userAuthData) {
+    console.log('authService: trying edit info...');
+
+    // /** Pack data to 'JSON' format to send via web*/
+    // const data = {
+    //     email: userAuthData.email,
+    //     password: userAuthData.password // unencrypted/raw password
+    // }
+    try {
+        const res = user_api.edit_info(userAuthData);
+        console.log("the result is" + res)
+        const statusCode = (await res).status;
+        console.log( statusCode + "after req adar katzir")
+        console.log('got response from server, status code: ' + statusCode);
+        console.log('response: ' + JSON.stringify(res, null, 2));
+        if (statusCode == 200) {
+            console.log('user edit info successfully: ' + JSON.stringify(userAuthData.email));
+            return true
+        }
+    } catch (err) {
+        console.log('user log in failed: ' + err);
+    }
+    return false
+}
+
 
 export default {
     register,
     login,
     logout,
     authToken,
+    edit_info,
     deletemyaccount,
     get_user_info_by_email,
+    
     // getAllUsers,
 };
