@@ -57,7 +57,10 @@ function PersonalArea() {
   };
 
   async function getInfo() {
-    let email1 = localStorage.getItem('activeUserEmail');
+    let email1;
+    email1=localStorage.getItem('activeUserEmail').toString()
+    setEmail(email1); // Corrected line
+    //let email1 = localStorage.getItem('activeUserEmail');
     console.log('pppp', email1.toString());
     const res = await authService.get_user_info_by_email(email1); //to do 
     console.log(res);
