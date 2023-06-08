@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import authService from '../../services/authService';
 import Rating from 'react-rating';
 
-
 function PersonalArea() {
   const [isLoggedIn, setIsLoggedIn] = useState(true); // change to false when log in
   const [firstName, setFirstName] = useState('');
@@ -24,8 +23,6 @@ function PersonalArea() {
 
   const handleRatingSubmit = async (value) => {
     try {
-        console.log('bbb:', email);
-
       // Check if user is trying to rate themselves
       if (localStorage.getItem('activeUserEmail') !== email) {
         // TODO: Send the rating to the server and save it in the MongoDB database
@@ -34,7 +31,7 @@ function PersonalArea() {
         // Show the success message
         setShowSuccessMessage(true);
 
-        // Clear the success message after 10/4 seconds
+        // Clear the success message after 2.5 seconds
         setTimeout(() => {
           setShowSuccessMessage(false);
         }, 2500);
@@ -46,15 +43,17 @@ function PersonalArea() {
     }
   };
 
-  async function getInfo() { 
-    localStorage.getItem('activeUserEmail')
-    const res = await authService.get_user_info_by_email(localStorage.getItem('activeUser'));//to do 
+  async function getInfo() {
+    setEmail(localStorage.getItem('activeUserEmail')); // Corrected line
+
+    const res = await authService.get_user_info_by_email(localStorage.getItem('activeUser'));
     console.log(res);
-    setEmail( res.data.user_info.email);
+    setEmail(res.data.user_info.email);
     setUserName(res.data.user_info.userName);
     setDateOfBirth(res.data.user_info.birth_date);
     setFirstName(res.data.user_info.firstName);
     setLastName(res.data.user_info.lastName);
+
     // TODO: Retrieve ratings from MongoDB and calculate the average rating
     // Replace the following line with the logic to calculate the average rating
     const ratings = [4, 5, 3, 4]; // Example ratings array
@@ -103,39 +102,22 @@ function PersonalArea() {
             </div>
           </div>
           {/* Rating */}
-          {localStorage.getItem('activeUserEmail') !== email && ( // Check if user is not rating themselves
-            <div>
-              <label>Rate the user:</label>
-              <Rating
-                initialRating={rating}
-                emptySymbol={<span className="rating-icon">&#9734;</span>}
-                fullSymbol={<span className="rating-icon selected">&#9733;</span>}
-                onChange={handleRatingChange}
-              />
-            </div>
-          )}
-          {/* Average Rating */}
-          <div>
-            <strong>Average Rating: </strong>
-            {averageRating.toFixed(1)} stars
+          <div className="rating-section">
+            <h3>Rate this user:</h3>
+            <Rating
+              initialRating={rating}
+              emptySymbol={<i className="far fa-star fa-2x"></i>}
+              fullSymbol={<i className="fas fa-star fa-2x"></i>}
+              onChange={handleRatingChange}
+            />
+            {showSuccessMessage && <div>Rating submitted successfully!</div>}
+            <p>Average Rating: {averageRating}</p>
           </div>
-          {/* Success Message */}
-          {showSuccessMessage && <div className="success-message">Rating submitted successfully!</div>}
-          {/* Edit Info and Delete Account buttons */}
-          <Link to="/personalarea/editinfo">
-            <button type="button">Edit Info</button>
-          </Link>
-
-          <Link to="/personalarea/confirmanddelet">
-            <button type="button">Delete My Account</button>
-          </Link>
         </div>
       ) : (
         <div>
-          Please log in to view your information.
-          <Link to="/login">
-            <button type="button">Login</button>
-          </Link>
+          <p>Please log in to view your personal area.</p>
+          <Link to="/login">Log In</Link>
         </div>
       )}
     </div>
