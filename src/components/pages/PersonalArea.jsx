@@ -24,7 +24,7 @@ function PersonalArea() {
 
   const handleRatingSubmit = async (value) => {
     try {
-        console.log('bbb:', email);
+      console.log('Rating:', email);
 
       // Check if user is trying to rate themselves
       if (localStorage.getItem('activeUserEmail') !== email) {
@@ -56,17 +56,16 @@ function PersonalArea() {
     }
   };
 
-  async function getInfo() { 
-    let email1 =localStorage.getItem('activeUserEmail')
-    console.log("pppp",email1.toString());
-    const res = await authService.get_user_info_by_email(email1);//to do 
+  async function getInfo() {
+    let email1 = localStorage.getItem('activeUserEmail');
+    console.log('pppp', email1.toString());
+    const res = await authService.get_user_info_by_email(email1); //to do 
     console.log(res);
     setEmail(res.data.user_info.email);
     setUserName(res.data.user_info.userName);
     setDateOfBirth(res.data.user_info.birth_date);
     setFirstName(res.data.user_info.firstName);
     setLastName(res.data.user_info.lastName);
-
     // TODO: Retrieve ratings from MongoDB and calculate the average rating
     // Replace the following line with the logic to calculate the average rating
     const totalRating = ratings.reduce((sum, rating) => sum + rating, 0);
@@ -114,22 +113,39 @@ function PersonalArea() {
             </div>
           </div>
           {/* Rating */}
-          <div className="rating-section">
-            <h3>Rate this user:</h3>
-            <Rating
-              initialRating={rating}
-              emptySymbol={<i className="far fa-star fa-2x"></i>}
-              fullSymbol={<i className="fas fa-star fa-2x"></i>}
-              onChange={handleRatingChange}
-            />
-            {showSuccessMessage && <div>Rating submitted successfully!</div>}
-            <p>Average Rating: {averageRating}</p>
+          {localStorage.getItem('activeUserEmail') !== email && ( // Check if user is not rating themselves
+            <div>
+              <label>Rate the user:</label>
+              <Rating
+                initialRating={rating}
+                emptySymbol={<span className="rating-icon">&#9734;</span>}
+                fullSymbol={<span className="rating-icon selected">&#9733;</span>}
+                onChange={handleRatingChange}
+              />
+            </div>
+          )}
+          {/* Average Rating */}
+          <div>
+            <strong>Average Rating: </strong>
+            {averageRating.toFixed(1)} stars
           </div>
+          {/* Success Message */}
+          {showSuccessMessage && <div className="success-message">Rating submitted successfully!</div>}
+          {/* Edit Info and Delete Account buttons */}
+          <Link to="/personalarea/editinfo">
+            <button type="button">Edit Info</button>
+          </Link>
+
+          <Link to="/personalarea/confirmanddelet">
+            <button type="button">Delete My Account</button>
+          </Link>
         </div>
       ) : (
         <div>
-          <p>Please log in to view your personal area.</p>
-          <Link to="/login">Log In</Link>
+          Please log in to view your information.
+          <Link to="/login">
+            <button type="button">Login</button>
+          </Link>
         </div>
       )}
     </div>
