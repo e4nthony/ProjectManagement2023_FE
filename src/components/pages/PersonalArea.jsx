@@ -14,7 +14,6 @@ function PersonalArea() {
     const [isLoggedIn, setIsLoggedIn] = useState(true); // change to false when log in
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
     const [dateOfBirth, setDateOfBirth] = useState('2000-01-01');
     const [userName,setUserName] = useState('')
     async function getinfo()

@@ -27,6 +27,12 @@ async function authToken() {
     return api.get("/authToken");
 };
 
+async function edit_info(userAuthData) {
+    console.log(userAuthData.email);
+    console.log(userAuthData.existEmail);
+    return api.post("/user/edit_info", userAuthData);   
+};
+
 
 /* --- This is Post API --- */
 
@@ -47,6 +53,9 @@ async function get_user_info_by_email(userAuthData) {
     return api.post("user/get_user_info_by_email", userAuthData);
 }
 
+// async function edit_info(userAuthData) {
+//     return api.post("user/edit_info", userAuthData);   
+// };
 
 /* --- DEBUG API --- */
 async function get_all_users_mails() { // DEBUG ,TODO DELETE
@@ -59,8 +68,9 @@ export default {
     deleteaccount,
     get_all_users_mails,  // DEBUG ,TODO DELETE
     authToken,
+    edit_info,
     create_post,
     get_all_posts,
     get_all_posts_by_author,
-    get_user_info_by_email
+    get_user_info_by_email,
 };
