@@ -1,6 +1,7 @@
 
 /* eslint-disable */
 /* the line above disables eslint check for this file (temporarily) todo:delete */
+import Rating from 'react-rating';
 
 import React, { useState } from 'react';
 import {
@@ -29,7 +30,10 @@ function PersonalArea() {
     }
     getinfo();
     console.log(userName);
-    
+    const handleRatingChange = (value) => {
+        // התנהגות לאחר שינוי בדירוג
+        console.log('הדירוג החדש הוא: ' + value);
+      };
     return (
         <div>
             <h1>Personal Area</h1>
@@ -55,6 +59,17 @@ function PersonalArea() {
                     <div>
                         <strong>Password: </strong>
                           ********
+                    </div>
+                    <div>
+                    <strong>Rating:</strong>
+                    <br></br>
+                    <Rating
+                        placeholderRating={3.5}
+                        emptySymbol={<img src="assets/images/star-grey.png" className="icon" alt="כוכב ריק" />}
+                        placeholderSymbol={<img src="assets/images/star-red.png" className="icon" alt="כוכב ממולא חלקית" />}
+                        fullSymbol={<img src="assets/images/star-yellow.png" className="icon" alt="כוכב מלא" />}
+                        onChange={handleRatingChange}
+                    />
                     </div>
                     {/* Following and Followers */}
                     <div className='following-followers'>
