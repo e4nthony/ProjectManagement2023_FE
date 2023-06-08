@@ -15,6 +15,7 @@ function PersonalArea() {
   const [rating, setRating] = useState(0); // New rating state
   const [showSuccessMessage, setShowSuccessMessage] = useState(false); // State to control success message
   const [averageRating, setAverageRating] = useState(0); // State for average rating
+  const [ratings, setRatings] = useState([4, 5, 3, 4]); // Example ratings array
 
   const handleRatingChange = (value) => {
     setRating(value);
@@ -23,17 +24,27 @@ function PersonalArea() {
 
   const handleRatingSubmit = async (value) => {
     try {
-        console.log('bbb:', email);
+      console.log('Rating:', email);
 
       // Check if user is trying to rate themselves
       if (localStorage.getItem('activeUserEmail') !== email) {
         // TODO: Send the rating to the server and save it in the MongoDB database
-        console.log('Rating:', email);
+
+        // Update the ratings array with the new rating
+        const newRatings = [...ratings, value];
+
+        // Calculate the new average rating
+        const totalRating = newRatings.reduce((sum, rating) => sum + rating, 0);
+        const newAverageRating = totalRating / newRatings.length || 0;
+
+        // Update the state with the new average rating and ratings array
+        setAverageRating(newAverageRating);
+        setRatings(newRatings);
 
         // Show the success message
         setShowSuccessMessage(true);
 
-        // Clear the success message after 10/4 seconds
+        // Clear the success message after 2.5 seconds
         setTimeout(() => {
           setShowSuccessMessage(false);
         }, 2500);
@@ -45,19 +56,18 @@ function PersonalArea() {
     }
   };
 
-  async function getInfo() { 
-    let email1 =localStorage.getItem('activeUserEmail')
-    console.log("pppp",email1.toString());
-    const res = await authService.get_user_info_by_email(email1);//to do 
+  async function getInfo() {
+    let email1 = localStorage.getItem('activeUserEmail');
+    console.log('pppp', email1.toString());
+    const res = await authService.get_user_info_by_email(email1); //to do 
     console.log(res);
-    setEmail( res.data.user_info.email);
+    setEmail(res.data.user_info.email);
     setUserName(res.data.user_info.userName);
     setDateOfBirth(res.data.user_info.birth_date);
     setFirstName(res.data.user_info.firstName);
     setLastName(res.data.user_info.lastName);
     // TODO: Retrieve ratings from MongoDB and calculate the average rating
     // Replace the following line with the logic to calculate the average rating
-    const ratings = [4, 5, 3, 4]; // Example ratings array
     const totalRating = ratings.reduce((sum, rating) => sum + rating, 0);
     const averageRating = totalRating / ratings.length || 0;
     setAverageRating(averageRating);
