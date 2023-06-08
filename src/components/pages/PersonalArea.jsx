@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import authService from '../../services/authService';
 import Rating from 'react-rating';
 
+
 function PersonalArea() {
   const [isLoggedIn, setIsLoggedIn] = useState(true); // change to false when log in
   const [firstName, setFirstName] = useState('');
@@ -46,9 +47,8 @@ function PersonalArea() {
   };
 
   async function getInfo() { 
-    let email1 =localStorage.getItem('activeUserEmail')
-    console.log("pppp",email1.toString());
-    const res = await authService.get_user_info_by_email(email1);//to do 
+    localStorage.getItem('activeUserEmail')
+    const res = await authService.get_user_info_by_email(localStorage.getItem('activeUser'));//to do 
     console.log(res);
     setEmail( res.data.user_info.email);
     setUserName(res.data.user_info.userName);
