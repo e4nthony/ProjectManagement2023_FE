@@ -1,24 +1,28 @@
 /* eslint-disable */
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import styles from './styles/CreatePost.module.css';
+import user_api from '../../api/user_api';
 
 function CreatePost() {
+    const navigate = useNavigate();
+
     const initialValues = {
         title: '',
         postText: '',
         postMinPrice: '',
         postMaxTime: '',
-        postImage: '',
+        //postImage: '',
     };
 
     const validationSchema = Yup.object().shape({
         title: Yup.string().required("This field can't be empty !"),
         postText: Yup.string().required("This field can't be empty !"),
-        postMinPrice: Yup.string().required("This field can't be empty !"),
-        postMaxTime: Yup.string().required("This field can't be empty !"),
-        postImage: Yup.string().required("his field can't be empty !"),
+        postMinPrice: Yup.number().required("This field can't be empty !"),
+        postMaxTime: Yup.number().required("This field can't be empty !"),
+        //postImage: Yup.string().required("his field can't be empty !"),
     });
 
     const onSubmit = (data) => {
@@ -28,7 +32,26 @@ function CreatePost() {
         console.log('postText: ' + data.postText);
         console.log('postMinPrice: ' + data.postMinPrice);
         console.log('postMaxTime: ' + data.postMaxTime);
-        console.log('postImage: ' + data.postImage);
+        //console.log('postImage: ' + data.postImage);
+        const post = {
+            post_tittle: data.title,
+            post_text: data.postText,
+            starting_price: data.postMinPrice,
+            timer: data.postMaxTime,
+            starting_time: Date.now(),
+            author_email: localStorage.getItem("activeUserEmail")
+        };
+        async function temp() {
+
+            try {
+                const res = await user_api.create_post(post);
+                if (res.status === 200) {
+                    alert(res.data.msg);
+                    navigate("/");
+                }
+            } catch (e) { console.log(e); }
+        }
+        temp();
     };
 
     return (
@@ -73,7 +96,7 @@ function CreatePost() {
                         name='postMaxTime'
                         placeholder='Set your timer in minutes..'
                     />
-                    <label>Image: </label>
+                    {/*<label>Image: </label>
                     <ErrorMessage name='postImage' component='span' />
                     <Field
                         autocomplete='off'
@@ -81,7 +104,7 @@ function CreatePost() {
                         type='file'
                         name='postImage'
 
-                    />
+    />*/}
                     <button id='submit' type='submit'>Create Post</button>
                 </Form>
             </Formik>

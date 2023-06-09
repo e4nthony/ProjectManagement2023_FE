@@ -30,7 +30,7 @@ async function authToken() {
 async function edit_info(userAuthData) {
     console.log(userAuthData.email);
     console.log(userAuthData.existEmail);
-    return api.post("/user/edit_info", userAuthData);   
+    return api.post("/user/edit_info", userAuthData);
 };
 
 
