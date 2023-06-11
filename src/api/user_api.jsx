@@ -37,6 +37,12 @@ async function edit_info(userAuthData) {
 };
 
 
+/* --- This is User API --- */
+async function get_user_info_by_email(userAuthData) {
+    return api.post("user/get_user_info_by_email", userAuthData);
+}
+
+
 /* --- This is Post API --- */
 
 async function create_post(userJson) {
@@ -51,10 +57,9 @@ async function get_all_posts_by_author(userJson) {
     return api.post("post/get_all_posts_by_author", userJson);
 };
 
-/* --- This is User API --- */
-async function get_user_info_by_email(userAuthData) {
-    return api.post("user/get_user_info_by_email", userAuthData);
-}
+async function get_post_by_id(userJson) {
+    return api.post("post/get_post_by_id", userJson);
+};
 
 // async function edit_info(userAuthData) {
 //     return api.post("user/edit_info", userAuthData);   
@@ -68,14 +73,21 @@ async function get_all_users_mails() { // DEBUG ,TODO DELETE
 
 
 export default {
+
+    /* Auth */
     register,
     login,
     deleteaccount,
     get_all_users_mails,  // DEBUG ,TODO DELETE
     authToken,
+
+    /* User Info */
     edit_info,
+    get_user_info_by_email,
+
+    /* Posts */
     create_post,
     get_all_posts,
     get_all_posts_by_author,
-    get_user_info_by_email,
+    get_post_by_id,
 };

@@ -1,21 +1,40 @@
 /* eslint-disable */
 /* the line above disables eslint check for this file (temporarily) todo:delete */
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import authService from '../../services/authService';
 import Rating from 'react-rating';
 
+// import { AuthContext } from '../AuthContext';
+
 function PersonalArea() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // change to false when log in
+  const navigate = useNavigate();
+
+  const { userEmail } = useParams();  /* param from url */
+
+  console.log('PersonalArea: userEmail', userEmail);
+
+  if (userEmail === undefined) {
+    navigate('/home');
+  }
+
+  // const { authState } = useContext(AuthContext);
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(userEmail);
   const [dateOfBirth, setDateOfBirth] = useState('2000-01-01');
   const [userName, setUserName] = useState('');
   const [rating, setRating] = useState(0); // New rating state
   const [showSuccessMessage, setShowSuccessMessage] = useState(false); // State to control success message
   const [averageRating, setAverageRating] = useState(0); // State for average rating
   const [ratings, setRatings] = useState([4, 5, 3, 4]); // Example ratings array
+
+  let isMyProfile = false;
+  if (userEmail == localStorage.getItem('activeUserEmail')) {
+    /* if this page of active user */
+    isMyProfile = true;
+  }
 
   const handleRatingChange = (value) => {
     setRating(value);
@@ -58,22 +77,28 @@ function PersonalArea() {
 
   async function getInfo() {
     let email1;
-    email1=localStorage.getItem('activeUserEmail').toString()
+    email1 = userEmail.toString()
     setEmail(email1); // Corrected line
     //let email1 = localStorage.getItem('activeUserEmail');
-    console.log('pppp', email1.toString());
+    console.log('calling authService.get_user_info_by_email()', email1.toString());
     const res = await authService.get_user_info_by_email(email1); //to do 
     console.log(res);
-    setEmail(res.data.user_info.email);
-    setUserName(res.data.user_info.userName);
-    setDateOfBirth(res.data.user_info.birth_date);
-    setFirstName(res.data.user_info.firstName);
-    setLastName(res.data.user_info.lastName);
-    // TODO: Retrieve ratings from MongoDB and calculate the average rating
-    // Replace the following line with the logic to calculate the average rating
-    const totalRating = ratings.reduce((sum, rating) => sum + rating, 0);
-    const averageRating = totalRating / ratings.length || 0;
-    setAverageRating(averageRating);
+
+    const statusCode = (await res).status;
+    if (statusCode != 200) {
+      /* TODO show message: servers busy, please try later */
+    } else {
+      setEmail(res.data.user_info.email);
+      setUserName(res.data.user_info.userName);
+      setDateOfBirth(res.data.user_info.birth_date);
+      setFirstName(res.data.user_info.firstName);
+      setLastName(res.data.user_info.lastName);
+      // TODO: Retrieve ratings from MongoDB and calculate the average rating
+      // Replace the following line with the logic to calculate the average rating
+      const totalRating = ratings.reduce((sum, rating) => sum + rating, 0);
+      const averageRating = totalRating / ratings.length || 0;
+      setAverageRating(averageRating);
+    }
   }
 
   useEffect(() => {
@@ -82,8 +107,11 @@ function PersonalArea() {
 
   return (
     <div>
-      <h1>Personal Area</h1>
-      {isLoggedIn ? (
+      {isMyProfile && <h1>Personal Area</h1>}
+
+      {!isMyProfile && <h1>User Information</h1>}
+      
+      {!!userEmail ? (
         <div>
           {/* User Information */}
           <div>
@@ -108,11 +136,11 @@ function PersonalArea() {
           <div className="following-followers">
             <div className="following-followers-item">
               <h3>Following</h3>
-              <span>{}</span>
+              <span>{ }</span>
             </div>
             <div className="following-followers-item">
               <h3>Followers</h3>
-              <span>{}</span>
+              <span>{ }</span>
             </div>
           </div>
           {/* Rating */}
@@ -135,17 +163,21 @@ function PersonalArea() {
           {/* Success Message */}
           {showSuccessMessage && <div className="success-message">Rating submitted successfully!</div>}
           {/* Edit Info and Delete Account buttons */}
-          <Link to="/personalarea/editinfo">
-            <button type="button">Edit Info</button>
-          </Link>
 
-          <Link to="/personalarea/confirmanddelet">
-            <button type="button">Delete My Account</button>
-          </Link>
+          {isMyProfile && <div>
+            <Link to="/personalarea/editinfo">
+              <button type="button">Edit Info</button>
+            </Link>
+
+            <Link to="/personalarea/confirmanddelet">
+              <button type="button">Delete My Account</button>
+            </Link>
+          </div>}
+
         </div>
       ) : (
         <div>
-          Please log in to view your information.
+          Please log in to view information.
           <Link to="/login">
             <button type="button">Login</button>
           </Link>
