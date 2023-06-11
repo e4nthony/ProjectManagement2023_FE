@@ -37,7 +37,7 @@ function DropdownMenu() {
         // localStorage.removeItem('accessToken');
         setAuthState(false);
         setIsOpen(false);
-        navigate('/login');
+        navigate('/');
     }
 
     return (

@@ -5,6 +5,9 @@ import { async } from 'q';
 import api from './api';
 
 
+/* --- --- This File Contains API That User Allowed To Interact With --- --- */
+
+
 /* --- This is Authentication API --- */
 
 async function register(userJson) {
@@ -41,7 +44,7 @@ async function create_post(userJson) {
 };
 
 async function get_all_posts() {
-    return api.post("post/get_all_posts");
+    return api.get("post/get_all_posts");
 };
 
 async function get_all_posts_by_author(userJson) {
@@ -58,9 +61,11 @@ async function get_user_info_by_email(userAuthData) {
 // };
 
 /* --- DEBUG API --- */
+
 async function get_all_users_mails() { // DEBUG ,TODO DELETE
     return api.get("/get_all_users_mails");
 };
+
 
 export default {
     register,

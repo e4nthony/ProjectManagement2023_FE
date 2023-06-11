@@ -64,6 +64,7 @@ function App() {
 
     return (
         <div className={styles.background}>
+            <div className={styles.full_height}>
             <React.StrictMode>
                 <AuthContext.Provider value={{ authState, setAuthState }}>
                     <BrowserRouter>
@@ -73,6 +74,7 @@ function App() {
                     </BrowserRouter>
                 </AuthContext.Provider>
             </React.StrictMode>
+            </div>
         </div>
     );
 }

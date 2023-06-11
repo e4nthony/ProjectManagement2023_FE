@@ -1,13 +1,15 @@
 /* eslint-disable */
 /* the line above disables eslint check for this file (temporarily) todo:delete */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import global_styles from '../styles/GlobalStyles.module.css';
 import register_styles from './styles/RegisterStyles.module.css';
 import { useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs'
 
 import authService from '../../services/authService';
+
+import { AuthContext } from '../AuthContext'
 
 
 function RegistrationPage() {
@@ -24,6 +26,17 @@ function RegistrationPage() {
   const [ageError, setAgeError] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [matchMessage, setMatchMessage] = useState('');
+
+  /* import here setAuthState function */
+  const { authState, setAuthState } = useContext(AuthContext);
+
+  useEffect(() => {
+    /* protects register page from authorized/active user. */
+    // if (authState){
+    //     navigate('/home')
+    // }
+  }, []);
+
 
   //event.target.value
   const handleConfirmPasswordChange = (event) => {
@@ -103,6 +116,7 @@ function RegistrationPage() {
     const salt = await bcrypt.genSalt(10);
     const encryptedPassword = await bcrypt.hash(password, salt);
 
+    /* Packs data to 'JSON' format to send via web */
     const data = {
       email: email,
       enc_password: encryptedPassword,
