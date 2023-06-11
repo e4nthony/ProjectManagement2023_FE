@@ -12,9 +12,18 @@ import defaultImage from '../pictures/default-image2.png';
 
 function GenerateSinglePost(post) {
     const { authState, setAuthState } = useContext(AuthContext);
-    // const [likeStatus, setLikeStatus] = useState(null); //todo pull info from db
+    //const [likeStatus, setLikeStatus] = useState(null); //todo pull info from db
     // const [followStatus, setFollowStatus] = useState(null); //todo pull info from db
 
+    let likeStatus = false;
+    function setLikeStatus() {
+        likeStatus = !likeStatus;
+    }
+
+    let followStatus = false;
+    function setFollowStatus() {
+        followStatus = !followStatus;
+    }
 
     /* --- Single Post Functions --- */
     function handlePlaceBid() {
@@ -27,11 +36,23 @@ function GenerateSinglePost(post) {
 
     function handleFollowClick() {
         console.log('HomePage: user attempts to follow the buyer.');
+        setFollowStatus();
+        let followBTN = document.getElementById('followButton')
+        if (followStatus)
+            followBTN.textContent = 'following';
+        else
+            followBTN.textContent = 'follow';
     }
 
     function handleLike() {
         console.log('HomePage: user attempts to like the post.');
-        setLikeStatus(likeStatus);
+        setLikeStatus();
+        let likeBTN = document.getElementById('likeButton');
+        if (likeStatus)
+            likeBTN.style.fill = "black";
+        else
+            likeBTN.style.fill = "red";
+
     }
 
     return (

@@ -398,10 +398,10 @@ button:active {
     transition: .2s;
 }
 
-.post button[id='likeButton']:focus {
-    fill: #fd1853;
+/*.post button[id='likeButton']:focus {
+    fill: #fd1853;*/
     /* animation: grosseur .2s ; linear */
-}
+/*}*/
 
 /* .post button[id='likeButton']:target {
     color: #fd1853;
