@@ -1,6 +1,7 @@
-import "./styles/Conversation.module.css";
+import './Conversation.css'
+import React from 'react';
 
-export default function Conversation() {
+export default function Conversation () {
     return (
         <div className="conversation.css">
             <img

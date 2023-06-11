@@ -28,7 +28,7 @@ function DropdownMenu() {
 
     function MyChats() {
         setIsOpen(false);
-        navigate('/MyChats');
+        navigate('/Messenger');
     }
 
     function logout() {
@@ -54,7 +54,7 @@ function DropdownMenu() {
             {isOpen && (
                 <ul className={styles.dropdownOptions}>
                     <li onClick={() => PersonalArea()}>Personal area</li>
-                    <li onClick={() => MyChats()}>My chats</li>
+                    <li onClick={() => MyChats()}>Messenger</li>
                     <li onClick={() => logout()}>Logout</li>
                 </ul>
             )}

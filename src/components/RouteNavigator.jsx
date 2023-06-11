@@ -19,6 +19,7 @@ import PersonalArea from './pages/PersonalArea';
 import EditInfo from './pages/EditInfo';
 import Confirmanddel from './pages/confirmanddelet';
 import CreatePost from './pages/CreatePost';
+import Messenger from './pages/Messenger/Messenger';
 
 function RouteNavigator() {
 
@@ -42,6 +43,7 @@ function RouteNavigator() {
                 <Route path='/personalarea/editInfo' element={<EditInfo />} />
                 <Route path='/personalarea/confirmanddelet' element={<Confirmanddel />} />
                 <Route path='/CreatePost' element={<CreatePost />} />
+                <Route path='/Messenger' element={<Messenger />} />
             </Routes>
 
             {/* <div className='devmessage'>
