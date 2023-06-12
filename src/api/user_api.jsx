@@ -62,6 +62,13 @@ async function get_all_users_mails() { // DEBUG ,TODO DELETE
     return api.get("/get_all_users_mails");
 };
 
+
+/* --- Chat API --- */
+
+async function get_convo(userAuthData)
+{
+    return api.get("conversation/get_convo",userAuthData);
+}
 export default {
     register,
     login,
@@ -73,4 +80,5 @@ export default {
     get_all_posts,
     get_all_posts_by_author,
     get_user_info_by_email,
+    get_convo,
 };

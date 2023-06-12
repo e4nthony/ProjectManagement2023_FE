@@ -17,6 +17,7 @@ function PersonalArea() {
   const [averageRating, setAverageRating] = useState(0); // State for average rating
   const [ratings, setRatings] = useState([4, 5, 3, 4]); // Example ratings array
 
+
   const handleRatingChange = (value) => {
     setRating(value);
     handleRatingSubmit(value);
@@ -63,6 +64,7 @@ function PersonalArea() {
     //let email1 = localStorage.getItem('activeUserEmail');
     console.log('pppp', email1.toString());
     const res = await authService.get_user_info_by_email(email1); //to do 
+    console.log(res.data.user_info._id);
     console.log(res);
     setEmail(res.data.user_info.email);
     setUserName(res.data.user_info.userName);

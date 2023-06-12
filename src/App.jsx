@@ -19,6 +19,7 @@ import authService from './services/authService';
 
 import { AuthContext } from './components/AuthContext';
 
+
 /* helps to print circular objects as string */
 import { inspect } from 'util'; //DEBUG
 
@@ -67,9 +68,7 @@ function App() {
             <React.StrictMode>
                 <AuthContext.Provider value={{ authState, setAuthState }}>
                     <BrowserRouter>
-
                         <RouteNavigator />
-
                     </BrowserRouter>
                 </AuthContext.Provider>
             </React.StrictMode>

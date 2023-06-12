@@ -151,10 +151,10 @@ async function get_user_info_by_email(userAuthData)
         res = await user_api.get_user_info_by_email(data);
         console.log('res(authService): ' + res.status);
         if (res.status === 200) {
-            console.log('user info in successfully: ' + email);
+            console.log('user info in successfully: ' + data.email);
             console.log('res is \n' + res);
         } else if (res.status === 400) {
-            console.log('user info  failed: ' + email);
+            console.log('user info  failed: ' + data.email);
         }
     } catch (err) {
         console.log('user info failed: ' + err);
@@ -186,6 +186,32 @@ async function edit_info(userAuthData) {
     }
     return false
 }
+// ****************Chat****************** //
+async function get_convo(userAuthData)
+{
+    console.log('authService: trying to get Converstion ...');
+
+    /* Pack data to 'JSON' format to send via web */
+    const data = {
+        userId: userAuthData
+    };
+
+    let res;
+    try {
+        res = await user_api.get_convo(data);
+        console.log('res(authService): ' + res.status);
+        if (res.status === 200) {
+            console.log('user convo is successfully: ' + data.userId);
+            console.log('res is \n' + res);
+            console.log(res);
+        } else if (res.status === 400) {
+            console.log('user convo  failed: ' + data.userId);
+        }
+    } catch (err) {
+        console.log('user info failed: ' + err);
+    }
+    return res;   
+}
 
 
 export default {
@@ -196,6 +222,7 @@ export default {
     edit_info,
     deletemyaccount,
     get_user_info_by_email,
+    get_convo,
     
     // getAllUsers,
 };
