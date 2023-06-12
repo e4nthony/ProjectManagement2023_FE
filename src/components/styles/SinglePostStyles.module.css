@@ -107,7 +107,7 @@
 
 .post div[id='tittle'] {
     margin-left: 20px;
-    width: 370px;
+    width: 220px;
 
 
     overflow: hidden;
@@ -120,6 +120,19 @@
     /* border: 1px solid lightgray; */
 }
 
+.post div[id='time']{
+    display: flex;
+    font-size: 20px;
+    margin-bottom: -20px;
+}
+
+.post div[id='timer']{
+    display: flex;
+    font-size: 15px;
+    margin-right: 15px;
+    margin-left: 4px;
+    margin-bottom: -20px;
+}
 
 /* Place Bid Button */
 .post button[id='placeBidButton'] {
@@ -371,6 +384,53 @@ button:active {
     margin-left: 15px;
 
     /* border: 1px solid lightgray; */
+}
+
+.post div[id='shareButton'] {
+    margin-left: 15px;
+    /* border: 1px solid lightgray; */
+}
+
+.post div[id='copiedText'] {
+    margin-left: 5px;
+    display: none;
+    align-items: center;
+    appearance: none;
+    background-image: none;
+    border: none;
+    border-radius: none;
+    box-shadow: none;
+    box-sizing: none;
+    color:#004e89;
+    font-weight: bold;
+    cursor:auto;
+    font-family: "JetBrains Mono", monospace;
+    justify-content: center;
+    line-height: 0;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 3px;
+    padding-right: 10px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+    white-space: nowrap;
+    will-change: none,none;
+    font-size: 15px;
+}
+
+.post div[type='authorButtons']:hover {
+    box-shadow: none;
+    transform: none;
+}
+
+.post div[type='authorButtons']:active {
+    box-shadow: none;
+    transform: none;
 }
 
 /* .post div[id='likeButton'] {

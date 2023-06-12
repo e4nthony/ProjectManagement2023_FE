@@ -21,7 +21,7 @@ function CreatePost() {
         title: Yup.string().required("This field can't be empty !"),
         postText: Yup.string().required("This field can't be empty !"),
         postMinPrice: Yup.number().required("This field can't be empty !"),
-        postMaxTime: Yup.number().required("This field can't be empty !"),
+        postMaxTime: Yup.date().required("This field can't be empty !").min(new Date(), 'Expiration time must be in the future !'),
         //postImage: Yup.string().required("his field can't be empty !"),
     });
 
@@ -37,8 +37,9 @@ function CreatePost() {
             post_tittle: data.title,
             post_text: data.postText,
             starting_price: data.postMinPrice,
-            timer: data.postMaxTime,
-            starting_time: Date.now(),
+            //timer: data.postMaxTime,
+            //starting_time: Date(),
+            expirationTime: data.postMaxTime,
             author_email: localStorage.getItem("activeUserEmail")
         };
         async function temp() {
@@ -88,9 +89,10 @@ function CreatePost() {
                         name='postMinPrice'
                         placeholder='Enter your price in USD..'
                     />
-                    <label>Maximum time: </label>
+                    <label>Expiration date: </label>
                     <ErrorMessage name='postMaxTime' component='span' />
                     <Field
+                        type='datetime-local'
                         autocomplete='off'
                         id='createPostFields'
                         name='postMaxTime'
