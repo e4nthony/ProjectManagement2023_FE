@@ -3,7 +3,7 @@
 import Message from '../../message/Message';
 import Conversation from '../../Conversation/Conversation'
 import './Messenger.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ChatOnline from '../../chatOnline/ChatOnline';
 import authService from '../../../services/authService';
 import { async } from 'q';
@@ -17,6 +17,7 @@ import { async } from 'q';
     const [currentChat, setCurrentChat] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
+    const scrollRef = useRef();
 
     useEffect(() => {
         const getConversations = async () => {
@@ -63,6 +64,9 @@ import { async } from 'q';
         console.log(err);
     }
 };
+    useEffect(() => { 
+        scrollRef.current.scrollIntoView({behavior: 'smooth'});
+    }, [messages]);
 
     return (
         <div className="messenger">
@@ -82,7 +86,9 @@ import { async } from 'q';
 ? (
                     <><div className="chatBoxTop">
                         {messages.map((m) => (
-                            <Message message={m} own={m.sender === localStorage.getItem('id')} />
+                            <div ref={scrollRef}>
+                                <Message message={m} own={m.sender === localStorage.getItem('id')} />
+                            </div>
                         ))}
 
                         </div><div className="chatBoxBottom">
