@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import authService from '../../services/authService';
-import './Conversation.css'
+import './Conversation.module.css'
 import React, { useEffect, useState } from 'react';
 
 export default function Conversation ({ conversation, currentUser }) {

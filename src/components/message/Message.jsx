@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import './message.css';
+import './message.module.css';
 import React from 'react';
 // import { format } from 'timeago'
 

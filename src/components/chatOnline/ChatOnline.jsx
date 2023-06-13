@@ -1,4 +1,4 @@
-import './chatOnline.css'
+import './chatOnline.module.css'
 import React from 'react';
 
 function ChatOnline () {
