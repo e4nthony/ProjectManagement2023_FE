@@ -65,45 +65,6 @@ import { io } from 'socket.io-client';
             text: newMessage,
             conversationId: currentChat?._id
         };
-<<<<<<< HEAD
-
-        // const receiverId = currentChat.members.find(
-        //     (member) => member !== user._id
-        // );
-
-        // socket.current.emit('sendMessage', {
-        //     senderId: user._id,
-        //     receiverId,
-        //     text: newMessage,
-        // });
-
-        try {
-            const res = await authService.new_message(messages);
-            setMessages([...messages, res.data]);
-            setNewMessage('')
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
-    useEffect(() => {
-        socket.current.on('getMessage', data => {
-            setArrivalMessage({
-                sender: data.senderId,
-                text: data.text,
-                createdAt: Date.now(),
-            })
-        })
-    },[]);
-
-    
-
-
-
-    // useEffect(() => { 
-    //     scrollRef.current?.scrollIntoView({behavior: 'smooth'});
-    // }, [messages]);
-=======
     try {
         const res = await authService.new_message(message);
         setMessages([...messages, res.data]);
@@ -112,7 +73,6 @@ import { io } from 'socket.io-client';
         console.log(err);
     }
 };
->>>>>>> 25c0e52bf39e5e41723fda410c9decb8c01ba2b7
 
     return (
         <div className={style.messenger}>
