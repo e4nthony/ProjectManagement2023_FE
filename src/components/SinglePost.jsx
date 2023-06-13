@@ -45,7 +45,7 @@ function GenerateSinglePost(post) {
     function handleFollowClick() {
         console.log('HomePage: user attempts to follow the buyer.');
         setFollowStatus();
-        let followBTN = document.getElementById('followButton')
+        let followBTN = document.getElementById(post._id + 'followButton')
         if (followStatus)
             followBTN.textContent = 'following';
         else
@@ -55,7 +55,7 @@ function GenerateSinglePost(post) {
     function handleLike() {
         console.log('HomePage: user attempts to like the post.');
         setLikeStatus();
-        let likeBTN = document.getElementById('likeButton');
+        let likeBTN = document.getElementById(post._id + 'likeButton');
         if (likeStatus)
             likeBTN.style.fill = "black";
         else
@@ -64,11 +64,11 @@ function GenerateSinglePost(post) {
 
     function handleShare() {
         console.log('HomePage: user attempts to share the post.');
-        const url = 'tempURL'; // need to change it to the right url when every post will get unique url
-        navigator.clipboard.writeText(url);
-        document.getElementById('copiedText').style.display = 'flex';
+
+        navigator.clipboard.writeText(document.URL + '/post/' + post._id);
+        document.getElementById(post._id + 'copiedText').style.display = 'flex';
         setTimeout(function () {
-            document.getElementById('copiedText').style.display = 'none';
+            document.getElementById(post._id + 'copiedText').style.display = 'none';
         }, 1250);
     }
 
@@ -144,7 +144,7 @@ function GenerateSinglePost(post) {
             className={styles.post}
             onClick={() => {
                 console.log('post id: ' + post._id + ' has been clicked')
-            }} 
+            }}
             id={post._id}>
 
             <div id='header'>
@@ -191,16 +191,16 @@ function GenerateSinglePost(post) {
                     {/* <div id='timer'>{ }</div> */}
 
                     {authState && <div id='authorButtons'>
-                        <div type='authorButtons' id='followButton' onClick={handleFollowClick}>follow</div>
-                        <div type='authorButtons' id='messageButton' onClick={handleMessageClick}>start chat</div>
-                        <div type='authorButtons' id='shareButton' onClick={handleShare}>Share</div>
-                        <div type='authorButtons' id='copiedText'>Copied!</div>
+                        <div type='authorButtons' class='followButton' id={post._id + 'followButton'} onClick={handleFollowClick}>follow</div>
+                        <div type='authorButtons' class='messageButton' id={post._id + 'messageButton'} onClick={handleMessageClick}>start chat</div>
+                        <div type='authorButtons' class='shareButton' id={post._id + 'shareButton'} onClick={handleShare}>Share</div>
+                        <div type='authorButtons' class='copiedText' id={post._id + 'copiedText'}>Copied!</div>
                     </div>}
 
                 </div>
 
                 {/* <div type='button' id='likeButton' onClick={handleLike}>like</div> */}
-                {authState && <button id='likeButton' onClick={handleLike}>
+                {authState && <button class='likeButton' id={post._id + 'likeButton'} onClick={handleLike}>
                     <svg class="icon" width="30" height="30" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"></path></svg>
                 </button>}
 
