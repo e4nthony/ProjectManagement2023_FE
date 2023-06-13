@@ -6,8 +6,7 @@ import './Messenger.css';
 import React, { useState, useEffect, useRef } from 'react';
 import ChatOnline from '../../chatOnline/ChatOnline';
 import authService from '../../../services/authService';
-import { async } from 'q';
-
+import { io } from 'socket.io-client';
 
 
     function Messenger () {
@@ -17,8 +16,17 @@ import { async } from 'q';
     const [currentChat, setCurrentChat] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
+<<<<<<< HEAD
     const scrollRef = useRef();
+=======
+    const socket = useRef(io('ws://localhost:8900'));
 
+
+>>>>>>> 546592c1d742d081fd5703a16b0552f1d093fe4c
+
+   useEffect(() => {
+    socket.current.emit('addUser', localStorage.getItem('id'));
+   }, [user]);
     useEffect(() => {
         const getConversations = async () => {
             try {
