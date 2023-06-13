@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 /* eslint-disable */
 import Message from '../../message/Message';
 import Conversation from '../../Conversation/Conversation'
 import './Messenger.module.css';
+=======
+/* eslint-disable  */
+
+import Message from '../../message/Message';
+import Conversation from '../../Conversation/Conversation'
+import style from './Messenger.module.css';
+>>>>>>> 8f09bbe1ce6512c9197c78bc1388d9214569b796
 import React, { useState, useEffect, useRef } from 'react';
 import ChatOnline from '../../chatOnline/ChatOnline';
 import authService from '../../../services/authService';
@@ -9,7 +17,11 @@ import { io } from 'socket.io-client';
 
 
 
+<<<<<<< HEAD
 function Messenger() {
+=======
+    function Messenger () {
+>>>>>>> 8f09bbe1ce6512c9197c78bc1388d9214569b796
     const [conversation, setConversation] = useState([]);
     const email1 = localStorage.getItem('activeUserEmail');
     const [user, setUser] = useState(null);
@@ -92,10 +104,10 @@ function Messenger() {
     // }, [messages]);
 
     return (
-        <div className="messenger">
-            <div className="chatMenu">
-                <div className="chetMenuWrapper">
-                    <input placeholder="Search for friends" className="chatMenuInput" />
+        <div className={style.messenger}>
+            <div className={style.chatMenu}>
+                <div className={style.chetMenuWrapper}>
+                    <input placeholder="Search for friends" className={style.chatMenuInput} />
                     {conversation.map(c => (
                         <div onClick={() => setCurrentChat(c)}>
                             <Conversation conversation={c} currentUser={user} key={user._id} />
@@ -103,6 +115,7 @@ function Messenger() {
                     ))}
                 </div>
             </div>
+<<<<<<< HEAD
             <div className="chatBox">
                 <div className="chatBoxWrapper">
                     {!currentChat
@@ -131,6 +144,35 @@ function Messenger() {
             <div className="chatOnline"></div>
             <div className="chatOnlineWrapper">
                 <ChatOnline />
+=======
+            <div className={style.chatBox}>
+                <div
+                className={style.chatBoxWrapper}>
+                    { !currentChat
+? (
+                    <><div className={style.chatBoxTop}>
+                        {messages.map((m) => (
+                            <Message message={m} own={m.sender === localStorage.getItem('id')} />
+                        ))}
+
+                        </div><div className={style.chatBoxBottom}>
+                                <textarea className={style.chatMessageInput}
+                                placeholder='write something ...'
+                                onChange={(e) => setNewMessage(e.target.value) }
+                                value={newMessage}
+                                ></textarea>
+                                <button className={style.chatSumbitButton} onClick={handleSubmit}>Send</button>
+                            </div></>
+                )
+: (
+                    <span className={style.noConversationtext}>Open conversation to start a chat.</span>
+                    )}
+                </div>
+            </div>
+            <div className={style.chatOnline}></div>
+            <div className={style.chatOnlineWrapper}>
+                <ChatOnline/>
+>>>>>>> 8f09bbe1ce6512c9197c78bc1388d9214569b796
             </div>
         </div>
     )
