@@ -79,6 +79,10 @@ async function get_user_info_by_id(userAuthData) {
     return api.post("user/get_user_info_by_id", userAuthData);
 }
 
+async function new_message(userAuthData) {
+    return api.post("message/new_message", userAuthData);
+}
+
 export default {
     register,
     login,
@@ -93,4 +97,5 @@ export default {
     get_convo,
     get_user_info_by_id,
     get_message,
+    new_message,
 };

@@ -264,6 +264,32 @@ async function get_message(userAuthData)
     return res;   
 }
 
+async function new_message(userAuthData)
+{
+    console.log('authService: trying to new message ...');
+
+    /* Pack data to 'JSON' format to send via web */
+    const data = {
+        conversationId: userAuthData
+    };
+
+    let res;
+    try {
+        res = await user_api.new_message(data);
+        console.log('res(authService): ' + res.status);
+        if (res.status === 200) {
+            console.log('user new message is successfully: ' + data.conversationId);
+            console.log('res is \n' + res);
+            console.log(res);
+        } else if (res.status === 400) {
+            console.log('user new message  failed: ' + data.conversationId);
+        }
+    } catch (err) {
+        console.log('user new message is  failed: ' + err);
+    }
+    return res;   
+}
+
 export default {
     register,
     login,
@@ -274,7 +300,8 @@ export default {
     get_user_info_by_email,
     get_convo,
     get_user_info_by_id,
-    get_message
+    get_message,
+    new_message,
     
     // getAllUsers,
 };
