@@ -21,30 +21,31 @@ function CreatePost() {
         title: Yup.string().required("This field can't be empty !"),
         postText: Yup.string().required("This field can't be empty !"),
         postMinPrice: Yup.number().required("This field can't be empty !"),
-        postMaxTime: Yup.number().required("This field can't be empty !"),
+        postMaxTime: Yup.date().required("This field can't be empty !").min(new Date(), 'Expiration time must be in the future !'),
         //postImage: Yup.string().required("his field can't be empty !"),
     });
 
     const onSubmit = (data) => {
         //here you can see how the data orgenized after a post has been created
         // we need to send 'data' var to the server and save the post in our database
-        console.log('title: ' + data.title);
-        console.log('postText: ' + data.postText);
-        console.log('postMinPrice: ' + data.postMinPrice);
-        console.log('postMaxTime: ' + data.postMaxTime);
-        //console.log('postImage: ' + data.postImage);
-        const post = {
+
+        var now = new Date().getTime();
+
+        const new_post_data = {
             post_tittle: data.title,
             post_text: data.postText,
             starting_price: data.postMinPrice,
-            timer: data.postMaxTime,
-            starting_time: Date.now(),
+            publication_time: now,
+            expiration_time: data.postMaxTime,
             author_email: localStorage.getItem("activeUserEmail")
         };
+
+        console.log('New Post Data: ' +  JSON.stringify(new_post_data, null, 2));
+
         async function temp() {
 
             try {
-                const res = await user_api.create_post(post);
+                const res = await user_api.create_post(new_post_data);
                 if (res.status === 200) {
                     alert(res.data.msg);
                     navigate("/");
@@ -88,9 +89,10 @@ function CreatePost() {
                         name='postMinPrice'
                         placeholder='Enter your price in USD..'
                     />
-                    <label>Maximum time: </label>
+                    <label>Expiration date: </label>
                     <ErrorMessage name='postMaxTime' component='span' />
                     <Field
+                        type='datetime-local'
                         autocomplete='off'
                         id='createPostFields'
                         name='postMaxTime'

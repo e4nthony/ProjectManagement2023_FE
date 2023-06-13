@@ -1,86 +1,95 @@
 /* eslint-disable */
 /* the line above disables eslint check for this file (temporarily) todo:delete */
 
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import { useNavigate } from 'react-router-dom';
+
 import styles from './styles/HomeStyles.module.css';
+
 import logo from '../../pictures/BidZone-logo.png';
 
+import postService from '../../services/postService';
+
+import { AuthContext } from '../AuthContext';
+
+/* helps to print circular objects as string */
+import { inspect } from 'util'; //DEBUG
+
+import GenerateSinglePost from '../SinglePost';
+
+
 function HomePage() {
-    // const navigate = useNavigate();
-    // function handleClick() {
-    //     navigate('/login');
-    // }
+    // const [feedMode, setFeedMode] = useState('explore');
+    const [feedData, setFeedData] = useState([]);
+    const { authState, setAuthState } = useContext(AuthContext);
+
+
+
+    async function reloadFeed(feedMode = 'explore') {
+        console.log('HomePage: reloadFeed started. feedMode:' + feedMode) //DEBUG
+
+
+        if (feedMode == 'explore') {
+            try {
+                const res = await postService.get_all_posts();
+                console.log('HomePage: return from postService.get_all_posts(): ' + inspect(res)) //DEBUG
+
+                setFeedData(res.data);
+            } catch (err) {
+                console.log('HomePage: ERROR: ' + err);
+            }
+        }
+        else if (feedMode == 'following') {
+
+
+
+            // DEBUG dev todo delete
+            const post1 = {
+                title: 'post1Title',
+                postText: 'post1Text',
+                postMinPrice: 'post1minPrice',
+                postMaxTime: 'post1maxTime',
+                postImage: 'post1Image',
+                username: 'user1',
+                //id - not to display
+            };
+            const post2 = {
+                title: 'post2Title',
+                postText: 'post2Text',
+                postMinPrice: 'post2minPrice',
+                postMaxTime: 'post2maxTime',
+                postImage: 'post2Image',
+                username: 'user2',
+                //id - not to display
+            };
+            setFeedData([post1, post2]);
+
+
+        }
+    }
 
     function handleExploreClick() {
-        console.log('\'Explore\' feed selected')
+        console.log('HomePage: \'Explore\' feed selected');
+        // setFeedMode('explore')
+        reloadFeed('explore');
     }
 
     function handleFollowingClick() {
-        console.log('\'Following\' feed selected')
+        console.log('HomePage: \'Following\' feed selected');
+        // setFeedMode('following')
+        reloadFeed('following');
     }
 
-
-
-
-
-    // dev todo delete
-    const post1 = {
-        title: 'post1Title',
-        postText: 'post1Text',
-        postMinPrice: 'post1minPrice',
-        postMaxTime: 'post1maxTime',
-        postImage: 'post1Image',
-        username: 'user1',
-        //id - not to display
-    };
-    const post2 = {
-        title: 'post2Title',
-        postText: 'post2Text',
-        postMinPrice: 'post2minPrice',
-        postMaxTime: 'post2maxTime',
-        postImage: 'post2Image',
-        username: 'user2',
-        //id - not to display
-    };
-    const posts = [post1, post2];
-
-
-
-
-
-
-
-
-
-    function GenerateSinglePost(post) {
-        return (
-            <div id='aPost'
-                className={styles.post}
-                onClick={() => {
-                    console.log(post.title + ' has been clicked')
-                }} >
-
-                <div id='title'> {post.title} </div>
-                <div id='seller'>{post.username}</div>
-                <div id='body'>{post.postText}</div>
-                <div id='pic'>{post.postImage}</div>
-                <div id='priceANDtimer'>
-                    <div id='maxBid'>{post.postMinPrice}</div>
-                    <div id='timer'>{post.postMaxTime}</div>
-                </div>
-                <div id='index'></div>
-
-            </div>
-        );
-    }
+    useEffect(() => {
+        reloadFeed();
+    }, []);
 
     return (
         <div>
 
             {/* --- Logo --- */}
-            <div id='siteLogo'>
+            <div id='siteLogo' className={styles.siteLogo} >
                 <img src={logo} alt='site_logo' />
             </div>
 
@@ -88,16 +97,16 @@ function HomePage() {
             <div className={styles.postsList}>
 
                 {/* --- Buttons --- */}
-                <div id='feedMode'>
-                    <div id='explore' onClick={handleExploreClick}>Explore</div>
+                {authState && <div id='feedMode'>
+                    <div id='exploreButton' onClick={handleExploreClick}>Explore</div>
 
-                    <div id='following' onClick={handleFollowingClick}>Following</div>
-                </div>
+                    <div id='followingButton' onClick={handleFollowingClick}>Following</div>
+                </div>}
 
                 {/* --- Posts List --- */}
-                <div>
-                    {posts.map(GenerateSinglePost)}
-                </div>
+                <ul>
+                    {feedData.map(GenerateSinglePost)}
+                </ul>
 
             </div>
 

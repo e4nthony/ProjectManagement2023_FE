@@ -39,7 +39,8 @@ function RouteNavigator() {
                 <Route path='/about' element={<About />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
-                <Route path='/personalarea' element={<PersonalArea />} />
+                {/* <Route path='/personalarea' element={<PersonalArea />} /> */}
+                <Route path='/user/:userEmail' element={<PersonalArea />} />
                 <Route path='/personalarea/editInfo' element={<EditInfo />} />
                 <Route path='/personalarea/confirmanddelet' element={<Confirmanddel />} />
                 <Route path='/CreatePost' element={<CreatePost />} />

@@ -5,6 +5,9 @@ import { async } from 'q';
 import api from './api';
 
 
+/* --- --- This File Contains API That User Allowed To Interact With --- --- */
+
+
 /* --- This is Authentication API --- */
 
 async function register(userJson) {
@@ -33,6 +36,14 @@ async function edit_info(userAuthData) {
     return api.post("/user/edit_info", userAuthData);
 };
 
+/* --- This is User API --- */
+async function get_user_info_by_email(userAuthData) {
+    return api.post("user/get_user_info_by_email", userAuthData);
+}
+
+async function follow(data) {
+    return api.post("/user/follow", data);
+};
 
 /* --- This is Post API --- */
 
@@ -41,23 +52,23 @@ async function create_post(userJson) {
 };
 
 async function get_all_posts() {
-    return api.post("post/get_all_posts");
+    return api.get("post/get_all_posts");
 };
 
 async function get_all_posts_by_author(userJson) {
     return api.post("post/get_all_posts_by_author", userJson);
 };
 
-/* --- This is User API --- */
-async function get_user_info_by_email(userAuthData) {
-    return api.post("user/get_user_info_by_email", userAuthData);
-}
+async function get_post_by_id(userJson) {
+    return api.post("post/get_post_by_id", userJson);
+};
 
 // async function edit_info(userAuthData) {
 //     return api.post("user/edit_info", userAuthData);   
 // };
 
 /* --- DEBUG API --- */
+
 async function get_all_users_mails() { // DEBUG ,TODO DELETE
     return api.get("/get_all_users_mails");
 };
@@ -84,12 +95,20 @@ async function new_message(userAuthData) {
 }
 
 export default {
+
+    /* Auth */
     register,
     login,
     deleteaccount,
     get_all_users_mails,  // DEBUG ,TODO DELETE
     authToken,
+
+    /* User Info */
     edit_info,
+    get_user_info_by_email,
+    follow,
+
+    /* Posts */
     create_post,
     get_all_posts,
     get_all_posts_by_author,
@@ -98,4 +117,5 @@ export default {
     get_user_info_by_id,
     get_message,
     new_message,
+    get_post_by_id,
 };

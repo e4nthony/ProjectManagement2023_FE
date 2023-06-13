@@ -11,6 +11,8 @@ import { inspect } from 'util'; //DEBUG
 function DropdownMenu() {
     const navigate = useNavigate();
 
+    const activeUserEmail = localStorage.getItem('activeUserEmail');
+
     const [isOpen, setIsOpen] = useState(false);
 
     const { authState, setAuthState } = useContext(AuthContext);
@@ -23,7 +25,9 @@ function DropdownMenu() {
 
     function PersonalArea() {
         setIsOpen(false);
-        navigate('/PersonalArea');
+        const navString = '/user/' + activeUserEmail
+
+        navigate(navString);
     }
 
     function MyChats() {
@@ -37,7 +41,7 @@ function DropdownMenu() {
         // localStorage.removeItem('accessToken');
         setAuthState(false);
         setIsOpen(false);
-        navigate('/login');
+        navigate('/');
     }
 
     return (
