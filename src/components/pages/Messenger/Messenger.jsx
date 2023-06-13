@@ -1,12 +1,13 @@
-/* eslint-disable react/jsx-key */
-/* eslint-disable no-unused-vars */
+/* eslint-disable  */
+
 import Message from '../../message/Message';
 import Conversation from '../../Conversation/Conversation'
-import './Messenger.css';
+import style from './Messenger.module.css';
 import React, { useState, useEffect, useRef } from 'react';
 import ChatOnline from '../../chatOnline/ChatOnline';
 import authService from '../../../services/authService';
 import { io } from 'socket.io-client';
+
 
 
     function Messenger () {
@@ -70,10 +71,10 @@ import { io } from 'socket.io-client';
 };
 
     return (
-        <div className="messenger">
-            <div className="chatMenu">
-                <div className="chetMenuWrapper">
-                    <input placeholder="Search for friends" className="chatMenuInput" />
+        <div className={style.messenger}>
+            <div className={style.chatMenu}>
+                <div className={style.chetMenuWrapper}>
+                    <input placeholder="Search for friends" className={style.chatMenuInput} />
                     {conversation.map(c => (
                         <div onClick={() => setCurrentChat(c)}>
                         <Conversation conversation={c} currentUser={user} key={user._id}/>
@@ -81,31 +82,32 @@ import { io } from 'socket.io-client';
                     ))}
                 </div>
             </div>
-            <div className="chatBox">
-                <div className="chatBoxWrapper">
+            <div className={style.chatBox}>
+                <div
+                className={style.chatBoxWrapper}>
                     { !currentChat
 ? (
-                    <><div className="chatBoxTop">
+                    <><div className={style.chatBoxTop}>
                         {messages.map((m) => (
                             <Message message={m} own={m.sender === localStorage.getItem('id')} />
                         ))}
 
-                        </div><div className="chatBoxBottom">
-                                <textarea className='chatMessageInput'
+                        </div><div className={style.chatBoxBottom}>
+                                <textarea className={style.chatMessageInput}
                                 placeholder='write something ...'
                                 onChange={(e) => setNewMessage(e.target.value) }
                                 value={newMessage}
                                 ></textarea>
-                                <button className='chatSumbitButton' onClick={handleSubmit}>Send</button>
+                                <button className={style.chatSumbitButton} onClick={handleSubmit}>Send</button>
                             </div></>
                 )
 : (
-                    <span className='noConversationtext'>Open conversation to start a chat.</span>
+                    <span className={style.noConversationtext}>Open conversation to start a chat.</span>
                     )}
                 </div>
             </div>
-            <div className="chatOnline"></div>
-            <div className="chatOnlineWrapper">
+            <div className={style.chatOnline}></div>
+            <div className={style.chatOnlineWrapper}>
                 <ChatOnline/>
             </div>
         </div>
