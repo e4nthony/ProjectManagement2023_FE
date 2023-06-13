@@ -49,6 +49,14 @@ async function isfollow(data) {
     return api.post("/user/isfollow", data);
 };
 
+async function like(data) {
+    return api.post("/user/like", data);
+};
+
+async function isliked(data) {
+    return api.post("/user/isliked", data);
+};
+
 /* --- This is Post API --- */
 
 async function create_post(userJson) {
@@ -92,6 +100,8 @@ export default {
     get_user_info_by_email,
     follow,
     isfollow,
+    like,
+    isliked,
 
     /* Posts */
     create_post,
