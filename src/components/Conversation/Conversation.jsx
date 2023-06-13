@@ -2,6 +2,7 @@
 import authService from '../../services/authService';
 import style from './Conversation.module.css'
 import React, { useEffect, useState } from 'react';
+import picture from '../../pictures/profilePic.png'
 
 export default function Conversation ({ conversation, currentUser }) {
     const [user, setUser] = useState(null);
@@ -24,7 +25,7 @@ export default function Conversation ({ conversation, currentUser }) {
         <div className={style.conversation}>
             <img
               className={style.conversationImg}
-              src='./profilePic.png'
+              src={picture}
               alt=""
             />
             <span className={style.conversationName}>{user && user.userName}</span>

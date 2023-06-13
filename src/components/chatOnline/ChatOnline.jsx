@@ -1,5 +1,6 @@
 import style from './chatOnline.module.css'
 import React from 'react';
+import picture from '../../pictures/profilePic.png';
 
 function ChatOnline () {
     return (
@@ -7,7 +8,7 @@ function ChatOnline () {
             <div className={style.chatOnlineFriend}>
             <div className={style.chatOnlineImgContainger}>
                 <img className={style.chatOnlineImg}
-                src='../../../pictures./profilePic.png'
+                src={picture}
                 alt=''/>
                 <div className={style.chatOnlineBadge}></div>
             </div>

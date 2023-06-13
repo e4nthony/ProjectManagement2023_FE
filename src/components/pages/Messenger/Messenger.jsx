@@ -32,9 +32,9 @@ import { io } from 'socket.io-client';
         const getConversations = async () => {
             try {
                 const res_user = await authService.get_user_info_by_email(email1);
-                console.log(res_user);
+                console.log('messenger:res_user',res_user);
                 setUser(res_user.data.user_info);
-                console.log(user);
+                console.log('messenger:user',user);
                 console.log('start to get convo');
                 const res = await authService.get_convo(localStorage.getItem('id'));
                 console.log(res)
@@ -77,14 +77,14 @@ import { io } from 'socket.io-client';
     return (
         <div className={style.messenger}>
             <div className={style.chatMenu}>
-                <div className={style.chetMenuWrapper}>
+                {/* <div className={style.chetMenuWrapper}>
                     <input placeholder="Search for friends" className={style.chatMenuInput} />
                     {conversation.map(c => (
                         <div onClick={() => setCurrentChat(c)}>
                             <Conversation conversation={c} currentUser={user} key={user._id} />
                         </div>
                     ))}
-                </div>
+                </div> */}
             </div>
             <div className={style.chatBox}>
                 <div
