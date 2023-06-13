@@ -75,23 +75,23 @@ function PersonalArea() {
       console.error('Error saving rating:', error);
     }
   };
-
-  let my_followers = [];
-  function set_my_followers(data) {
-    my_followers = data;
-  }
-  function get_my_followers() {
-    return my_followers;
-  }
-
-  let i_following_to = [];
-  function set_i_following_to(data) {
-    i_following_to = data;
-  }
-  function get_i_following_to() {
-    return i_following_to;
-  }
-
+  /*
+    let my_followers = [];
+    function set_my_followers(data) {
+      my_followers = data;
+    }
+    function get_my_followers() {
+      return my_followers;
+    }
+  
+    let i_following_to = [];
+    function set_i_following_to(data) {
+      i_following_to = data;
+    }
+    function get_i_following_to() {
+      return i_following_to;
+    }
+  */
   async function getInfo() {
     let email1;
     email1 = userEmail.toString()
@@ -99,10 +99,10 @@ function PersonalArea() {
     //let email1 = localStorage.getItem('activeUserEmail');
     console.log('calling authService.get_user_info_by_email()', email1.toString());
     const res = await authService.get_user_info_by_email(email1); //to do 
-
-    set_my_followers(res.data.user_info.my_followers);
-    set_i_following_to(res.data.user_info.i_following_to);
-
+    /*
+        set_my_followers(res.data.user_info.my_followers);
+        set_i_following_to(res.data.user_info.i_following_to);
+    */
     const statusCode = (await res).status;
     if (statusCode != 200) {
       /* TODO show message: servers busy, please try later */
@@ -217,9 +217,6 @@ function PersonalArea() {
         <div className="following-followers-likedPosts">
           <div className='following'>
             <h3>Following</h3>
-            <ul>
-              {i_following_to.map(showFollower)}
-            </ul>
           </div>
           <div className="likedPosts">
             <h3>Liked posts</h3>
@@ -227,9 +224,6 @@ function PersonalArea() {
           </div>
           <div className='followers'>
             <h3>Followers</h3>
-            <ul>
-              {my_followers.map(showFollower)}
-            </ul>
           </div>
 
         </div>
