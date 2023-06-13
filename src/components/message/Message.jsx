@@ -1,9 +1,11 @@
+/* eslint-disable react/prop-types */
 import './message.css';
 import React from 'react';
+import { format } from 'timeago.js'
 
 
 // eslint-disable-next-line react/prop-types
-export default function Message ({ own }) {
+export default function Message ({ message, own }) {
     return (
         <div className= { own ? 'message own' : 'message' }>
             <div className="messageTop">
@@ -12,9 +14,11 @@ export default function Message ({ own }) {
                 src="../../logo.svg"
                 alt=""
                 />
-                <p className="messageTex">Hello this is a message</p>
+                <p className="messageTex">
+                    {message.text}
+                </p>
             </div>
-            <div className="messageBottom">1 hour ago</div>
+            <div className="messageBottom">{format(message.createdAt)}</div>
         </div>
     )
 }
