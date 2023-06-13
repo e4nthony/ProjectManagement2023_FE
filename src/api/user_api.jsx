@@ -45,6 +45,10 @@ async function follow(data) {
     return api.post("/user/follow", data);
 };
 
+async function isfollow(data) {
+    return api.post("/user/isfollow", data);
+};
+
 /* --- This is Post API --- */
 
 async function create_post(userJson) {
@@ -87,6 +91,7 @@ export default {
     edit_info,
     get_user_info_by_email,
     follow,
+    isfollow,
 
     /* Posts */
     create_post,

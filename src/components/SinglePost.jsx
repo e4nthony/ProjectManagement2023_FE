@@ -29,8 +29,11 @@ function GenerateSinglePost(post) {
     }
 
     let followStatus = false;
-    function setFollowStatus() {
-        followStatus = !followStatus;
+    function setFollowStatus(flag) {
+        followStatus = flag;
+    }
+    function getFollowStatus() {
+        return followStatus;
     }
 
     /* --- Single Post Functions --- */
@@ -40,6 +43,33 @@ function GenerateSinglePost(post) {
 
     function handleMessageClick() {
         console.log('HomePage: user attempts to start chat with buyer.');
+    }
+
+    async function isfollow() {
+        const data = {
+            /* reads values from fields */
+            user: localStorage.getItem('activeUserEmail'),
+            author: post.author_email,
+        };
+        try {
+            const res = await authService.isfollow(data);
+            if (res.status === 200) {
+                if (res.data.flag === true) {
+                    setFollowStatus(true);
+                    console.log(data.user + ' is following ' + data.author)
+                    return 'following';
+                }
+                else {
+                    console.log(data.user + ' is not following ' + data.author)
+                    setFollowStatus(false);
+                    return 'follow';
+                }
+            }
+        } catch (err) {
+            console.log('failed to follow: ' + err);
+            return 'follow';
+        }
+        return 'follow';
     }
 
     async function handleFollowClick() {
@@ -62,12 +92,16 @@ function GenerateSinglePost(post) {
                 return;
             }
         } catch (err) {
-            console.log('failed to log in user: ' + err);
+            console.log('failed to follow: ' + err);
         }
+        if (getFollowStatus())
+            setFollowStatus(false);
+        else
+            setFollowStatus(true);
 
-        setFollowStatus();
         let followBTN = document.getElementById(post._id + 'followButton')
-        if (followStatus)
+
+        if (getFollowStatus())
             followBTN.textContent = 'following';
         else
             followBTN.textContent = 'follow';
@@ -159,6 +193,22 @@ function GenerateSinglePost(post) {
         // navigate('/postinfo');
     }
 
+    async function temp() {
+        try {
+            const str = await isfollow();
+            console.log('str:' + str);
+            if (!str || str === 'follow')
+                setFollowStatus(false);
+            else
+                setFollowStatus(true);
+            if (getFollowStatus())
+                document.getElementById(post._id + 'followButton').textContent = 'following';
+            else
+                document.getElementById(post._id + 'followButton').textContent = 'follow';
+        } catch { }
+    };
+
+    temp();
 
     return (
         <div

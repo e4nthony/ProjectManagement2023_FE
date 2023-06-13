@@ -183,10 +183,25 @@ async function edit_info(userAuthData) {
     return false
 }
 
-async function follow(data) {
-    console.log('authService: trying to log in...');
+async function isfollow(data) {
 
-    /* Pack data to 'JSON' format to send via web */
+    let res;
+    try {
+        res = await user_api.isfollow(data);
+
+        if (res.status === 200) {
+            if (res.data.flag === true)
+                console.log('isfollowService: ' + data.user + ' is following ' + data.author)
+            else
+                console.log('isfollowService: ' + data.user + ' is not following ' + data.author)
+        }
+    } catch (err) {
+        console.log('isfollowService: follow failed: ' + err);
+    }
+    return res;
+}
+
+async function follow(data) {
 
     let res;
     try {
@@ -211,6 +226,7 @@ export default {
     deletemyaccount,
     get_user_info_by_email,
     follow,
+    isfollow,
 
     // getAllUsers,
 };
