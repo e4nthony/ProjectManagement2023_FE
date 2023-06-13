@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import './message.css';
 import React from 'react';
-import { format } from 'timeago.js'
+// import { format } from 'timeago'
 
 
 // eslint-disable-next-line react/prop-types
@@ -18,7 +18,7 @@ export default function Message ({ message, own }) {
                     {message.text}
                 </p>
             </div>
-            <div className="messageBottom">{format(message.createdAt)}</div>
+            <div className="messageBottom">{(message.createdAt)}</div>
         </div>
     )
 }

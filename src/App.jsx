@@ -68,7 +68,7 @@ function App() {
     return (
         <div className={styles.background}>
             <React.StrictMode>
-                <AuthContext.Provider value={{ user,authState, setAuthState }}>
+                <AuthContext.Provider value={{ authState, setAuthState }}>
                     <BrowserRouter>
                         <RouteNavigator />
                     </BrowserRouter>
