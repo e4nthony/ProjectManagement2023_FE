@@ -86,6 +86,26 @@ async function get_all_users_mails() { // DEBUG ,TODO DELETE
 };
 
 
+/* --- Chat API --- */
+
+async function get_convo(userAuthData)
+{
+    return api.get("conversation/get_convo",userAuthData);
+}
+
+async function get_message(userAuthData)
+{
+    return api.get("message/get_message",userAuthData);
+}
+
+async function get_user_info_by_id(userAuthData) {
+    return api.post("user/get_user_info_by_id", userAuthData);
+}
+
+async function new_message(userAuthData) {
+    return api.post("message/new_message", userAuthData);
+}
+
 export default {
 
     /* Auth */
@@ -107,5 +127,10 @@ export default {
     create_post,
     get_all_posts,
     get_all_posts_by_author,
+    get_user_info_by_email,
+    get_convo,
+    get_user_info_by_id,
+    get_message,
+    new_message,
     get_post_by_id,
 };

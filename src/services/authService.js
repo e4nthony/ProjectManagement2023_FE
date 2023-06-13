@@ -147,10 +147,10 @@ async function get_user_info_by_email(userAuthData) {
         res = await user_api.get_user_info_by_email(data);
         console.log('res(authService): ' + res.status);
         if (res.status === 200) {
-            console.log('user info in successfully: ' + email);
+            console.log('user info in successfully: ' + data.email);
             console.log('res is \n' + res);
         } else if (res.status === 400) {
-            console.log('user info  failed: ' + email);
+            console.log('user info  failed: ' + data.email);
         }
     } catch (err) {
         console.log('user info failed: ' + err);
@@ -182,9 +182,112 @@ async function edit_info(userAuthData) {
     }
     return false
 }
+// ****************Chat****************** //
+async function get_convo(userAuthData)
+{
+    console.log('authService: trying to get Converstion ...');
+/* Pack data to 'JSON' format to send via web */
+    const data = {
+        userId: userAuthData
+    };
 
+    let res;
+    try {
+        res = await user_api.get_convo(data);
+        console.log('res(authService): ' + res.status);
+        if (res.status === 200) {
+            console.log('user convo is successfully: ' + data.userId);
+            console.log('res is \n' + res);
+            console.log(res);
+        } else if (res.status === 400) {
+            console.log('user convo  failed: ' + data.userId);
+        }
+    } catch (err) {
+        console.log('user info failed: ' + err);
+    }
+    return res;   
+}
+
+async function get_user_info_by_id(userAuthData)
+{
+    console.log('authService: trying to get info by id...');
+
+    /* Pack data to 'JSON' format to send via web */
+    const data = {
+        id: userAuthData
+    };
+
+    let res;
+    try {
+        res = await user_api.get_user_info_by_id(data);
+        console.log('res(authService by id): ' + res.status);
+        if (res.status === 200) {
+            console.log('user info with id is successfully: ' + data.id);
+            console.log('res is \n' + res);
+        } else if (res.status === 400) {
+            console.log('user info  failed: ' + data.id);
+        }
+    } catch (err) {
+        console.log('user info failed: ' + err);
+    }
+    return res; 
+}
+
+async function get_message(userAuthData)
+{
+    console.log('authService: trying to get message ...');
+
+    /* Pack data to 'JSON' format to send via web */
+    const data = {
+        conversationId: userAuthData
+    };
+
+    let res;
+    try {
+        res = await user_api.get_message(data);
+        console.log('res(authService): ' + res.status);
+        if (res.status === 200) {
+            console.log('user message is successfully: ' + data.conversationId);
+            console.log('res is \n' + res);
+            console.log(res);
+        } else if (res.status === 400) {
+            console.log('user message  failed: ' + data.conversationId);
+        }
+    } catch (err) {
+        console.log('user message is  failed: ' + err);
+    }
+    return res;   
+}
+
+async function new_message(userAuthData)
+{
+    console.log('authService: trying to new message ...');
+
+    /* Pack data to 'JSON' format to send via web */
+    const data = {
+        conversationId: userAuthData
+    };
+
+    let res;
+    try {
+        res = await user_api.new_message(data);
+        console.log('res(authService): ' + res.status);
+        if (res.status === 200) {
+            console.log('user new message is successfully: ' + data.conversationId);
+            console.log('res is \n' + res);
+            console.log(res);
+        } else if (res.status === 400) {
+            console.log('user new message  failed: ' + data.conversationId);
+        }
+    } catch (err) {
+        console.log('user new message is  failed: ' + err);
+    }
+    return res; 
+}  
+async function follow(data) {
+    console.log('authService: trying to log in...');
+  
 async function isfollow(data) {
-
     let res;
     try {
         res = await user_api.isfollow(data);
@@ -260,10 +363,14 @@ export default {
     edit_info,
     deletemyaccount,
     get_user_info_by_email,
+    get_convo,
+    get_user_info_by_id,
+    get_message,
+    new_message,
     follow,
     isfollow,
     like,
     isliked,
+    };
+  
 
-    // getAllUsers,
-};

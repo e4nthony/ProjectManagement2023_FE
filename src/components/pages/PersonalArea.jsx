@@ -83,6 +83,7 @@ function PersonalArea() {
     //let email1 = localStorage.getItem('activeUserEmail');
     console.log('calling authService.get_user_info_by_email()', email1.toString());
     const res = await authService.get_user_info_by_email(email1); //to do 
+    console.log(res.data.user_info._id);
     console.log(res);
 
     const statusCode = (await res).status;

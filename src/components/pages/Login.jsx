@@ -5,6 +5,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import login_styles from './styles/LoginStyles.module.css';
 import { AuthContext } from '../AuthContext'
+import UserContext from '../UserContext';
 
 // import HomePage from './HomePage';
 // import user_api from '../../api_api';
@@ -23,7 +24,7 @@ function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
-
+   
     // const [islogin, setIsLoggedIn] = useState(false);
     // const [id, setid] = useState('');
 
@@ -91,6 +92,9 @@ function Login() {
             localStorage.clear();  /* clears local storage from previous user */
             localStorage.setItem('activeUserEmail', email);
             localStorage.setItem('accessToken', res.data.accessToken);
+            const user = await authService.get_user_info_by_email(email);
+            localStorage.setItem('id' , user.data.user_info._id);
+           
 
             /* force update of the AuthContext's default value. */
             setAuthState(true);
