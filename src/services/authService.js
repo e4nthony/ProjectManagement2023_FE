@@ -183,10 +183,9 @@ async function edit_info(userAuthData) {
     return false
 }
 // ****************Chat****************** //
-async function get_convo(userAuthData)
-{
+async function get_convo(userAuthData) {
     console.log('authService: trying to get Converstion ...');
-/* Pack data to 'JSON' format to send via web */
+    /* Pack data to 'JSON' format to send via web */
     const data = {
         userId: userAuthData
     };
@@ -205,11 +204,10 @@ async function get_convo(userAuthData)
     } catch (err) {
         console.log('user info failed: ' + err);
     }
-    return res;   
+    return res;
 }
 
-async function get_user_info_by_id(userAuthData)
-{
+async function get_user_info_by_id(userAuthData) {
     console.log('authService: trying to get info by id...');
 
     /* Pack data to 'JSON' format to send via web */
@@ -230,11 +228,10 @@ async function get_user_info_by_id(userAuthData)
     } catch (err) {
         console.log('user info failed: ' + err);
     }
-    return res; 
+    return res;
 }
 
-async function get_message(userAuthData)
-{
+async function get_message(userAuthData) {
     console.log('authService: trying to get message ...');
 
     /* Pack data to 'JSON' format to send via web */
@@ -256,11 +253,10 @@ async function get_message(userAuthData)
     } catch (err) {
         console.log('user message is  failed: ' + err);
     }
-    return res;   
+    return res;
 }
 
-async function new_message(userAuthData)
-{
+async function new_message(userAuthData) {
     console.log('authService: trying to new message ...');
 
     /* Pack data to 'JSON' format to send via web */
@@ -282,11 +278,9 @@ async function new_message(userAuthData)
     } catch (err) {
         console.log('user new message is  failed: ' + err);
     }
-    return res; 
-}  
-async function follow(data) {
-    console.log('authService: trying to log in...');
-  
+    return res;
+}
+
 async function isfollow(data) {
     let res;
     try {
@@ -371,6 +365,4 @@ export default {
     isfollow,
     like,
     isliked,
-    };
-  
-
+};

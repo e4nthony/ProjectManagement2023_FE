@@ -111,8 +111,8 @@ function GenerateSinglePost(post) {
 
         const data = {
             /* reads values from fields */
-            user: localStorage.getItem('activeUserEmail'),
-            author: post.author_email,
+            active_user_email: localStorage.getItem('activeUserEmail'),
+            target_email: post.author_email,
         };
 
         try {
