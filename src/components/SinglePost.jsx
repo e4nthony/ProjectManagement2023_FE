@@ -72,37 +72,63 @@ function GenerateSinglePost(post) {
         }, 1250);
     }
 
-    function timer() {
-        var countDownDate = new Date(post.expirationTime); // date and time of exiration
+    // function timer() {
+    //     var countDownDate = new Date(post.expirationTime); // date and time of exiration
 
-        // Update the count down every sec
-        var x = setInterval(function () {
+    //     // Update the count down every sec
+    //     var x = setInterval(function () {
 
-            // Get current date and time
-            var now = new Date().getTime();
+    //         // Get current date and time
+    //         var now = new Date().getTime();
 
-            // Find the distance between now and the count down date
-            var distance = countDownDate - now;
+    //         // Find the distance between now and the count down date
+    //         var distance = countDownDate - now;
 
-            // Time calculations for days, hours, minutes and seconds
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    //         // Time calculations for days, hours, minutes and seconds
+    //         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    //         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    //         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    //         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Update timer
-            document.getElementById("timer").innerHTML = days + "d " + hours + "h "
-                + minutes + "m " + seconds + "s ";
+    //         // Update timer
+    //         document.getElementById("timer").innerHTML = days + "d " + hours + "h "
+    //             + minutes + "m " + seconds + "s ";
 
-            // If the count down is finished
-            if (distance <= 0) {
-                clearInterval(x);
-                document.getElementById("timer").innerHTML = "EXPIRED";
-                document.getElementById("time").innerHTML = "";
-            }
-        }, 1000);
+    //         // If the count down is finished
+    //         if (distance <= 0) {
+    //             clearInterval(x);
+    //             document.getElementById("timer").innerHTML = "EXPIRED";
+    //             document.getElementById("time").innerHTML = "";
+    //         }
+    //     }, 1000);
+    // }
+    // timer();
+
+    function timeShow() {
+        var countDownDate = new Date(post.expiration_time); // date and time of exiration
+
+
+        // Get current date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        // var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+
+        // If the count down is finished
+        if (distance <= 0) {
+            return "EXPIRED";
+        }
+
+
+        return days + "d " + hours + "h " + minutes + "m ";
     }
-    timer();
 
     function handlePostTittleClick() {
         console.log('HomePage: user attempts to go post\'s info page. (handlePostTittleClick.)');
@@ -112,13 +138,14 @@ function GenerateSinglePost(post) {
         // navigate('/postinfo');
     }
 
-    
+
     return (
-        <div id='singlePost'
+        <div
             className={styles.post}
             onClick={() => {
                 console.log('post id: ' + post._id + ' has been clicked')
-            }} >
+            }} 
+            id={post._id}>
 
             <div id='header'>
                 <div id='maxBidAndTittle'>
@@ -127,12 +154,15 @@ function GenerateSinglePost(post) {
 
                         <a>{'$'}</a>
                     </>
-                    
+
                     <div id='tittle' onClick={handlePostTittleClick}>{post.post_tittle}</div>
                 </div>
                 {/* <div id='status'>Status: Open</div> */}
                 <div id='time'>time left: </div>
-                <div id='timer'>00:00:00</div>
+
+                {/* <div id='timer'>00:00:00</div> */}
+                <div id='timer'>{timeShow()}</div>
+
                 {authState && <button type='button' id='placeBidButton' onClick={handlePlaceBid}>Place Bid</button>}
             </div>
 
@@ -178,7 +208,7 @@ function GenerateSinglePost(post) {
 
 
             {/* DEBUG dev _id */}
-            {/* <div id='index'>{'post_id: ' + post._id}</div> */}
+            <div id='index'>{'post_id: ' + post._id}</div>
 
 
         </div>
