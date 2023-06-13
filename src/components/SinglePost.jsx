@@ -10,6 +10,7 @@ import authService from '../services/authService';
 import { AuthContext } from './AuthContext';
 
 import defaultImage from '../pictures/default-image2.png';
+import picterdefult from '../pictures/default-image2.png'
 
 
 
@@ -308,6 +309,11 @@ function GenerateSinglePost(post) {
                 <div id='desctiption'>{post.post_text}</div>
 
                 <div id='picContainer'>{post.postImage}
+                    <img
+                        id = 'pic'
+                        src={picterdefult}
+                        alt=""
+                    />
                     {/* <img id='pic' src={defaultImage} alt='post_image' >{post.postImage}</img> */}
                     {/* <div id='pic'></div> */}
                     {/* <svg id='default_pic' src='../../pictures/default-image-icon.svg' alt="default_image"></svg> */}
