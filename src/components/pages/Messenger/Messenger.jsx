@@ -55,7 +55,14 @@ import { async } from 'q';
             text: newMessage,
             conversationId: currentChat?._id
         };
-    };
+    try {
+        const res = await authService.new_message(messages);
+        setMessages([...messages, res.data]);
+        setNewMessage('')
+    } catch (err) {
+        console.log(err);
+    }
+};
 
     return (
         <div className="messenger">
@@ -71,7 +78,7 @@ import { async } from 'q';
             </div>
             <div className="chatBox">
                 <div className="chatBoxWrapper">
-                    { currentChat
+                    { !currentChat
 ? (
                     <><div className="chatBoxTop">
                         {messages.map((m) => (
