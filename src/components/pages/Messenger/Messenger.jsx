@@ -62,7 +62,7 @@ import { io } from 'socket.io-client';
             conversationId: currentChat?._id
         };
     try {
-        const res = await authService.new_message(messages);
+        const res = await authService.new_message(message);
         setMessages([...messages, res.data]);
         setNewMessage('')
     } catch (err) {
