@@ -213,6 +213,56 @@ async function get_convo(userAuthData)
     return res;   
 }
 
+async function get_user_info_by_id(userAuthData)
+{
+    console.log('authService: trying to get info by id...');
+
+    /* Pack data to 'JSON' format to send via web */
+    const data = {
+        id: userAuthData
+    };
+
+    let res;
+    try {
+        res = await user_api.get_user_info_by_id(data);
+        console.log('res(authService by id): ' + res.status);
+        if (res.status === 200) {
+            console.log('user info with id is successfully: ' + data.id);
+            console.log('res is \n' + res);
+        } else if (res.status === 400) {
+            console.log('user info  failed: ' + data.id);
+        }
+    } catch (err) {
+        console.log('user info failed: ' + err);
+    }
+    return res; 
+}
+
+async function get_message(userAuthData)
+{
+    console.log('authService: trying to get message ...');
+
+    /* Pack data to 'JSON' format to send via web */
+    const data = {
+        conversationId: userAuthData
+    };
+
+    let res;
+    try {
+        res = await user_api.get_message(data);
+        console.log('res(authService): ' + res.status);
+        if (res.status === 200) {
+            console.log('user message is successfully: ' + data.conversationId);
+            console.log('res is \n' + res);
+            console.log(res);
+        } else if (res.status === 400) {
+            console.log('user message  failed: ' + data.conversationId);
+        }
+    } catch (err) {
+        console.log('user message is  failed: ' + err);
+    }
+    return res;   
+}
 
 export default {
     register,
@@ -223,6 +273,8 @@ export default {
     deletemyaccount,
     get_user_info_by_email,
     get_convo,
+    get_user_info_by_id,
+    get_message
     
     // getAllUsers,
 };
