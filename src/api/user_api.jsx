@@ -46,7 +46,7 @@ async function follow(data) {
 };
 
 async function isfollow(data) {
-    return api.post("/user/isfollow", data);
+    return api.post("/user/isfollowing", data);
 };
 
 async function like(data) {
@@ -88,14 +88,12 @@ async function get_all_users_mails() { // DEBUG ,TODO DELETE
 
 /* --- Chat API --- */
 
-async function get_convo(userAuthData)
-{
-    return api.get("conversation/get_convo",userAuthData);
+async function get_convo(userAuthData) {
+    return api.get("conversation/get_convo", userAuthData);
 }
 
-async function get_message(userAuthData)
-{
-    return api.get("message/get_message",userAuthData);
+async function get_message(userAuthData) {
+    return api.get("message/get_message", userAuthData);
 }
 
 async function get_user_info_by_id(userAuthData) {

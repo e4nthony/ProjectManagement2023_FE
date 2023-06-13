@@ -51,13 +51,14 @@ function GenerateSinglePost(post) {
     async function isfollow() {
         const data = {
             /* reads values from fields */
-            user: localStorage.getItem('activeUserEmail'),
-            author: post.author_email,
+            active_user_email: localStorage.getItem('activeUserEmail'),
+            target_email: post.author_email,
         };
         try {
             const res = await authService.isfollow(data);
+
             if (res.status === 200) {
-                if (res.data.flag === true) {
+                if (res.data.isfollowing === true) {
                     setFollowStatus(true);
                     console.log(data.user + ' is following ' + data.author)
                     return 'following';

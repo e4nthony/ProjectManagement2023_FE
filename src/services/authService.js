@@ -287,14 +287,15 @@ async function isfollow(data) {
         res = await user_api.isfollow(data);
 
         if (res.status === 200) {
-            if (res.data.flag === true)
-                console.log('isfollowService: ' + data.user + ' is following ' + data.author)
+            if (res.data.isfollowing === true)
+                console.log('isfollowService: ' + data.active_user_email + ' is following ' + data.target_email)
             else
-                console.log('isfollowService: ' + data.user + ' is not following ' + data.author)
+                console.log('isfollowService: ' + data.active_user_email + ' is not following ' + data.target_email)
         }
     } catch (err) {
         console.log('isfollowService: follow failed: ' + err);
     }
+    console.log('isfollowing: ' + res.data.isfollowing)
     return res;
 }
 
@@ -305,9 +306,9 @@ async function follow(data) {
         res = await user_api.follow(data);
 
         if (res.status === 200)
-            console.log('followService: ' + data.user + ' following ' + data.author)
+            console.log('followService: ' + data.active_user_email + ' following ' + data.target_email)
         else if (res.status === 400)
-            console.log('followService: ' + data.user + ' can not following ' + data.author)
+            console.log('followService: ' + data.active_user_email + ' can not following ' + data.target_email)
     } catch (err) {
         console.log('followService: follow failed: ' + err);
     }
