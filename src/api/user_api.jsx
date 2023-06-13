@@ -69,6 +69,16 @@ async function get_convo(userAuthData)
 {
     return api.get("conversation/get_convo",userAuthData);
 }
+
+async function get_message(userAuthData)
+{
+    return api.get("message/get_message",userAuthData);
+}
+
+async function get_user_info_by_id(userAuthData) {
+    return api.post("user/get_user_info_by_id", userAuthData);
+}
+
 export default {
     register,
     login,
@@ -81,4 +91,6 @@ export default {
     get_all_posts_by_author,
     get_user_info_by_email,
     get_convo,
+    get_user_info_by_id,
+    get_message,
 };
