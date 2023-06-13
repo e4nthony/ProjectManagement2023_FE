@@ -1,10 +1,6 @@
 /* eslint-disable react/prop-types */
 import authService from '../../services/authService';
-<<<<<<< HEAD
-import './Conversation.module.css'
-=======
 import style from './Conversation.module.css'
->>>>>>> 1ac838bd0952baddf2572013c6952c5c4ec5f10e
 import React, { useEffect, useState } from 'react';
 
 export default function Conversation ({ conversation, currentUser }) {
@@ -12,7 +8,6 @@ export default function Conversation ({ conversation, currentUser }) {
 
     useEffect(() => {
         const friendId = conversation.members.find((m) => m !== currentUser._id);
-        // const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
         const getUser = async () => {
             try {
@@ -22,16 +17,17 @@ export default function Conversation ({ conversation, currentUser }) {
                 console.log(err);
             }
         };
-        getUser()
+        getUser();
     }, [currentUser, conversation]);
+
     return (
-        <div className={style.conversation.css}>
+        <div className={style.conversation}>
             <img
               className={style.conversationImg}
               src='./profilePic.png'
               alt=""
             />
-            <span className={style.conversationName}>{user.userName}</span>
+            <span className={style.conversationName}>{user && user.userName}</span>
         </div>
-    )
+    );
 }

@@ -1,12 +1,7 @@
-<<<<<<< HEAD
-/* eslint-disable react/prop-types */
-import './message.module.css';
-=======
 /* eslint-disable  */
 import style from './message.module.css';
->>>>>>> 1ac838bd0952baddf2572013c6952c5c4ec5f10e
 import React from 'react';
-// import { format } from 'timeago'
+import { format, render, cancel, register } from 'timeago.js';
 
 
 // eslint-disable-next-line react/prop-types
@@ -16,16 +11,14 @@ export default function Message({ message, own }) {
         <div className={style.messageTop}>
           <img
             className={style.messageImg}
-            src="../../logo.svg"
+            src="./profilePic.png"
             alt=""
           />
           <p className={style.messageText}>
             {message.text}
           </p>
         </div>
-        <div className={style.messageBottom}>
-          {message.createdAt}
-        </div>
+        <div className={style.messageBottom}>{format(message.createdAt)}</div>
       </div>
     );
   }

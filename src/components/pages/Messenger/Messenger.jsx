@@ -10,7 +10,7 @@ import { io } from 'socket.io-client';
 
 
 
-function Messenger() {
+    function Messenger () {
     const [conversation, setConversation] = useState([]);
     const email1 = localStorage.getItem('activeUserEmail');
     const [user, setUser] = useState(null);
@@ -66,15 +66,15 @@ function Messenger() {
             conversationId: currentChat?._id
         };
 
-        const receiverId = currentChat.members.find(
-            (member) => member !== user._id
-        );
+        // const receiverId = currentChat.members.find(
+        //     (member) => member !== user._id
+        // );
 
-        socket.current.emit('sendMessage', {
-            senderId: user._id,
-            receiverId,
-            text: newMessage,
-        });
+        // socket.current.emit('sendMessage', {
+        //     senderId: user._id,
+        //     receiverId,
+        //     text: newMessage,
+        // });
 
         try {
             const res = await authService.new_message(messages);
@@ -92,17 +92,10 @@ function Messenger() {
                 text: data.text,
                 createdAt: Date.now(),
             })
-
         })
-    }, []);
+    },[]);
 
-    useEffect(() => {
-        arrivalMessage &&
-            currentChat?.members.includes(arrivalMessage.sender) &&
-            setMessages((prev) => [...prev, arrivalMessage]);
-    }, [arrivalMessage, currentChat]);
-
-
+    
 
 
 
@@ -124,31 +117,31 @@ function Messenger() {
             </div>
             <div className={style.chatBox}>
                 <div
-                    className={style.chatBoxWrapper}>
-                    {!currentChat
-                        ? (
-                            <><div className={style.chatBoxTop}>
-                                {messages.map((m) => (
-                                    <Message message={m} own={m.sender === localStorage.getItem('id')} />
-                                ))}
+                className={style.chatBoxWrapper}>
+                    { !currentChat
+? (
+                    <><div className={style.chatBoxTop}>
+                        {messages.map((m) => (
+                            <Message message={m} own={m.sender === localStorage.getItem('id')} />
+                        ))}
 
-                            </div><div className={style.chatBoxBottom}>
-                                    <textarea className={style.chatMessageInput}
-                                        placeholder='write something ...'
-                                        onChange={(e) => setNewMessage(e.target.value)}
-                                        value={newMessage}
-                                    ></textarea>
-                                    <button className={style.chatSumbitButton} onClick={handleSubmit}>Send</button>
-                                </div></>
-                        )
-                        : (
-                            <span className={style.noConversationtext}>Open conversation to start a chat.</span>
-                        )}
+                        </div><div className={style.chatBoxBottom}>
+                                <textarea className={style.chatMessageInput}
+                                placeholder='write something ...'
+                                onChange={(e) => setNewMessage(e.target.value) }
+                                value={newMessage}
+                                ></textarea>
+                                <button className={style.chatSumbitButton} onClick={handleSubmit}>Send</button>
+                            </div></>
+                )
+: (
+                    <span className={style.noConversationtext}>Open conversation to start a chat.</span>
+                    )}
                 </div>
             </div>
             <div className={style.chatOnline}></div>
             <div className={style.chatOnlineWrapper}>
-                <ChatOnline />
+                <ChatOnline/>
             </div>
         </div>
     )
