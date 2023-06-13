@@ -24,13 +24,19 @@ function GenerateSinglePost(post) {
     // const activeUserEmail = localStorage.getItem('activeUserEmail').toString();
 
     let likeStatus = false; // is following
-    function setLikeStatus() {
-        likeStatus = !likeStatus;
+    function setLikeStatus(flag) {
+        likeStatus = flag;
+    }
+    function getLikeStatus() {
+        return likeStatus;
     }
 
     let followStatus = false;
-    function setFollowStatus() {
-        followStatus = !followStatus;
+    function setFollowStatus(flag) {
+        followStatus = flag;
+    }
+    function getFollowStatus() {
+        return followStatus;
     }
 
     /* --- Single Post Functions --- */
@@ -40,6 +46,61 @@ function GenerateSinglePost(post) {
 
     function handleMessageClick() {
         console.log('HomePage: user attempts to start chat with buyer.');
+    }
+
+    async function isfollow() {
+        const data = {
+            /* reads values from fields */
+            user: localStorage.getItem('activeUserEmail'),
+            author: post.author_email,
+        };
+        try {
+            const res = await authService.isfollow(data);
+            if (res.status === 200) {
+                if (res.data.flag === true) {
+                    setFollowStatus(true);
+                    console.log(data.user + ' is following ' + data.author)
+                    return 'following';
+                }
+                else {
+                    console.log(data.user + ' is not following ' + data.author)
+                    setFollowStatus(false);
+                    return 'follow';
+                }
+            }
+        } catch (err) {
+            console.log('failed to follow: ' + err);
+            return 'follow';
+        }
+        return 'follow';
+    }
+
+    async function isliked() {
+        const data = {
+            /* reads values from fields */
+            user: localStorage.getItem('activeUserEmail'),
+            postID: post._id,
+        };
+
+        try {
+            const res = await authService.isliked(data);
+            if (res.status === 200) {
+                if (res.data.flag === true) {
+                    setLikeStatus(true);
+                    console.log(data.user + ' liked post with id: ' + data.postID)
+                    return true;
+                }
+                else {
+                    console.log(data.user + ' not like post with id: ' + data.postID)
+                    setLikeStatus(false);
+                    return false;
+                }
+            }
+        } catch (err) {
+            console.log('failed to follow: ' + err);
+            return false;
+        }
+        return false;
     }
 
     async function handleFollowClick() {
@@ -62,22 +123,47 @@ function GenerateSinglePost(post) {
                 return;
             }
         } catch (err) {
-            console.log('failed to log in user: ' + err);
+            console.log('failed to follow: ' + err);
         }
+        if (getFollowStatus())
+            setFollowStatus(false);
+        else
+            setFollowStatus(true);
 
-        setFollowStatus();
         let followBTN = document.getElementById(post._id + 'followButton')
-        if (followStatus)
+
+        if (getFollowStatus())
             followBTN.textContent = 'following';
         else
             followBTN.textContent = 'follow';
     }
 
-    function handleLike() {
+    async function handleLike() {
         console.log('HomePage: user attempts to like the post.');
-        setLikeStatus();
+
+        const data = {
+            /* reads values from fields */
+            user: localStorage.getItem('activeUserEmail'),
+            postID: post._id,
+        };
+
+        try {
+            const res = await authService.like(data);
+
+            if (res.status !== 200) {
+                console.log(data.user + ' can not like the post with id: ' + data.author)
+                return;
+            }
+        } catch (err) {
+            console.log('failed to like post: ' + err);
+        }
+        if (getLikeStatus())
+            setLikeStatus(false);
+        else
+            setLikeStatus(true);
+
         let likeBTN = document.getElementById(post._id + 'likeButton');
-        if (likeStatus)
+        if (getLikeStatus)
             likeBTN.style.fill = "black";
         else
             likeBTN.style.fill = "red";
@@ -159,6 +245,35 @@ function GenerateSinglePost(post) {
         // navigate('/postinfo');
     }
 
+    async function temp() {
+        try {
+            const str = await isfollow();
+            console.log('strFollow:' + str);
+            if (!str || str === 'follow')
+                setFollowStatus(false);
+            else
+                setFollowStatus(true);
+            if (getFollowStatus())
+                document.getElementById(post._id + 'followButton').textContent = 'following';
+            else
+                document.getElementById(post._id + 'followButton').textContent = 'follow';
+        } catch { }
+
+        try {
+            const flag = await isliked();
+            console.log('flagLike:' + flag);
+            if (flag)
+                setLikeStatus(true);
+            else
+                setLikeStatus(false);
+            if (getLikeStatus())
+                document.getElementById(post._id + 'likeButton').style.fill = 'red';
+            else
+                document.getElementById(post._id + 'likeButton').style.fill = 'black';
+        } catch { }
+    };
+
+    temp();
 
     return (
         <div

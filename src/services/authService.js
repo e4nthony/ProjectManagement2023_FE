@@ -186,8 +186,7 @@ async function edit_info(userAuthData) {
 async function get_convo(userAuthData)
 {
     console.log('authService: trying to get Converstion ...');
-
-    /* Pack data to 'JSON' format to send via web */
+/* Pack data to 'JSON' format to send via web */
     const data = {
         userId: userAuthData
     };
@@ -287,8 +286,25 @@ async function new_message(userAuthData)
 }  
 async function follow(data) {
     console.log('authService: trying to log in...');
+  
+async function isfollow(data) {
+    let res;
+    try {
+        res = await user_api.isfollow(data);
 
-    /* Pack data to 'JSON' format to send via web */
+        if (res.status === 200) {
+            if (res.data.flag === true)
+                console.log('isfollowService: ' + data.user + ' is following ' + data.author)
+            else
+                console.log('isfollowService: ' + data.user + ' is not following ' + data.author)
+        }
+    } catch (err) {
+        console.log('isfollowService: follow failed: ' + err);
+    }
+    return res;
+}
+
+async function follow(data) {
 
     let res;
     try {
@@ -300,6 +316,41 @@ async function follow(data) {
             console.log('followService: ' + data.user + ' can not following ' + data.author)
     } catch (err) {
         console.log('followService: follow failed: ' + err);
+    }
+    return res;
+}
+
+
+async function isliked(data) {
+
+    let res;
+    try {
+        res = await user_api.isliked(data);
+
+        if (res.status === 200) {
+            if (res.data.flag === true)
+                console.log('islikedService: ' + data.user + ' like the post with id: ' + data.postID)
+            else
+                console.log('islikedService: ' + data.user + ' is not like the post with id: ' + data.postID)
+        }
+    } catch (err) {
+        console.log('islikedService: like failed: ' + err);
+    }
+    return res;
+}
+
+async function like(data) {
+
+    let res;
+    try {
+        res = await user_api.like(data);
+
+        if (res.status === 200)
+            console.log('likeService: ' + data.user + ' like the post with id: ' + data.postID)
+        else if (res.status === 400)
+            console.log('likeService: ' + data.user + ' can not like the post with id: ' + data.postID)
+    } catch (err) {
+        console.log('likeService: like failed: ' + err);
     }
     return res;
 }
@@ -316,6 +367,10 @@ export default {
     get_user_info_by_id,
     get_message,
     new_message,
-    follow
+    follow,
+    isfollow,
+    like,
+    isliked,
     };
+  
 
