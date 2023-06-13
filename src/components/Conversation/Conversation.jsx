@@ -1,6 +1,10 @@
 /* eslint-disable react/prop-types */
 import authService from '../../services/authService';
+<<<<<<< HEAD
 import './Conversation.module.css'
+=======
+import style from './Conversation.module.css'
+>>>>>>> 1ac838bd0952baddf2572013c6952c5c4ec5f10e
 import React, { useEffect, useState } from 'react';
 
 export default function Conversation ({ conversation, currentUser }) {
@@ -21,13 +25,13 @@ export default function Conversation ({ conversation, currentUser }) {
         getUser()
     }, [currentUser, conversation]);
     return (
-        <div className="conversation.css">
+        <div className={style.conversation.css}>
             <img
-              className="conversationImg"
-              src="pictures/profilePic.png"
+              className={style.conversationImg}
+              src='./profilePic.png'
               alt=""
             />
-            <span className="conversationName">{user.userName}</span>
+            <span className={style.conversationName}>{user.userName}</span>
         </div>
     )
 }
