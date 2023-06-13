@@ -57,8 +57,35 @@ async function get_all_posts() {
     }
 }
 
+async function get_post_by_id(postData) {
+    console.log('postService: trying to get_post_by_id...');
+
+    // /* Pack data to 'JSON' format to send via web */
+    // const newPostData = {
+    //     post_id: 'erhgrsthjsrthserhaeth',
+    // };
+
+    try {
+        const res = user_api.get_post_by_id(postData);
+
+        const statusCode = (await res).status;
+        console.log('postService: got response from server, status code: ' + statusCode);
+        console.log('postService: response: ' + JSON.stringify(res, null, 2));
+        if (res.status === 200) {
+            console.log('postService: get_post_by_id successfully.');
+        } else if (res.status === 400) {
+            console.log('postService: get_post_by_id failed.');
+        } else if (res.status === 404) {
+            console.log('postService: no posts found.');
+        }
+        return res;
+    } catch (err) {
+        console.log('postService: get_post_by_id failed, error: ' + err);
+    }
+}
 
 export default {
     create_post,
-    get_all_posts
+    get_all_posts,
+    get_post_by_id
 };
