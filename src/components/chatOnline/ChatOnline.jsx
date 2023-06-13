@@ -1,18 +1,18 @@
-import './chatOnline.css'
+import style from './chatOnline.module.css'
 import React from 'react';
 
 function ChatOnline () {
     return (
-        <div className='chatOnline'>
-            <div className='chatOnlineFriend'>
-            <div className='chatOnlineImgContainger'>
-                <img className='chatOnlineImg'
+        <div className={style.chatOnline}>
+            <div className={style.chatOnlineFriend}>
+            <div className={style.chatOnlineImgContainger}>
+                <img className={style.chatOnlineImg}
                 src='../../../preview/Create Post Page.png'
                 alt=''/>
-                <div className='chatOnlineBadge'></div>
+                <div className={style.chatOnlineBadge}></div>
             </div>
             </div>
-            <span className="chatOnlinename">Jhon Doe</span>
+            <span className={style.chatOnlinename}>Jhon Doe</span>
         </div>
     );
 }

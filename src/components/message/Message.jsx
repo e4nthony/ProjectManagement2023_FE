@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
-import './message.css';
+/* eslint-disable  */
+import style from './message.module.css';
 import React from 'react';
 // import { format } from 'timeago'
 
@@ -8,17 +8,17 @@ import React from 'react';
 export default function Message ({ message, own }) {
     return (
         <div className= { own ? 'message own' : 'message' }>
-            <div className="messageTop">
+            <div className={style.messageTop}>
                 <image
-                className="messageImg"
+                className={style.messageImg}
                 src="../../logo.svg"
                 alt=""
                 />
-                <p className="messageTex">
+                <p className={style.messageTex}>
                     {message.text}
                 </p>
             </div>
-            <div className="messageBottom">{(message.createdAt)}</div>
+            <div className={style.messageBottom}>{(message.createdAt)}</div>
         </div>
     )
 }
