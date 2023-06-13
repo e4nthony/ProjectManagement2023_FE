@@ -3,11 +3,10 @@
 import Message from '../../message/Message';
 import Conversation from '../../Conversation/Conversation'
 import './Messenger.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ChatOnline from '../../chatOnline/ChatOnline';
 import authService from '../../../services/authService';
-import { async } from 'q';
-
+import { io } from 'socket.io-client';
 
 
     function Messenger () {
@@ -17,7 +16,13 @@ import { async } from 'q';
     const [currentChat, setCurrentChat] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
+    const socket = useRef(io('ws://localhost:8900'));
 
+
+
+   useEffect(() => {
+    socket.current.emit('addUser', localStorage.getItem('id'));
+   }, [user]);
     useEffect(() => {
         const getConversations = async () => {
             try {
