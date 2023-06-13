@@ -375,23 +375,23 @@ button:active {
     place-content: center;
 }
 
-.post div[id='followButton'] {
+.post div[class='followButton'] {
     margin-left: 15px;
     /* border: 1px solid lightgray; */
 }
 
-.post div[id='messageButton'] {
+.post div[class='messageButton'] {
     margin-left: 15px;
 
     /* border: 1px solid lightgray; */
 }
 
-.post div[id='shareButton'] {
+.post div[class='shareButton'] {
     margin-left: 15px;
     /* border: 1px solid lightgray; */
 }
 
-.post div[id='copiedText'] {
+.post div[class='copiedText'] {
     margin-left: 5px;
     display: none;
     align-items: center;
@@ -441,7 +441,7 @@ button:active {
 
 
 
-.post button[id='likeButton'] {
+.post button[class='likeButton'] {
     border: 1px solid rgb(0, 241, 101);
     display: flex;
     align-items: center;
@@ -452,7 +452,7 @@ button:active {
     position: relative;
 }
 
-.post button[id='likeButton']:hover {
+.post button[class='likeButton']:hover {
     transform: scale(1.2);
     cursor: pointer;
     transition: .2s;
