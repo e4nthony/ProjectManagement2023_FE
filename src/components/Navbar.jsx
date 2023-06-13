@@ -1,28 +1,32 @@
+/* eslint-disable */
+/* the line above disables eslint check for this file (temporarily) todo:delete */
+
 import {
     React, useState, useEffect, useContext
 } from 'react';
-import './styles/navbar_styles.css';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../AuthContext';
-import DropDownProfile from './DropDownProfile';
 
+import styles from './styles/NavbarStyles.module.css';
+
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from './AuthContext';
+import DropDownProfile from './NavBarDropDownProfile';
+
+/* helps to print circular objects as string */
+import { inspect } from 'util'; //DEBUG
 
 export default function Navbar() {
     const [selectedOption, setSelectedOption] = useState('');
-    const { setAuthState, authState } = useContext(AuthContext);
+
+    const { authState, setAuthState } = useContext(AuthContext);
+
+    console.log('NavBar: AuthContext\'s authState: ' + inspect(authState)); //DEBUG
+
     const navigate = useNavigate();
 
-    function logout() {
-        localStorage.removeItem('accessToken');
-        setAuthState(false);
-        navigate('/');
-    }
-
     return (
-        <nav className='nav'>
-            <a href='/' className='site-title'>BidZone</a>
+        <nav className={styles.nav}>
+            <a href='/'>BidZone</a>
             <ul>
-                {authState && (<a href='/CreatePost'>Create Post</a>)}
                 {!authState && (
                     <>
                         <li>
@@ -33,9 +37,13 @@ export default function Navbar() {
                         </li>
                     </>
                 )}
+
+                {authState && (<a href='/CreatePost'>Create Post</a>)}
+
                 <li>
                     <a href='/about'>About</a>
                 </li>
+
                 {authState && (<DropDownProfile />)}
             </ul>
         </nav>

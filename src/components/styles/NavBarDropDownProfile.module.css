@@ -1,0 +1,44 @@
+/* --- --- --- Nav Bar DropDown Profile Menu CSS Stylesheet --- --- --- */
+
+
+.dropdownMenu {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownToggle {
+  all: unset;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  padding: .25rem;
+  cursor: pointer;
+}
+
+/* <ul> - a parent */
+.dropdownOptions {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #333;
+  list-style-type: none;
+  padding: 0;
+  white-space: nowrap;
+  margin: 0;
+  width: 330%;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdownOptions li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #333;
+}
+
+.dropdownOptions li:last-child {
+  border-bottom: none;
+  background-color: #333;
+}

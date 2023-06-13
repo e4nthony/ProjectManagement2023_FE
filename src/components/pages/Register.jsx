@@ -1,12 +1,15 @@
 /* eslint-disable */
 /* the line above disables eslint check for this file (temporarily) todo:delete */
 
-import React, { useState } from 'react';
-import './styles/register_styles.css';
+import React, { useState, useEffect, useContext } from 'react';
+import global_styles from '../styles/GlobalStyles.module.css';
+import register_styles from './styles/RegisterStyles.module.css';
 import { useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs'
 
-import register_model from '../../model/register_model';
+import authService from '../../services/authService';
+
+import { AuthContext } from '../AuthContext'
 
 
 function RegistrationPage() {
@@ -18,11 +21,22 @@ function RegistrationPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('2000-01-01');
   const [passwordMatchError, setPasswordMatchError] = useState('');
   const [ageError, setAgeError] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [matchMessage, setMatchMessage] = useState('');
+
+  /* import here setAuthState function */
+  const { authState, setAuthState } = useContext(AuthContext);
+
+  useEffect(() => {
+    /* protects register page from authorized/active user. */
+    // if (authState){
+    //     navigate('/home')
+    // }
+  }, []);
+
 
   //event.target.value
   const handleConfirmPasswordChange = (event) => {
@@ -102,19 +116,20 @@ function RegistrationPage() {
     const salt = await bcrypt.genSalt(10);
     const encryptedPassword = await bcrypt.hash(password, salt);
 
+    /* Packs data to 'JSON' format to send via web */
     const data = {
+      email: email,
+      enc_password: encryptedPassword,
       firstName: firstName,
       lastName: lastName,
       userName: username,
-      email: email,
-      enc_password: encryptedPassword,
       birth_date: dateOfBirth
     }
 
     /* Send data to server */
     let is_success;
     try {
-      is_success = await register_model.register(data);
+      is_success = await authService.register(data);
     } catch (err) {
       console.log('failed to register user: ' + err);
       setErrorMessage('Registration failed, please try again later');
@@ -130,10 +145,11 @@ function RegistrationPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={register_styles.reg}>
       <label htmlFor='firstName'>
         First Name:
         <input
+          className={global_styles.input}
           type='text'
           id='firstName'
           value={firstName}
@@ -144,6 +160,7 @@ function RegistrationPage() {
       <label htmlFor='lastName'>
         Last Name:
         <input
+          className={global_styles.input}
           type='text'
           id='lastName'
           value={lastName}
@@ -155,9 +172,9 @@ function RegistrationPage() {
       <label htmlFor='email' className='label'>
         Email
         <input
+          className={global_styles.input}
           type='email'
           id='email'
-          className='input'
           value={email}
           onChange={handelEmail}
           required
@@ -167,6 +184,7 @@ function RegistrationPage() {
       <label htmlFor='username'>
         Username:
         <input
+          className={global_styles.input}
           type='text'
           id='username'
           value={username}
@@ -177,6 +195,7 @@ function RegistrationPage() {
       <label htmlFor='password'>
         Password:
         <input
+          className={global_styles.input}
           type='password'
           id='password'
           value={password}
@@ -187,6 +206,7 @@ function RegistrationPage() {
       <label htmlFor='confirmPassword'>
         Confirm Password:
         <input
+          className={global_styles.input}
           type='password'
           id='confirmPassword'
           value={confirmPassword}
@@ -199,6 +219,7 @@ function RegistrationPage() {
       <label htmlFor='dateOfBirth'>
         Date of Birth:
         <input
+          className={global_styles.input}
           type='date'
           id='dateOfBirth'
           value={dateOfBirth}
@@ -210,7 +231,7 @@ function RegistrationPage() {
       {ageError && <p style={{ color: 'black' }}>{ageError}</p>}
       {errorMessage && <p style={{ color: 'black' }}>{errorMessage}</p>}
 
-      <button className='register-button' type='submit' onClick={handleSubmit}>Register</button>
+      <button className={register_styles.registerButton} id='submitRegister' type='button' onClick={handleSubmit}>Register</button>
     </form>
   );
 }

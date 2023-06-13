@@ -3,82 +3,109 @@
 
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './styles/login_styles.css';
+import login_styles from './styles/LoginStyles.module.css';
 import { AuthContext } from '../AuthContext'
+import UserContext from '../UserContext';
 
 // import HomePage from './HomePage';
 // import user_api from '../../api_api';
 // import api from '../../api/api';
 
-import user_model from '../../model/user_model.jsx';
+import authService from '../../services/authService';
 import { is } from '@babel/types';
 
 function Login() {
     const navigate = useNavigate();
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [message, setMessage] = useState("");
+    
+    /* import here setAuthState function */
+    const { authState, setAuthState } = useContext(AuthContext);
 
-    const { setAuthState } = useContext(AuthContext);
-    const [islogin, setIsLoggedIn] = useState(false);
-    const [id, setid] = useState("");
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
+   
+    // const [islogin, setIsLoggedIn] = useState(false);
+    // const [id, setid] = useState('');
+
+    useEffect(() => {
+        /* protects login page from authorized/active user. */
+        // if (authState){
+        //     navigate('/home')
+        // }
+    }, []);
+
     async function onLoginCallback() {
 
         const userAuthData = {
-            /** read values from fields */
+            /* reads values from fields */
             email: email,
             password: password,
         };
 
-        console.log('userData: ' + userAuthData.toString());
-        console.log('trying to reach back-end server...');
-        console.log(userAuthData.email);  // debug, todo delete
+        console.log('LoginPage: userData: ' + userAuthData.toString());
+        console.log('LoginPage: userAuthData.email:' + userAuthData.email);  // debug, todo delete
 
         function showError(err_msg = 'Invalid email or password') {
-            console.log('setting the error message: ' + err_msg);
+            console.log('LoginPage: Setting the error message: ' + err_msg);
             setMessage(err_msg);
         }
         showError('');
 
         if (email == '' || password == '') {
+            /* one or both fields are epmty. */
             showError('Please fill all fields');
             return;
         }
 
         function isValidEmail(email) {
+            //TODO ?improove email check?
             return email.includes('@') && email.includes('.')
         }
-
         if (!isValidEmail(email)) {
             showError('Please input a valid Email');
             return;
         }
 
         if (password.length < 6) {
-            /* this password cannot be valid */
-            showError('Password is too short, please enter password from 6 to 18 characters');
+            /* this password cannot be valid, don't send it to server */
+            showError();  // default error
             return;
         }
 
+        /* try to login */
         try {
             // let tokens = await UserModel.login(user); // todo? get tokens to stay signed in
-            const res = await user_model.login(userAuthData);
-            if (res.data.error || !res.data.accessToken) {
-                console.log("no data," + JSON.stringify(res, null, 2))
-                setAuthState(false);
+            console.log('LoginPage: trying to reach back-end server...');
+            const res = await authService.login(userAuthData);
+
+            if (!res.data || res.data.error || !res.data.accessToken) {
+                /* if there is error or corrupted request */
+                console.log('LoginPage: no data,' + JSON.stringify(res, null, 2));
                 setMessage(res.data.error);
-            } else {
-                console.log("got token: " + JSON.stringify(res.data.accessToken, null, 2))
-                setMessage("");
-                localStorage.setItem("accessToken", res.data.accessToken);
-                setAuthState(true);
-                navigate('/');
+                setAuthState(false);
+                return;
             }
 
+            console.log('LoginPage: got token: ' + JSON.stringify(res.data.accessToken, null, 2));
+            setMessage('');  /* no error to show to user */
+            localStorage.clear();  /* clears local storage from previous user */
+            localStorage.setItem('activeUserEmail', email);
+            localStorage.setItem('accessToken', res.data.accessToken);
+            const user = await authService.get_user_info_by_email(email);
+            localStorage.setItem('id' , user.data.user_info._id);
+           
+
+            /* force update of the AuthContext's default value. */
+            setAuthState(true);
+
+            navigate('/');
+
         } catch (err) {
-            console.log("failed to log in user: " + err);
+            console.log('failed to log in user: ' + err);
         }
+
+        return true;
     }
 
     function backClick() {
@@ -86,75 +113,66 @@ function Login() {
     }
 
     return (
-        <form>
-            <div className='main-container'>
-                <div className='sub-main-container'>
+        <form className={login_styles.log}>
+            <div>
+                <div className={login_styles.textTittle}>
+                    <h3>Welcome to BidZone!</h3>
+                    <h1>Login</h1>
+                </div>
 
-                    <div>
-                        {/* <div className='imgs'>
-            <div className='container-image'>
-            </div>
-          </div> */}
+                <div className={login_styles.marginAround}>
+                    <text id='message' className='message-text'>
+                        {message}
+                    </text>
+                </div>
+
+
+                <div className={login_styles.alignLeft}>
+                    <div className={login_styles.marginAround1}>
                         <div>
-
-                            <h1 className='text-tittle'>Login Page</h1>
-
-                            <div className='margin-around'>
-                                <text id='message' className='message-text'>
-                                    {message}
-                                </text>
-                            </div>
-
-
-                            <div className='aliightnleft'>
-                                <div className='margin-around1'>
-                                    <div>
-                                        <label for='email' className='simplelabel'><b>Email: </b></label>
-                                    </div>
-                                    <input id='email'
-                                        className='input-field-name'
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                    />
-                                </div>
-
-                                <div className='margin-around1'>
-                                    <div>
-                                        <label for='password' className='simplelabel'><b>Password: </b></label>
-                                    </div>
-                                    <input id='password'
-                                        type='password'
-                                        className='input-field-password'
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                    />
-                                </div>
-                            </div>
-
-
-                            <div className='margin-around'>
-                                <button type="button" className='login-button' onClick={onLoginCallback}>Login</button>
-                            </div>
-
-                            <p className='link'>
-                                <a href='#'>
-                                    Forgot password ?
-                                </a>
-
-                                <a> or </a>
-
-                                <a href='#'>
-                                    Sign Up
-                                </a>
-                            </p>
-
-                            <div className='margin-around'>
-                                <button type="button" className='login-button' onClick={backClick}>Back</button>
-                            </div>
+                            <label for='email'>Email:</label>
                         </div>
+                        <input id='email'
+                            className={login_styles.inputFieldName}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
                     </div>
 
+                    <div className={login_styles.marginAround1}>
+                        <div>
+                            <label for='password'>Password:</label>
+                        </div>
+                        <input id='password'
+                            type='password'
+                            className={login_styles.inputFieldPassword}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
                 </div>
+
+
+                <div className={login_styles.marginAround}>
+                    <button type='button' className={login_styles.loginButton} onClick={onLoginCallback}>Login</button>
+                </div>
+
+                <p className='link'>
+                    <a href='#'>
+                        Forgot password ?
+                    </a>
+
+                    <a> or </a>
+
+                    <a href='#'>
+                        Sign Up
+                    </a>
+                </p>
+
+                <div className={login_styles.marginAround}>
+                    <button type='button' className={login_styles.loginButton} onClick={backClick}>Back</button>
+                </div>
+
             </div>
         </form>
     );

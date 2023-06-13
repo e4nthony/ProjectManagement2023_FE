@@ -1,0 +1,66 @@
+/* --- --- --- Home Page CSS Stylesheet --- --- --- */
+
+.siteLogo {
+    display: flex;
+    justify-content: center;
+}
+
+.siteLogo img {
+    width: 400px;
+}
+
+
+/* --- Posts List (feed) --- */
+.postsList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* --- Buttons --- */
+.postsList div[id='feedMode'] {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex: 30%;
+}
+
+.postsList div[id='exploreButton'] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 40px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    background-color: rgb(144, 172, 197);
+    color: white;
+    border-radius: 6px;
+}
+
+.postsList div[id='exploreButton']:hover {
+    cursor: pointer;
+    background-color: #ff7f01;
+}
+
+.postsList div[id='followingButton'] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 40px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    background-color: rgb(144, 172, 197);
+    color: white;
+    border-radius: 6px;
+
+    margin-left: 250px;
+}
+
+.postsList div[id='followingButton']:hover {
+    cursor: pointer;
+    background-color: #ff7f01;
+}
+
