@@ -65,7 +65,7 @@ import { async } from 'q';
     }
 };
     useEffect(() => { 
-        scrollRef.current.scrollIntoView({behavior: 'smooth'});
+        scrollRef.current?.scrollIntoView({behavior: 'smooth'});
     }, [messages]);
 
     return (
