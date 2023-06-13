@@ -63,6 +63,17 @@ function Messenger() {
             text: newMessage,
             conversationId: currentChat?._id
         };
+
+        const receiverId = currentChat.members.find(
+            (member) => member !== user._id
+        );
+
+        socket.current.emit('sendMessage', {
+            senderId: user._id,
+            receiverId,
+            text: newMessage,
+        });
+
         try {
             const res = await authService.new_message(messages);
             setMessages([...messages, res.data]);
@@ -71,6 +82,11 @@ function Messenger() {
             console.log(err);
         }
     };
+
+    
+
+
+
     // useEffect(() => { 
     //     scrollRef.current?.scrollIntoView({behavior: 'smooth'});
     // }, [messages]);
