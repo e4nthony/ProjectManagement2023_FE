@@ -4,6 +4,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import authService from '../../services/authService';
 import Rating from 'react-rating';
+import './styles/PersonalArea.css';
 
 // import { AuthContext } from '../AuthContext';
 
@@ -106,11 +107,11 @@ function PersonalArea() {
   }, []);
 
   return (
-    <div>
+    <div className='personal-area-page'>
       {isMyProfile && <h1>Personal Area</h1>}
 
       {!isMyProfile && <h1>User Information</h1>}
-      
+
       {!!userEmail ? (
         <div>
           {/* User Information */}
@@ -159,6 +160,7 @@ function PersonalArea() {
           <div>
             <strong>Average Rating: </strong>
             {averageRating.toFixed(1)} stars
+
           </div>
           {/* Success Message */}
           {showSuccessMessage && <div className="success-message">Rating submitted successfully!</div>}
@@ -183,6 +185,27 @@ function PersonalArea() {
           </Link>
         </div>
       )}
+      {/* Following and Followers */}
+      <div className="following-followers">
+        <div className="following-followers-likedPosts">
+          <div className='following'>
+            <h3>Following</h3>
+            <span>{ }</span>
+          </div>
+          <div className="likedPosts">
+            <h3>Liked posts</h3>
+            <span>{ }</span>
+          </div>
+          <div className='followers'>
+            <h3>Followers</h3>
+            <span>{ }</span>
+          </div>
+
+        </div>
+
+      </div>
+
+
     </div>
   );
 }
