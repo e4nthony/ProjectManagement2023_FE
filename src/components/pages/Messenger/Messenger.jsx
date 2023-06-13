@@ -65,6 +65,7 @@ import { io } from 'socket.io-client';
             text: newMessage,
             conversationId: currentChat?._id
         };
+<<<<<<< HEAD
 
         // const receiverId = currentChat.members.find(
         //     (member) => member !== user._id
@@ -102,6 +103,16 @@ import { io } from 'socket.io-client';
     // useEffect(() => { 
     //     scrollRef.current?.scrollIntoView({behavior: 'smooth'});
     // }, [messages]);
+=======
+    try {
+        const res = await authService.new_message(message);
+        setMessages([...messages, res.data]);
+        setNewMessage('')
+    } catch (err) {
+        console.log(err);
+    }
+};
+>>>>>>> 25c0e52bf39e5e41723fda410c9decb8c01ba2b7
 
     return (
         <div className={style.messenger}>
