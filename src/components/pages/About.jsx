@@ -1,9 +1,9 @@
 import React from 'react';
-import './styles/About.css';
+import styles from './styles/About.module.css';
 
 function About () {
   return (
-    <div className='about'>
+    <div className={styles.aboutPage}>
       <h1>About</h1>
       <div>
         <p className='about-par'>
