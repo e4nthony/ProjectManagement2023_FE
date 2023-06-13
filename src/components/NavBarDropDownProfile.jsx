@@ -11,7 +11,7 @@ import { inspect } from 'util'; //DEBUG
 function DropdownMenu() {
     const navigate = useNavigate();
 
-    const activeUserEmail = localStorage.getItem('activeUserEmail').toString();
+    const activeUserEmail = localStorage.getItem('activeUserEmail');
 
     const [isOpen, setIsOpen] = useState(false);
 

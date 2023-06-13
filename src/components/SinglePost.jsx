@@ -2,6 +2,7 @@
 /* the line above disables eslint check for this file (temporarily) todo:delete */
 
 import React, { useEffect, useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './styles/SinglePostStyles.module.css';
 
@@ -10,10 +11,17 @@ import { AuthContext } from './AuthContext';
 
 import defaultImage from '../pictures/default-image2.png';
 
+
+
 function GenerateSinglePost(post) {
+    // const navigate = useNavigate();
+
     const { authState, setAuthState } = useContext(AuthContext);
     // const [likeStatus, setLikeStatus] = useState(null); //todo pull info from db
     // const [followStatus, setFollowStatus] = useState(null); //todo pull info from db
+    // const [PostId, setPostId] = useState(null); //todo pull info from db
+
+    // const activeUserEmail = localStorage.getItem('activeUserEmail').toString();
 
 
     /* --- Single Post Functions --- */
@@ -34,6 +42,15 @@ function GenerateSinglePost(post) {
         setLikeStatus(likeStatus);
     }
 
+    function handlePostTittleClick() {
+        console.log('HomePage: user attempts to go post\'s info page. (handlePostTittleClick.)');
+        // const navString = '/postinfo/' + PostId
+
+        // navigate(navString);
+        // navigate('/postinfo');
+    }
+
+    
     return (
         <div id='singlePost'
             className={styles.post}
@@ -48,7 +65,8 @@ function GenerateSinglePost(post) {
 
                         <a>{'$'}</a>
                     </>
-                    <div id='tittle'>{post.post_tittle}</div>
+                    
+                    <div id='tittle' onClick={handlePostTittleClick}>{post.post_tittle}</div>
                 </div>
                 {/* <div id='status'>Status: Open</div> */}
                 {authState && <button type='button' id='placeBidButton' onClick={handlePlaceBid}>Place Bid</button>}
