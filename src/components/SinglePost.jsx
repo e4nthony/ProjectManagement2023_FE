@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import styles from './styles/SinglePostStyles.module.css';
 
-
+import authService from '../services/authService';
 import { AuthContext } from './AuthContext';
 
 import defaultImage from '../pictures/default-image2.png';
@@ -23,7 +23,7 @@ function GenerateSinglePost(post) {
 
     // const activeUserEmail = localStorage.getItem('activeUserEmail').toString();
 
-    let likeStatus = false;
+    let likeStatus = false; // is following
     function setLikeStatus() {
         likeStatus = !likeStatus;
     }
@@ -42,8 +42,29 @@ function GenerateSinglePost(post) {
         console.log('HomePage: user attempts to start chat with buyer.');
     }
 
-    function handleFollowClick() {
+    async function handleFollowClick() {
         console.log('HomePage: user attempts to follow the buyer.');
+
+        /*/user/follow(user,author)
+        /user/isfollowing*/
+
+        const data = {
+            /* reads values from fields */
+            user: localStorage.getItem('activeUserEmail'),
+            author: post.author_email,
+        };
+
+        try {
+            const res = await authService.follow(data);
+
+            if (res.status !== 200) {
+                console.log(data.user + ' can not following ' + data.author)
+                return;
+            }
+        } catch (err) {
+            console.log('failed to log in user: ' + err);
+        }
+
         setFollowStatus();
         let followBTN = document.getElementById(post._id + 'followButton')
         if (followStatus)

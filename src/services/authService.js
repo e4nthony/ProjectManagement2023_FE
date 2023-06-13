@@ -134,8 +134,7 @@ async function deletemyaccount(email) {
     return;
 }
 
-async function get_user_info_by_email(userAuthData)
-{
+async function get_user_info_by_email(userAuthData) {
     console.log('authService: trying to get info...');
 
     /* Pack data to 'JSON' format to send via web */
@@ -156,7 +155,7 @@ async function get_user_info_by_email(userAuthData)
     } catch (err) {
         console.log('user info failed: ' + err);
     }
-    return res; 
+    return res;
 }
 
 async function edit_info(userAuthData) {
@@ -171,7 +170,7 @@ async function edit_info(userAuthData) {
         const res = user_api.edit_info(userAuthData);
         console.log("the result is" + res)
         const statusCode = (await res).status;
-        console.log( statusCode + "after req adar katzir")
+        console.log(statusCode + "after req adar katzir")
         console.log('got response from server, status code: ' + statusCode);
         console.log('response: ' + JSON.stringify(res, null, 2));
         if (statusCode == 200) {
@@ -184,6 +183,24 @@ async function edit_info(userAuthData) {
     return false
 }
 
+async function follow(data) {
+    console.log('authService: trying to log in...');
+
+    /* Pack data to 'JSON' format to send via web */
+
+    let res;
+    try {
+        res = await user_api.follow(data);
+
+        if (res.status === 200)
+            console.log('followService: ' + data.user + ' following ' + data.author)
+        else if (res.status === 400)
+            console.log('followService: ' + data.user + ' can not following ' + data.author)
+    } catch (err) {
+        console.log('followService: follow failed: ' + err);
+    }
+    return res;
+}
 
 export default {
     register,
@@ -193,6 +210,7 @@ export default {
     edit_info,
     deletemyaccount,
     get_user_info_by_email,
-    
+    follow,
+
     // getAllUsers,
 };

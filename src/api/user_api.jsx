@@ -36,12 +36,14 @@ async function edit_info(userAuthData) {
     return api.post("/user/edit_info", userAuthData);
 };
 
-
 /* --- This is User API --- */
 async function get_user_info_by_email(userAuthData) {
     return api.post("user/get_user_info_by_email", userAuthData);
 }
 
+async function follow(data) {
+    return api.post("/user/follow", data);
+};
 
 /* --- This is Post API --- */
 
@@ -84,6 +86,7 @@ export default {
     /* User Info */
     edit_info,
     get_user_info_by_email,
+    follow,
 
     /* Posts */
     create_post,
