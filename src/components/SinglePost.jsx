@@ -10,6 +10,7 @@ import authService from '../services/authService';
 import { AuthContext } from './AuthContext';
 
 import defaultImage from '../pictures/default-image2.png';
+import picterdefult from '../pictures/default-image2.png'
 
 
 
@@ -51,13 +52,14 @@ function GenerateSinglePost(post) {
     async function isfollow() {
         const data = {
             /* reads values from fields */
-            user: localStorage.getItem('activeUserEmail'),
-            author: post.author_email,
+            active_user_email: localStorage.getItem('activeUserEmail'),
+            target_email: post.author_email,
         };
         try {
             const res = await authService.isfollow(data);
+
             if (res.status === 200) {
-                if (res.data.flag === true) {
+                if (res.data.isfollowing === true) {
                     setFollowStatus(true);
                     console.log(data.user + ' is following ' + data.author)
                     return 'following';
@@ -111,8 +113,8 @@ function GenerateSinglePost(post) {
 
         const data = {
             /* reads values from fields */
-            user: localStorage.getItem('activeUserEmail'),
-            author: post.author_email,
+            active_user_email: localStorage.getItem('activeUserEmail'),
+            target_email: post.author_email,
         };
 
         try {
@@ -312,6 +314,11 @@ function GenerateSinglePost(post) {
                 <div id='desctiption'>{post.post_text}</div>
 
                 <div id='picContainer'>{post.postImage}
+                    <img
+                        id = 'pic'
+                        src={picterdefult}
+                        alt=""
+                    />
                     {/* <img id='pic' src={defaultImage} alt='post_image' >{post.postImage}</img> */}
                     {/* <div id='pic'></div> */}
                     {/* <svg id='default_pic' src='../../pictures/default-image-icon.svg' alt="default_image"></svg> */}

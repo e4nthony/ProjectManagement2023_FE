@@ -5,12 +5,15 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import authService from '../../services/authService';
 import Rating from 'react-rating';
 import './styles/PersonalArea.css';
+import showFollower from '../showFollower';
+
 
 // import { AuthContext } from '../AuthContext';
 
 function PersonalArea() {
   const navigate = useNavigate();
-
+  const [my_followers, set_my_followers] = useState([]);
+  const [i_following_to, set_i_following_to] = useState([]);
   const { userEmail } = useParams();  /* param from url */
 
   console.log('PersonalArea: userEmail', userEmail);
@@ -83,12 +86,17 @@ function PersonalArea() {
     //let email1 = localStorage.getItem('activeUserEmail');
     console.log('calling authService.get_user_info_by_email()', email1.toString());
     const res = await authService.get_user_info_by_email(email1); //to do 
-    console.log(res);
 
+    set_my_followers(res.data.user_info.my_followers);
+    set_i_following_to(res.data.user_info.i_following_to);
+    console.log('my followers: ' + my_followers)
+    console.log('I following to: ' + i_following_to)
     const statusCode = (await res).status;
     if (statusCode != 200) {
       /* TODO show message: servers busy, please try later */
     } else {
+      console.log(res.data.user_info._id);
+      console.log(res);
       setEmail(res.data.user_info.email);
       setUserName(res.data.user_info.userName);
       setDateOfBirth(res.data.user_info.birth_date);
@@ -100,6 +108,14 @@ function PersonalArea() {
       const averageRating = totalRating / ratings.length || 0;
       setAverageRating(averageRating);
     }
+  }
+
+  function showFollower(follower) {
+
+
+    return (
+      <div>{follower}</div>
+    )
   }
 
   useEffect(() => {
@@ -188,16 +204,20 @@ function PersonalArea() {
       <div className="following-followers">
         <div className="following-followers-likedPosts">
           <div className='following'>
-            <h3>Following</h3>
-            <span>{ }</span>
+            <h3>Following:</h3>
+            <div className='follower'>
+              {my_followers.map(showFollower)}
+            </div>
           </div>
           <div className="likedPosts">
-            <h3>Liked posts</h3>
+            <h3>Liked posts:</h3>
             <span>{ }</span>
           </div>
           <div className='followers'>
-            <h3>Followers</h3>
-            <span>{ }</span>
+            <h3>Followers:</h3>
+            <div className='follower'>
+              {i_following_to.map(showFollower)}
+            </div>
           </div>
 
         </div>

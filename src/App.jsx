@@ -18,6 +18,8 @@ import RouteNavigator from './components/RouteNavigator';
 import authService from './services/authService';
 
 import { AuthContext } from './components/AuthContext';
+import UserContext from './components/UserContext';
+
 
 /* helps to print circular objects as string */
 import { inspect } from 'util'; //DEBUG
@@ -54,6 +56,7 @@ function App() {
 
                 /* user is truly authorized */
                 setAuthState(true);
+                
             } catch (err) {
                 console.log('App: user is not authenticated, ERROR: ' + err);
             }
@@ -68,9 +71,7 @@ function App() {
             <React.StrictMode>
                 <AuthContext.Provider value={{ authState, setAuthState }}>
                     <BrowserRouter>
-
                         <RouteNavigator />
-
                     </BrowserRouter>
                 </AuthContext.Provider>
             </React.StrictMode>
