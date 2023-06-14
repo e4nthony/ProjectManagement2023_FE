@@ -38,7 +38,7 @@ async function edit_info(userAuthData) {
 
 /* --- This is User API --- */
 async function get_user_info_by_email(userAuthData) {
-    return api.post("user/get_user_info_by_email", userAuthData);
+    return api.post("/user/get_user_info_by_email", userAuthData);
 }
 
 async function follow(data) {
@@ -60,19 +60,27 @@ async function isliked(data) {
 /* --- This is Post API --- */
 
 async function create_post(userJson) {
-    return api.post("post/create", userJson);
+    return api.post("/post/create", userJson);
 };
 
+async function update_post_by_id(data) {
+    return api.post("/post/update_post_by_id", data);
+}
+
 async function get_all_posts() {
-    return api.get("post/get_all_posts");
+    return api.get("/post/get_all_posts");
+};
+
+async function get_20_newest_posts() {
+    return api.get("/post/get_20_newest_posts");
 };
 
 async function get_all_posts_by_author(userJson) {
-    return api.post("post/get_all_posts_by_author", userJson);
+    return api.post("/post/get_all_posts_by_author", userJson);
 };
 
 async function get_post_by_id(userJson) {
-    return api.post("post/get_post_by_id", userJson);
+    return api.post("/post/get_post_by_id", userJson);
 };
 
 // async function edit_info(userAuthData) {
@@ -89,19 +97,19 @@ async function get_all_users_mails() { // DEBUG ,TODO DELETE
 /* --- Chat API --- */
 
 async function get_convo(userAuthData) {
-    return api.get("conversation/get_convo", userAuthData);
+    return api.get("/conversation/get_convo", userAuthData);
 }
 
 async function get_message(userAuthData) {
-    return api.get("message/get_message", userAuthData);
+    return api.get("/message/get_message", userAuthData);
 }
 
 async function get_user_info_by_id(userAuthData) {
-    return api.post("user/get_user_info_by_id", userAuthData);
+    return api.post("/user/get_user_info_by_id", userAuthData);
 }
 
 async function new_message(userAuthData) {
-    return api.post("message/new_message", userAuthData);
+    return api.post("/message/new_message", userAuthData);
 }
 
 export default {
@@ -123,9 +131,10 @@ export default {
 
     /* Posts */
     create_post,
+    update_post_by_id,
     get_all_posts,
+    get_20_newest_posts,
     get_all_posts_by_author,
-    get_user_info_by_email,
     get_convo,
     get_user_info_by_id,
     get_message,

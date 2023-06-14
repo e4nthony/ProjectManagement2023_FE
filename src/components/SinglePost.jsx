@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import styles from './styles/SinglePostStyles.module.css';
 
 import authService from '../services/authService';
+import postService from '../services/postService';
+
 import { AuthContext } from './AuthContext';
 
 import defaultImage from '../pictures/default-image2.png';
@@ -46,9 +48,57 @@ function GenerateSinglePost(post) {
         return followStatus;
     }
 
+
+    let bidwindowstatus = false; // is following
+    function setbidwindowstatus(status = !bidwindowstatus) {
+        bidwindowstatus = status;
+    }
+
+
     /* --- Single Post Functions --- */
     function handlePlaceBid() {
         console.log('SinglePost: user attempts to place bid.');
+        const id = "form-container" + post._id;
+
+        if (bidwindowstatus == true){
+            setbidwindowstatus(false);
+            document.getElementById(id).style.display = "none";
+        } else{
+            setbidwindowstatus(true);
+            document.getElementById(id).style.display = "flex";
+        }
+        
+        
+    }
+    
+    async function handlePostBidSubmitClick() {
+        console.log('SinglePost: handlePostBidSubmitClick clicked.');
+
+        const id = "form-container" + post._id;
+
+        // const bidnum = document.getElementById("placebid" + post._id).textContent;
+        // const current_pricetemp = document.getElementById('maxBid' + post._id).textContent; 
+
+        // if (bidnum > current_pricetemp){
+            
+        // }
+        localStorage.setItem('asrthrstrtgil','1');
+
+        setbidwindowstatus(false);
+        document.getElementById(id).style.display = "none";
+        localStorage.setItem('asrthrstrtgil','2');
+        /* Pack data to 'JSON' format to send via web */
+        const data = {
+            _id: post._id,
+            leading_buyer_email: localStorage.getItem('activeUserEmail'),
+            new_price: 1      // (Integer)
+        };
+        localStorage.setItem('asrthrstrtgil','3');
+        console.log('SinglePost: SUBMITTED NEW BID !!!!!!!!!!!!!.');
+        const res = await postService.update_post_by_id(data);
+
+        localStorage.setItem('asrthrstrtgil','4');
+
     }
 
     function handleMessageClick() {
@@ -299,7 +349,7 @@ function GenerateSinglePost(post) {
             <div id='header'>
                 <div id='maxBidAndTittle'>
                     <>
-                        <div id='maxBid'>{post.current_price}</div>
+                        <div type='maxBid' id={'maxBid' + post._id}>{post.current_price}</div>
 
                         <a>{'$'}</a>
                     </>
@@ -312,7 +362,18 @@ function GenerateSinglePost(post) {
                 {/* <div id='timer'>00:00:00</div> */}
                 <div id='timer'>{timeShow()}</div>
 
-                {authState && <button type='button' id='placeBidButton' onClick={handlePlaceBid}>Place Bid</button>}
+                {authState && <button type='button' id='placeBidButton' onClick={handlePlaceBid}>Place Bid</button>
+                }
+
+                <form type="form-container" id={"form-container" + post._id}>
+                    <div id={"subform-container" + post._id}>
+                        <h3>Enter Your bid</h3>
+                        <h5>It must be higher than current bid.</h5>
+                        <input type="placebidfield" id={"placebid" + post._id} placeholder="Enter bid" />
+                
+                        <button  type="placebidbuttonsub" id={"placebidbuttonsub" + post._id} onClick={handlePostBidSubmitClick} >Place</button>
+                    </div>
+                </form>
             </div>
 
             {/* <div id='subtittleline'>

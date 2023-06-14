@@ -35,6 +35,64 @@ async function create_post(newPostData) {
     }
 }
 
+async function update_post_by_id(newPostData) {
+    console.log('postService: trying to create a new post...');
+
+    // /* Pack data to 'JSON' format to send via web */
+    // const newPostData = {
+    //     post_tittle: newPostData.post_tittle,
+    //     post_text: newPostData.post_text,
+    //     author_email: newPostData.author_email,
+    //     starting_price: newPostData.starting_price,    // (Integer)
+    //     current_price: newPostData.starting_price   // (Integer)                          // (Integer)
+    // };
+
+    try {
+        const res = user_api.update_post_by_id(newPostData);
+
+        const statusCode = (await res).status;
+        console.log('postService: got response from server, status code: ' + statusCode);
+        console.log('postService: response: ' + JSON.stringify(res, null, 2));
+        if (res.status === 200) {
+            console.log('postService: post update successfully: ' + JSON.stringify(newPostData));
+        } else if (res.status === 400) {
+            console.log('postService: post update failed: ' + JSON.stringify(newPostData));
+        }
+        return res;
+    } catch (err) {
+        console.log('postService: post update failed, error: ' + err);
+    }
+}
+
+// async function update_post(postData) {
+//     console.log('postService: trying to create a new post...');
+
+//     // /* Pack data to 'JSON' format to send via web */
+//     // const newPostData = {
+//     //     post_tittle: newPostData.post_tittle,
+//     //     post_text: newPostData.post_text,
+//     //     author_email: newPostData.author_email,
+//     //     starting_price: newPostData.starting_price,    // (Integer)
+//     //     current_price: newPostData.starting_price   // (Integer)                          // (Integer)
+//     // };
+
+//     try {
+//         const res = user_api.create_post(postData);
+
+//         const statusCode = (await res).status;
+//         console.log('postService: got response from server, status code: ' + statusCode);
+//         console.log('postService: response: ' + JSON.stringify(res, null, 2));
+//         if (res.status === 200) {
+//             console.log('postService: post created successfully: ' + JSON.stringify(postData));
+//         } else if (res.status === 400) {
+//             console.log('postService: post creation failed: ' + JSON.stringify(postData));
+//         }
+//         return res;
+//     } catch (err) {
+//         console.log('postService: post creation failed, error: ' + err);
+//     }
+// }
+
 async function get_all_posts() {
     console.log('postService: trying to get_all_posts...');
 
@@ -87,5 +145,6 @@ async function get_post_by_id(postData) {
 export default {
     create_post,
     get_all_posts,
-    get_post_by_id
+    get_post_by_id,
+    update_post_by_id
 };
