@@ -60,13 +60,13 @@ async function get_all_posts() {
 async function get_post_by_id(postData) {
     console.log('postService: trying to get_post_by_id...');
 
-    // /* Pack data to 'JSON' format to send via web */
-    // const newPostData = {
-    //     post_id: 'erhgrsthjsrthserhaeth',
-    // };
+    /* Pack data to 'JSON' format to send via web */
+    const newPostData = {
+        post_id: postData,
+    };
 
     try {
-        const res = user_api.get_post_by_id(postData);
+        const res = user_api.get_post_by_id(newPostData);
 
         const statusCode = (await res).status;
         console.log('postService: got response from server, status code: ' + statusCode);

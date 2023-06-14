@@ -15,6 +15,7 @@ import picterdefult from '../pictures/default-image2.png'
 
 
 function GenerateSinglePost(post) {
+    console.log('SinglePost: post', post);
     // const navigate = useNavigate();
 
     const { authState, setAuthState } = useContext(AuthContext);
@@ -47,11 +48,11 @@ function GenerateSinglePost(post) {
 
     /* --- Single Post Functions --- */
     function handlePlaceBid() {
-        console.log('HomePage: user attempts to place bid.');
+        console.log('SinglePost: user attempts to place bid.');
     }
 
     function handleMessageClick() {
-        console.log('HomePage: user attempts to start chat with buyer.');
+        console.log('SinglePost: user attempts to start chat with buyer.');
         openInNewTab('/Messenger')
     }
 

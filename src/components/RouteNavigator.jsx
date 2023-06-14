@@ -12,6 +12,7 @@ import NavBar from './Navbar';
 /** --- Pages Imports --- */
 import Page404 from './pages/Page404';
 import Home from './pages/HomePage';
+import PostInfo from './pages/PostInfo';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import About from './pages/About';
@@ -41,6 +42,7 @@ function RouteNavigator() {
                 <Route path='/register' element={<Register />} />
                 {/* <Route path='/personalarea' element={<PersonalArea />} /> */}
                 <Route path='/user/:userEmail' element={<PersonalArea />} />
+                <Route path='/post/:postId' element={<PostInfo />} />
                 <Route path='/personalarea/editInfo' element={<EditInfo />} />
                 <Route path='/personalarea/confirmanddelet' element={<Confirmanddel />} />
                 <Route path='/CreatePost' element={<CreatePost />} />
