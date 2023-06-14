@@ -142,9 +142,46 @@ async function get_post_by_id(postData) {
     }
 }
 
+
+async function isliked(data) {
+
+    let res;
+    try {
+        res = await user_api.isliked(data);
+
+        if (res.status === 200) {
+            if (res.data.flag === true)
+                console.log('islikedService: ' + data.user + ' like the post with id: ' + data.postID)
+            else
+                console.log('islikedService: ' + data.user + ' is not like the post with id: ' + data.postID)
+        }
+    } catch (err) {
+        console.log('islikedService: like failed: ' + err);
+    }
+    return res;
+}
+
+async function like(data) {
+
+    let res;
+    try {
+        res = await user_api.like(data);
+
+        if (res.status === 200)
+            console.log('likeService: ' + data.user + ' like the post with id: ' + data.postID)
+        else if (res.status === 400)
+            console.log('likeService: ' + data.user + ' can not like the post with id: ' + data.postID)
+    } catch (err) {
+        console.log('likeService: like failed: ' + err);
+    }
+    return res;
+}
+
 export default {
     create_post,
     get_all_posts,
     get_post_by_id,
-    update_post_by_id
+    update_post_by_id,
+    like,
+    isliked
 };

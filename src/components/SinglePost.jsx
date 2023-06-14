@@ -139,8 +139,8 @@ function GenerateSinglePost(post) {
     async function isliked() {
         const data = {
             /* reads values from fields */
-            user: localStorage.getItem('activeUserEmail'),
-            postID: post._id,
+            email: localStorage.getItem('activeUserEmail'),
+            post_id: post._id,
         };
 
         try {
@@ -148,11 +148,11 @@ function GenerateSinglePost(post) {
             if (res.status === 200) {
                 if (res.data.flag === true) {
                     setLikeStatus(true);
-                    console.log(data.user + ' liked post with id: ' + data.postID)
+                    console.log(data.user + ' liked post with id: ' + data.post_id)
                     return true;
                 }
                 else {
-                    console.log(data.user + ' not like post with id: ' + data.postID)
+                    console.log(data.user + ' not like post with id: ' + data.post_id)
                     setLikeStatus(false);
                     return false;
                 }
@@ -214,12 +214,12 @@ function GenerateSinglePost(post) {
 
         const data = {
             /* reads values from fields */
-            user: localStorage.getItem('activeUserEmail'),
-            postID: post._id,
+            email: localStorage.getItem('activeUserEmail'),
+            post_id: post._id,
         };
 
         try {
-            const res = await authService.like(data);
+            const res = await postService.like(data);
 
             if (res.status !== 200) {
                 console.log(data.user + ' can not like the post with id: ' + data.author)

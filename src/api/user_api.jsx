@@ -50,11 +50,11 @@ async function isfollow(data) {
 };
 
 async function like(data) {
-    return api.post("/user/like", data);
+    return api.post("/post/like", data);
 };
 
 async function isliked(data) {
-    return api.post("/user/isliked", data);
+    return api.post("/post/islikes", data);
 };
 
 /* --- This is Post API --- */
