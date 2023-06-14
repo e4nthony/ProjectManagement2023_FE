@@ -76,28 +76,30 @@ function GenerateSinglePost(post) {
 
         const id = "form-container" + post._id;
 
-        // const bidnum = document.getElementById("placebid" + post._id).textContent;
-        // const current_pricetemp = document.getElementById('maxBid' + post._id).textContent; 
+        const bidnum = document.getElementById("placebid" + post._id).value;
+        const current_pricetemp = document.getElementById('maxBid' + post._id).textContent; 
+        localStorage.setItem('bidnum',bidnum);
+        localStorage.setItem('current_pricetemp',current_pricetemp);
+        localStorage.setItem('is',bidnum > current_pricetemp);
+        if (bidnum > current_pricetemp){
+            localStorage.setItem('asrthrstrtgil','1');
 
-        // if (bidnum > current_pricetemp){
-            
-        // }
-        localStorage.setItem('asrthrstrtgil','1');
+            setbidwindowstatus(false);
+            document.getElementById(id).style.display = "none";
+            localStorage.setItem('asrthrstrtgil','2');
+            /* Pack data to 'JSON' format to send via web */
+            const data = {
+                _id: post._id,
+                leading_buyer_email: localStorage.getItem('activeUserEmail'),
+                new_price: bidnum      // (Integer)
+            };
+            localStorage.setItem('asrthrstrtgil','3');
+            console.log('SinglePost: SUBMITTED NEW BID !!!!!!!!!!!!!.');
+            const res = await postService.update_post_by_id(data);
 
-        setbidwindowstatus(false);
-        document.getElementById(id).style.display = "none";
-        localStorage.setItem('asrthrstrtgil','2');
-        /* Pack data to 'JSON' format to send via web */
-        const data = {
-            _id: post._id,
-            leading_buyer_email: localStorage.getItem('activeUserEmail'),
-            new_price: 1      // (Integer)
-        };
-        localStorage.setItem('asrthrstrtgil','3');
-        console.log('SinglePost: SUBMITTED NEW BID !!!!!!!!!!!!!.');
-        const res = await postService.update_post_by_id(data);
-
-        localStorage.setItem('asrthrstrtgil','4');
+            localStorage.setItem('asrthrstrtgil','4');
+        }
+        
 
     }
 
@@ -365,7 +367,7 @@ function GenerateSinglePost(post) {
                 {authState && <button type='button' id='placeBidButton' onClick={handlePlaceBid}>Place Bid</button>
                 }
 
-                <form type="form-container" id={"form-container" + post._id}>
+                <div type="form-container" id={"form-container" + post._id}>
                     <div id={"subform-container" + post._id}>
                         <h3>Enter Your bid</h3>
                         <h5>It must be higher than current bid.</h5>
@@ -373,7 +375,7 @@ function GenerateSinglePost(post) {
                 
                         <button  type="placebidbuttonsub" id={"placebidbuttonsub" + post._id} onClick={handlePostBidSubmitClick} >Place</button>
                     </div>
-                </form>
+                </div>
             </div>
 
             {/* <div id='subtittleline'>

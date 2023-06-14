@@ -22,13 +22,13 @@ export default function Conversation ({ conversation, currentUser }) {
     }, [currentUser, conversation]);
 
     return (
-        <div className={style.conversation}>
-            <img
-              className={style.conversationImg}
-              src={picture}
-              alt=""
-            />
-            <span className={style.conversationName}>{user && user.userName}</span>
-        </div>
+      <div className={style.conversation}>
+        <img
+          className={style.conversationImg}
+          src={picture}
+          alt=''
+        />
+        <span className={style.conversationName}>{user && user.userName}</span>
+      </div>
     );
 }
