@@ -3,9 +3,9 @@
 /* <div> a parent */
 .post {
     width: 650px;
-    
+
     height: auto;
-    min-height: 200px; 
+    min-height: 200px;
 
     border-radius: 6px;
     position: relative;
@@ -120,18 +120,23 @@
     /* border: 1px solid lightgray; */
 }
 
-.post div[id='time']{
+.post div[id='subtittleline'] {
     display: flex;
+    flex-direction: row;
     font-size: 20px;
-    margin-bottom: -20px;
+    place-content: center;
 }
 
-.post div[id='timer']{
+.post div[id='time'] {
+    display: flex;
+    font-size: 17px;
+}
+
+.post div[id='timer'] {
     display: flex;
     font-size: 15px;
     margin-right: 15px;
     margin-left: 4px;
-    margin-bottom: -20px;
 }
 
 /* Place Bid Button */
@@ -273,7 +278,7 @@ button:active {
     padding-left: 20px;
     padding-right: 20px;
 
-    color: black;
+    
     /* color: white; */
 
     /* border: 1px solid lightgray; */
@@ -304,57 +309,50 @@ button:active {
 }
 
 /* --- Author Buttons --- */
+
 .post div[type='authorButtons'] {
-    height: 25px;
+    background-color: #fff;
+    border: 1px solid #0077b5;
+    height: 30px;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 3.5px;
+    padding-bottom: 3.5px;
 
-    /* margin: 6px; */
-    align-items: center;
-    appearance: none;
-    background-image: radial-gradient(100% 100% at 100% 0, #0091ff 0, #004e89 100%);
-    border: 0;
-    border-radius: 6px;
-    box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #003964 0 -3px 0 inset;
-    box-sizing: border-box;
-    color: #fff;
-    cursor: pointer;
-    display: inline-flex;
-    font-family: "JetBrains Mono", monospace;
-
-
-
-    justify-content: center;
-    line-height: 1;
-    list-style: none;
-    overflow: hidden;
-
-    padding-left: 10px;
-    padding-right: 10px;
     position: relative;
+    transition: 0.5s;
 
-    text-align: left;
-    text-decoration: none;
-    transition: box-shadow .15s, transform .15s;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    white-space: nowrap;
-    will-change: box-shadow, transform;
-    font-size: 18px;
-}
+    font-size: 15px;
+    border-radius: 7px;
+    cursor: pointer;
 
-.post div[type='authorButtons']:focus {
-    box-shadow: #003964 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+    font-weight: 501;
 }
 
 .post div[type='authorButtons']:hover {
-    box-shadow: #003964a4 0 4px 8px, #003964a4 0 7px 13px -3px, #003964 0 -3px 0 inset;
-    transform: translateY(-2px);
+    background-color: #0077b5;
 }
 
 .post div[type='authorButtons']:active {
-    box-shadow: #003964 0 3px 7px inset;
+    background-color: #F0F0F1;
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+    color: rgba(0, 0, 0, 0.65);
     transform: translateY(2px);
 }
+
+.post div[type='authorButtons'] p {
+    margin: 0;
+    padding: 0;
+    transition: .5s;
+    color: #0077b5;
+    user-select: none;
+}
+
+.post div[type='authorButtons']:hover p {
+    color: #fff
+}
+
 
 
 .post div[id='authorContainer'] {
@@ -364,10 +362,11 @@ button:active {
 }
 
 .post div[id='author'] {
+    color: black;
     margin-left: 0.5rem;
     display: flex;
     place-content: center;
-    text-shadow: rgba(175, 18, 18, 0.3) 0px 2px 8px 0px;
+    text-shadow: rgba(59, 59, 59, 0.3) 0px 2px 8px 0px;
 }
 
 .post div[id='authorButtons'] {
@@ -386,7 +385,28 @@ button:active {
     /* border: 1px solid lightgray; */
 }
 
+
+
+
+
+
+
+/* .post div[id='likeButton'] {
+    margin-left: 15px;
+    width: 40px;
+    border: 1px solid lightgray;
+} */
+
+
+
+
+.post button[class='postButtons'] {
+    display: flex;
+    place-content: center;
+}
+
 .post div[class='shareButton'] {
+    display: flex;
     margin-left: 15px;
     /* border: 1px solid lightgray; */
 }
@@ -401,9 +421,9 @@ button:active {
     border-radius: none;
     box-shadow: none;
     box-sizing: none;
-    color:#004e89;
+    color: #004e89;
     font-weight: bold;
-    cursor:auto;
+    cursor: auto;
     font-family: "JetBrains Mono", monospace;
     justify-content: center;
     line-height: 0;
@@ -419,29 +439,12 @@ button:active {
     -webkit-user-select: none;
     touch-action: none;
     white-space: nowrap;
-    will-change: none,none;
+    will-change: none, none;
     font-size: 15px;
 }
 
-.post div[type='authorButtons']:hover {
-    box-shadow: none;
-    transform: none;
-}
-
-.post div[type='authorButtons']:active {
-    box-shadow: none;
-    transform: none;
-}
-
-/* .post div[id='likeButton'] {
-    margin-left: 15px;
-    width: 40px;
-    border: 1px solid lightgray;
-} */
-
-
-
 .post button[class='likeButton'] {
+    display: flex;
     border: 1px solid rgb(0, 241, 101);
     display: flex;
     align-items: center;
@@ -460,7 +463,7 @@ button:active {
 
 /*.post button[id='likeButton']:focus {
     fill: #fd1853;*/
-    /* animation: grosseur .2s ; linear */
+/* animation: grosseur .2s ; linear */
 /*}*/
 
 /* .post button[id='likeButton']:target {

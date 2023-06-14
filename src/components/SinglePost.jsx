@@ -254,9 +254,9 @@ function GenerateSinglePost(post) {
             else
                 setFollowStatus(true);
             if (getFollowStatus())
-                document.getElementById(post._id + 'followButton').textContent = 'following';
+                document.getElementById(post._id + 'followButton').text = 'Following';
             else
-                document.getElementById(post._id + 'followButton').textContent = 'follow';
+                document.getElementById(post._id + 'followButton').text = 'Follow';
         } catch { }
 
         try {
@@ -302,6 +302,11 @@ function GenerateSinglePost(post) {
                 {authState && <button type='button' id='placeBidButton' onClick={handlePlaceBid}>Place Bid</button>}
             </div>
 
+            <div id='subtittleline'>
+                <div id='time'>time left: </div>
+                <div id='timer'>{timeShow()}</div>
+            </div>
+
             <div id='body'>
 
                 <div id='desctiption'>{post.post_text}</div>
@@ -327,19 +332,21 @@ function GenerateSinglePost(post) {
                     {/* <div id='timer'>{ }</div> */}
 
                     {authState && <div id='authorButtons'>
-                        <div type='authorButtons' class='followButton' id={post._id + 'followButton'} onClick={handleFollowClick}>follow</div>
-                        <div type='authorButtons' class='messageButton' id={post._id + 'messageButton'} onClick={handleMessageClick}>start chat</div>
-                        <div type='authorButtons' class='shareButton' id={post._id + 'shareButton'} onClick={handleShare}>Share</div>
-                        <div type='authorButtons' class='copiedText' id={post._id + 'copiedText'}>Copied!</div>
+                        <div type='authorButtons' class='followButton' id={post._id + 'followButton'} onClick={handleFollowClick}><p>Follow</p></div>
+                        <div type='authorButtons' class='messageButton' id={post._id + 'messageButton'} onClick={handleMessageClick}><p>Chat</p></div>
                     </div>}
 
                 </div>
 
                 {/* <div type='button' id='likeButton' onClick={handleLike}>like</div> */}
-                {authState && <button class='likeButton' id={post._id + 'likeButton'} onClick={handleLike}>
-                    <svg class="icon" width="30" height="30" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"></path></svg>
-                </button>}
 
+                <div id='postButtons'>
+                    <div type='postButtons' class='shareButton' id={post._id + 'shareButton'} onClick={handleShare}>Share</div>
+                    <div type='postButtons' class='copiedText' id={post._id + 'copiedText'}>Copied!</div>
+                    {authState && <button class='likeButton' id={post._id + 'likeButton'} onClick={handleLike}>
+                        <svg type='postButtons' class="icon" width="30" height="30" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"></path></svg>
+                    </button>}
+                </div>
             </div>
 
 
