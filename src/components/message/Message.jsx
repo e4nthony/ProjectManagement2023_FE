@@ -2,7 +2,7 @@
 import style from './message.module.css';
 import React from 'react';
 import { format, render, cancel, register } from 'timeago.js';
-
+import picture from '../../pictures/profilePic.png';
 
 // eslint-disable-next-line react/prop-types
 export default function Message({ message, own }) {
@@ -11,10 +11,11 @@ export default function Message({ message, own }) {
         <div className={style.messageTop}>
           <img
             className={style.messageImg}
-            src="./profilePic.png"
+            src={picture}
             alt=""
           />
           <p className={style.messageText}>
+            hello,how are you?
             {message.text}
           </p>
         </div>

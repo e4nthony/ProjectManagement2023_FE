@@ -3,9 +3,9 @@
 /* <div> a parent */
 .post {
     width: 650px;
-    
+
     height: auto;
-    min-height: 200px; 
+    min-height: 200px;
 
     border-radius: 6px;
     position: relative;
@@ -100,7 +100,7 @@
     flex-direction: row;
 }
 
-.post div[id='maxBid'] {
+.post div[type='maxBid'] {
     /* border: 1px solid lightgray; */
     max-width: 100px;
 }
@@ -108,7 +108,7 @@
 .post div[id='tittle'] {
     margin-left: 20px;
     width: 220px;
-
+    /* font-size: 18px; */
 
     overflow: hidden;
     text-overflow: ellipsis;
@@ -118,23 +118,33 @@
     /* overflow:hidden; */
 
     /* border: 1px solid lightgray; */
+    cursor: pointer;
 }
 
-.post div[id='time']{
+.post div[id='subtittleline'] {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
     font-size: 20px;
-    margin-bottom: -20px;
+    place-content: center;
 }
 
-.post div[id='timer']{
+.post div[id='time'] {
+    display: flex;
+    font-size: 17px;
+}
+
+.post div[id='timer'] {
     display: flex;
     font-size: 15px;
     margin-right: 15px;
     margin-left: 4px;
-    margin-bottom: -20px;
+    justify-self: end;
 }
 
 /* Place Bid Button */
+
 .post button[id='placeBidButton'] {
     position: relative;
     padding: 8px 12px;
@@ -192,6 +202,101 @@
 
 .post button[id='placeBidButton']:active {
     transform: translateY(2px);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.post button[type='placebidbuttonsub'] {
+    position: relative;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.712);
+    /* box-shadow: */
+    box-shadow: rgba(0, 0, 0, 0.712) 0px 2px 2px 0px;
+
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    /* background: transparent; */
+    background: #4281d4f5;
+    color: #fff;
+    overflow: hidden;
+    /* box-shadow: 0 0 0 0 transparent; */
+    -webkit-transition: all 0.2s ease-in;
+    -moz-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+}
+
+.post button[type='placebidbuttonsub']:hover {
+    border: 1px solid black;
+    color: black;
+    background: gold;
+    box-shadow: 0 0 30px 5px rgba(255, 215, 0, 0.815);
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+}
+
+.post button[type='placebidbuttonsub']:hover::before {
+    -webkit-animation: sh02 0.5s 0s linear;
+    -moz-animation: sh02 0.5s 0s linear;
+    animation: sh02 0.5s 0s linear;
+}
+
+.post button[type='placebidbuttonsub']::before {
+    content: '';
+    display: block;
+    width: 0px;
+    height: 86%;
+    position: absolute;
+    top: 7%;
+    left: 0%;
+    opacity: 0;
+    background: #fff;
+    box-shadow: 0 0 50px 30px #fff;
+    -webkit-transform: skewX(-20deg);
+    -moz-transform: skewX(-20deg);
+    -ms-transform: skewX(-20deg);
+    -o-transform: skewX(-20deg);
+    transform: skewX(-20deg);
+}
+
+.post button[type='placebidbuttonsub']:active {
+    transform: translateY(2px);
+}
+
+
+
+.post div[type='form-container']  {
+    display: none;
+    position: absolute;
+    border: 1px solid lightgray;
+    background: #c9c9c9f5;
+    border-radius: 7px;
+    right: -100px;
+    top: 35px;
+    box-shadow: rgb(0, 0, 0) 0px 1px 12px 0px;
+    padding: 5px;
 }
 
 @keyframes sh02 {
@@ -273,7 +378,7 @@ button:active {
     padding-left: 20px;
     padding-right: 20px;
 
-    color: black;
+
     /* color: white; */
 
     /* border: 1px solid lightgray; */
@@ -304,57 +409,50 @@ button:active {
 }
 
 /* --- Author Buttons --- */
+
 .post div[type='authorButtons'] {
-    height: 25px;
+    background-color: #fff;
+    border: 1px solid #0077b5;
+    height: 30px;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 3.5px;
+    padding-bottom: 3.5px;
 
-    /* margin: 6px; */
-    align-items: center;
-    appearance: none;
-    background-image: radial-gradient(100% 100% at 100% 0, #0091ff 0, #004e89 100%);
-    border: 0;
-    border-radius: 6px;
-    box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #003964 0 -3px 0 inset;
-    box-sizing: border-box;
-    color: #fff;
-    cursor: pointer;
-    display: inline-flex;
-    font-family: "JetBrains Mono", monospace;
-
-
-
-    justify-content: center;
-    line-height: 1;
-    list-style: none;
-    overflow: hidden;
-
-    padding-left: 10px;
-    padding-right: 10px;
     position: relative;
+    transition: 0.5s;
 
-    text-align: left;
-    text-decoration: none;
-    transition: box-shadow .15s, transform .15s;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    white-space: nowrap;
-    will-change: box-shadow, transform;
-    font-size: 18px;
-}
+    font-size: 15px;
+    border-radius: 7px;
+    cursor: pointer;
 
-.post div[type='authorButtons']:focus {
-    box-shadow: #003964 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+    font-weight: 501;
 }
 
 .post div[type='authorButtons']:hover {
-    box-shadow: #003964a4 0 4px 8px, #003964a4 0 7px 13px -3px, #003964 0 -3px 0 inset;
-    transform: translateY(-2px);
+    background-color: #0077b5;
 }
 
 .post div[type='authorButtons']:active {
-    box-shadow: #003964 0 3px 7px inset;
+    /* background-color: #F0F0F1; */
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+    color: rgba(0, 0, 0, 0.65);
     transform: translateY(2px);
 }
+
+.post div[type='authorButtons'] p {
+    margin: 0;
+    padding: 0;
+    transition: .5s;
+    /* color: #0077b5; */
+    user-select: none;
+}
+
+.post div[type='authorButtons']:hover p {
+    color: #fff
+}
+
 
 
 .post div[id='authorContainer'] {
@@ -364,10 +462,12 @@ button:active {
 }
 
 .post div[id='author'] {
+    color: black;
     margin-left: 0.5rem;
     display: flex;
     place-content: center;
-    text-shadow: rgba(175, 18, 18, 0.3) 0px 2px 8px 0px;
+    text-shadow: rgba(59, 59, 59, 0.3) 0px 2px 8px 0px;
+    cursor: pointer;
 }
 
 .post div[id='authorButtons'] {
@@ -378,6 +478,7 @@ button:active {
 .post div[class='followButton'] {
     margin-left: 15px;
     /* border: 1px solid lightgray; */
+    cursor: pointer;
 }
 
 .post div[class='messageButton'] {
@@ -386,9 +487,51 @@ button:active {
     /* border: 1px solid lightgray; */
 }
 
+
+
+
+
+
+
+/* .post div[id='likeButton'] {
+    margin-left: 15px;
+    width: 40px;
+    border: 1px solid lightgray;
+} */
+
+
+
+
+.post div[id='postButtons'] {
+    display: flex;
+    place-content: center;
+    justify-content: end;
+}
+
 .post div[class='shareButton'] {
+    background-color: #fff;
+    border: 1px solid #0077b5;
+    display: flex;
     margin-left: 15px;
     /* border: 1px solid lightgray; */
+    background-color: #F2F7FA;
+
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 3.5px;
+    padding-bottom: 3.5px;
+    
+    
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 501;
+    overflow: hidden;
+    transition-duration: 700ms;
+    cursor: pointer;
+}
+
+.post div[class='shareButton']:hover {
+    background-color: #0077b5;
 }
 
 .post div[class='copiedText'] {
@@ -401,16 +544,16 @@ button:active {
     border-radius: none;
     box-shadow: none;
     box-sizing: none;
-    color:#004e89;
+    color: #004e89;
     font-weight: bold;
-    cursor:auto;
+    cursor: auto;
     font-family: "JetBrains Mono", monospace;
     justify-content: center;
     line-height: 0;
     list-style: none;
     overflow: hidden;
-    padding-left: 3px;
-    padding-right: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
     position: relative;
     text-align: left;
     text-decoration: none;
@@ -419,29 +562,12 @@ button:active {
     -webkit-user-select: none;
     touch-action: none;
     white-space: nowrap;
-    will-change: none,none;
+    will-change: none, none;
     font-size: 15px;
 }
 
-.post div[type='authorButtons']:hover {
-    box-shadow: none;
-    transform: none;
-}
-
-.post div[type='authorButtons']:active {
-    box-shadow: none;
-    transform: none;
-}
-
-/* .post div[id='likeButton'] {
-    margin-left: 15px;
-    width: 40px;
-    border: 1px solid lightgray;
-} */
-
-
-
 .post button[class='likeButton'] {
+    display: flex;
     border: 1px solid rgb(0, 241, 101);
     display: flex;
     align-items: center;
@@ -458,9 +584,20 @@ button:active {
     transition: .2s;
 }
 
+
+.post input[type='placebidfield'] {
+    width: 100px;
+    height: 25px;
+    padding: 5px;
+    font-size: 16px;
+    border: 2px solid #a6d6e7;
+    border-radius: 5px;
+    text-align: left;
+}
+
 /*.post button[id='likeButton']:focus {
     fill: #fd1853;*/
-    /* animation: grosseur .2s ; linear */
+/* animation: grosseur .2s ; linear */
 /*}*/
 
 /* .post button[id='likeButton']:target {

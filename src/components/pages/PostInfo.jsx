@@ -3,9 +3,9 @@
 
 import React, { useEffect, useState, useContext } from 'react';
 import ReactDOM from 'react-dom/client';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import styles from './styles/PostInfoPageStyles.module.css';
+import styles from './styles/PostInfoStyles.module.css';
 
 import postService from '../../services/postService';
 
@@ -20,37 +20,21 @@ import GenerateSinglePost from '../SinglePost';
 function PostInfo() {
     // const [feedMode, setFeedMode] = useState('explore');
 
-    const [feedData, setFeedData] = useState([]);
-
+    const [postData, setPostData] = useState([]);
+ 
     const { authState, setAuthState } = useContext(AuthContext);
-
+    const { postId } = useParams();  /* param from url */
 
 
     async function loadPost() {
-
-        // DEBUG dev todo delete
-        const post1 = {
-            title: 'post1Title',
-            postText: 'post1Text',
-            postMinPrice: 'post1minPrice',
-            postMaxTime: 'post1maxTime',
-            postImage: 'post1Image',
-            username: 'user1',
-            //id - not to display
-        };
-        setFeedData([post1]);
-
-
-
         try {
-            const res = await postService.get_post_by_id();
-            console.log('HomePage: return from postService.get_all_posts(): ' + inspect(res)) //DEBUG
-
-            setFeedData(res.data);
+            const res = await postService.get_post_by_id(postId);
+            console.log('PostInfo: return from postService.get_post_by_id(): ' + inspect(res)) //DEBUG
+            console.log('PostInfo: res.data.post: ' + inspect(res.data.post)) //DEBUG
+            setPostData(res.data.post);
         } catch (err) {
-            console.log('HomePage: ERROR: ' + err);
+            console.log('PostInfo: ERROR: ' + err);
         }
-
     }
 
     useEffect(() => {
@@ -62,7 +46,9 @@ function PostInfo() {
             {/* --- Post Box --- */}
             <div className={styles.postBox}>
 
-                {GenerateSinglePost(feedData)}
+                <ul>
+                    {postData.map(GenerateSinglePost)}
+                </ul>
 
             </div>
         </div>

@@ -7,13 +7,17 @@ import { useNavigate } from 'react-router-dom';
 import styles from './styles/SinglePostStyles.module.css';
 
 import authService from '../services/authService';
+import postService from '../services/postService';
+
 import { AuthContext } from './AuthContext';
 
 import defaultImage from '../pictures/default-image2.png';
+import picterdefult from '../pictures/default-image2.png'
 
 
 
 function GenerateSinglePost(post) {
+    console.log('SinglePost: post', post);
     // const navigate = useNavigate();
 
     const { authState, setAuthState } = useContext(AuthContext);
@@ -22,6 +26,11 @@ function GenerateSinglePost(post) {
     // const [PostId, setPostId] = useState(null); //todo pull info from db
 
     // const activeUserEmail = localStorage.getItem('activeUserEmail').toString();
+
+
+    const openInNewTab = url => {
+        window.open(url, '_blank', 'noopener,noreferrer');
+    };
 
     let likeStatus = false; // is following
     function setLikeStatus(flag) {
@@ -39,25 +48,72 @@ function GenerateSinglePost(post) {
         return followStatus;
     }
 
+
+    let bidwindowstatus = false; // is following
+    function setbidwindowstatus(status = !bidwindowstatus) {
+        bidwindowstatus = status;
+    }
+
+
     /* --- Single Post Functions --- */
     function handlePlaceBid() {
-        console.log('HomePage: user attempts to place bid.');
+        console.log('SinglePost: user attempts to place bid.');
+        const id = "form-container" + post._id;
+
+        if (bidwindowstatus == true){
+            setbidwindowstatus(false);
+            document.getElementById(id).style.display = "none";
+        } else{
+            setbidwindowstatus(true);
+            document.getElementById(id).style.display = "flex";
+        }
+        
+        
+    }
+    
+    async function handlePostBidSubmitClick() {
+        console.log('SinglePost: handlePostBidSubmitClick clicked.');
+
+        const id = "form-container" + post._id;
+
+        const bidnum = document.getElementById("placebid" + post._id).value;
+        const current_pricetemp = document.getElementById('maxBid' + post._id).textContent; 
+
+        if (bidnum > current_pricetemp){
+
+            setbidwindowstatus(false);
+            document.getElementById(id).style.display = "none";
+
+            /* Pack data to 'JSON' format to send via web */
+            const data = {
+                _id: post._id,
+                leading_buyer_email: localStorage.getItem('activeUserEmail'),
+                new_price: bidnum      // (Integer)
+            };
+            
+            console.log('SinglePost: SUBMITTED NEW BID !!!!!!!!!!!!!.');
+            const res = await postService.update_post_by_id(data);
+        }
+        
+
     }
 
     function handleMessageClick() {
-        console.log('HomePage: user attempts to start chat with buyer.');
+        console.log('SinglePost: user attempts to start chat with buyer.');
+        openInNewTab('/Messenger')
     }
 
     async function isfollow() {
         const data = {
             /* reads values from fields */
-            user: localStorage.getItem('activeUserEmail'),
-            author: post.author_email,
+            active_user_email: localStorage.getItem('activeUserEmail'),
+            target_email: post.author_email,
         };
         try {
             const res = await authService.isfollow(data);
+
             if (res.status === 200) {
-                if (res.data.flag === true) {
+                if (res.data.isfollowing === true) {
                     setFollowStatus(true);
                     console.log(data.user + ' is following ' + data.author)
                     return 'following';
@@ -78,8 +134,8 @@ function GenerateSinglePost(post) {
     async function isliked() {
         const data = {
             /* reads values from fields */
-            user: localStorage.getItem('activeUserEmail'),
-            postID: post._id,
+            email: localStorage.getItem('activeUserEmail'),
+            post_id: post._id,
         };
 
         try {
@@ -87,11 +143,11 @@ function GenerateSinglePost(post) {
             if (res.status === 200) {
                 if (res.data.flag === true) {
                     setLikeStatus(true);
-                    console.log(data.user + ' liked post with id: ' + data.postID)
+                    console.log(data.user + ' liked post with id: ' + data.post_id)
                     return true;
                 }
                 else {
-                    console.log(data.user + ' not like post with id: ' + data.postID)
+                    console.log(data.user + ' not like post with id: ' + data.post_id)
                     setLikeStatus(false);
                     return false;
                 }
@@ -101,6 +157,16 @@ function GenerateSinglePost(post) {
             return false;
         }
         return false;
+    }
+
+
+    function handlePostTittleClick() {
+        console.log('HomePage: user attempts to go post\'s info page. (handlePostTittleClick.)');
+        // const navString = '/postinfo/' + PostId
+
+        // navigate(navString);
+        // navigate('/postinfo');
+        openInNewTab('/post/' + post._id)
     }
 
     async function handleFollowClick() {
@@ -143,12 +209,12 @@ function GenerateSinglePost(post) {
 
         const data = {
             /* reads values from fields */
-            user: localStorage.getItem('activeUserEmail'),
-            postID: post._id,
+            email: localStorage.getItem('activeUserEmail'),
+            post_id: post._id,
         };
 
         try {
-            const res = await authService.like(data);
+            const res = await postService.like(data);
 
             if (res.status !== 200) {
                 console.log(data.user + ' can not like the post with id: ' + data.author)
@@ -237,13 +303,7 @@ function GenerateSinglePost(post) {
         return days + "d " + hours + "h " + minutes + "m ";
     }
 
-    function handlePostTittleClick() {
-        console.log('HomePage: user attempts to go post\'s info page. (handlePostTittleClick.)');
-        // const navString = '/postinfo/' + PostId
 
-        // navigate(navString);
-        // navigate('/postinfo');
-    }
 
     async function temp() {
         try {
@@ -254,9 +314,9 @@ function GenerateSinglePost(post) {
             else
                 setFollowStatus(true);
             if (getFollowStatus())
-                document.getElementById(post._id + 'followButton').textContent = 'following';
+                document.getElementById(post._id + 'followButton').textContent = 'Following';
             else
-                document.getElementById(post._id + 'followButton').textContent = 'follow';
+                document.getElementById(post._id + 'followButton').textContent = 'Follow';
         } catch { }
 
         try {
@@ -286,7 +346,7 @@ function GenerateSinglePost(post) {
             <div id='header'>
                 <div id='maxBidAndTittle'>
                     <>
-                        <div id='maxBid'>{post.current_price}</div>
+                        <div type='maxBid' id={'maxBid' + post._id}>{post.current_price}</div>
 
                         <a>{'$'}</a>
                     </>
@@ -299,14 +359,35 @@ function GenerateSinglePost(post) {
                 {/* <div id='timer'>00:00:00</div> */}
                 <div id='timer'>{timeShow()}</div>
 
-                {authState && <button type='button' id='placeBidButton' onClick={handlePlaceBid}>Place Bid</button>}
+                {authState && <button type='button' id='placeBidButton' onClick={handlePlaceBid}>Place Bid</button>
+                }
+
+                <div type="form-container" id={"form-container" + post._id}>
+                    <div id={"subform-container" + post._id}>
+                        <h3>Enter Your bid</h3>
+                        <h5>It must be higher than current bid.</h5>
+                        <input type="placebidfield" id={"placebid" + post._id} placeholder="Enter bid" />
+                
+                        <button  type="placebidbuttonsub" id={"placebidbuttonsub" + post._id} onClick={handlePostBidSubmitClick} >Place</button>
+                    </div>
+                </div>
             </div>
+
+            {/* <div id='subtittleline'>
+                <div id='time'>time left: </div>
+                <div id='timer'>{timeShow()}</div>
+            </div> */}
 
             <div id='body'>
 
                 <div id='desctiption'>{post.post_text}</div>
 
                 <div id='picContainer'>{post.postImage}
+                    <img
+                        id='pic'
+                        src={picterdefult}
+                        alt=""
+                    />
                     {/* <img id='pic' src={defaultImage} alt='post_image' >{post.postImage}</img> */}
                     {/* <div id='pic'></div> */}
                     {/* <svg id='default_pic' src='../../pictures/default-image-icon.svg' alt="default_image"></svg> */}
@@ -321,30 +402,33 @@ function GenerateSinglePost(post) {
                 <div id='authorContainer'>
                     <>
                         <a>{'author:'}</a>
-                        <div id='author'>{post.author_email}</div>
+                        <div id='author' onClick={() => openInNewTab('/user/' + post.author_email)}>{post.author_email}</div>
                     </>
                     {/* what about timer ??? */}
                     {/* <div id='timer'>{ }</div> */}
 
                     {authState && <div id='authorButtons'>
-                        <div type='authorButtons' class='followButton' id={post._id + 'followButton'} onClick={handleFollowClick}>follow</div>
-                        <div type='authorButtons' class='messageButton' id={post._id + 'messageButton'} onClick={handleMessageClick}>start chat</div>
-                        <div type='authorButtons' class='shareButton' id={post._id + 'shareButton'} onClick={handleShare}>Share</div>
-                        <div type='authorButtons' class='copiedText' id={post._id + 'copiedText'}>Copied!</div>
+                        <div type='authorButtons' class='followButton' id={post._id + 'followButton'} onClick={handleFollowClick}><p>Follow</p></div>
+                        <div type='authorButtons' class='messageButton' id={post._id + 'messageButton'} onClick={handleMessageClick}><p>Chat</p></div>
                     </div>}
 
                 </div>
 
                 {/* <div type='button' id='likeButton' onClick={handleLike}>like</div> */}
-                {authState && <button class='likeButton' id={post._id + 'likeButton'} onClick={handleLike}>
-                    <svg class="icon" width="30" height="30" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"></path></svg>
-                </button>}
 
+                <div id='postButtons'>
+                    <div type='postButtons' class='shareButton' id={post._id + 'shareButton'} onClick={handleShare}>Share</div>
+                    <div type='postButtons' class='copiedText' id={post._id + 'copiedText'}>Copied!</div>
+
+                    {authState && <button class='likeButton' id={post._id + 'likeButton'} onClick={handleLike}>
+                        <svg type='postButtons' class="icon" width="30" height="30" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"></path></svg>
+                    </button>}
+                </div>
             </div>
 
 
             {/* DEBUG dev _id */}
-            <div id='index'>{'post_id: ' + post._id}</div>
+            {/* <div id='index'>{'post_id: ' + post._id}</div> */}
 
 
         </div>
