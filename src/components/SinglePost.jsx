@@ -78,26 +78,21 @@ function GenerateSinglePost(post) {
 
         const bidnum = document.getElementById("placebid" + post._id).value;
         const current_pricetemp = document.getElementById('maxBid' + post._id).textContent; 
-        localStorage.setItem('bidnum',bidnum);
-        localStorage.setItem('current_pricetemp',current_pricetemp);
-        localStorage.setItem('is',bidnum > current_pricetemp);
+
         if (bidnum > current_pricetemp){
-            localStorage.setItem('asrthrstrtgil','1');
 
             setbidwindowstatus(false);
             document.getElementById(id).style.display = "none";
-            localStorage.setItem('asrthrstrtgil','2');
+
             /* Pack data to 'JSON' format to send via web */
             const data = {
                 _id: post._id,
                 leading_buyer_email: localStorage.getItem('activeUserEmail'),
                 new_price: bidnum      // (Integer)
             };
-            localStorage.setItem('asrthrstrtgil','3');
+            
             console.log('SinglePost: SUBMITTED NEW BID !!!!!!!!!!!!!.');
             const res = await postService.update_post_by_id(data);
-
-            localStorage.setItem('asrthrstrtgil','4');
         }
         
 
