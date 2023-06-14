@@ -13,6 +13,7 @@ import showFollower from '../showFollower';
 function PersonalArea() {
   const navigate = useNavigate();
   const [my_followers, set_my_followers] = useState([]);
+  const [my_likes, set_my_likes] = useState([]);
   const [i_following_to, set_i_following_to] = useState([]);
   const { userEmail } = useParams();  /* param from url */
 
@@ -88,8 +89,10 @@ function PersonalArea() {
     const res = await authService.get_user_info_by_email(email1); //to do 
 
     set_my_followers(res.data.user_info.my_followers);
+    set_my_likes(res.data.user_info.my_likes);
     set_i_following_to(res.data.user_info.i_following_to);
     console.log('my followers: ' + my_followers)
+    console.log('my likes: ' + my_likes)
     console.log('I following to: ' + i_following_to)
     const statusCode = (await res).status;
     if (statusCode != 200) {
@@ -115,6 +118,14 @@ function PersonalArea() {
 
     return (
       <div>{follower}</div>
+    )
+  }
+
+  function showLikedPost(id) {
+
+
+    return (
+      <div>{id}</div>
     )
   }
 
@@ -203,16 +214,21 @@ function PersonalArea() {
       {/* Following and Followers */}
       <div className="following-followers">
         <div className="following-followers-likedPosts">
+
           <div className='following'>
             <h3>Following:</h3>
             <div className='follower'>
               {i_following_to.map(showFollower)}
             </div>
           </div>
+
           <div className="likedPosts">
             <h3>Liked posts:</h3>
-            <span>{ }</span>
+            <div className='follower'>
+              {my_likes.map(showLikedPost)}
+            </div>
           </div>
+
           <div className='followers'>
             <h3>Followers:</h3>
             <div className='follower'>
