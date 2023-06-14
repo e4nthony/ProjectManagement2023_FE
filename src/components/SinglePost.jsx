@@ -433,7 +433,7 @@ function GenerateSinglePost(post) {
 
 
             {/* DEBUG dev _id */}
-            <div id='index'>{'post_id: ' + post._id}</div>
+            {/* <div id='index'>{'post_id: ' + post._id}</div> */}
 
 
         </div>
