@@ -206,7 +206,7 @@ function PersonalArea() {
           <div className='following'>
             <h3>Following:</h3>
             <div className='follower'>
-              {my_followers.map(showFollower)}
+              {i_following_to.map(showFollower)}
             </div>
           </div>
           <div className="likedPosts">
@@ -216,7 +216,7 @@ function PersonalArea() {
           <div className='followers'>
             <h3>Followers:</h3>
             <div className='follower'>
-              {i_following_to.map(showFollower)}
+              {my_followers.map(showFollower)}
             </div>
           </div>
 
